@@ -1,0 +1,107 @@
+version: "3.0"
+
+stories:
+
+- story: extract_kpi_with_confirm
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: extract_kpi
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - requested_slot: place
+  - slot_was_set:
+    - requested_slot: "Berlin"
+  - slot_was_set:
+    - requested_slot: time
+  - slot_was_set:
+    - requested_slot: "2021"
+  - slot_was_set:
+    - requested_slot: kpi
+  - slot_was_set:
+    - requested_slot: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: utter_query_completed
+  - action: action_execute_query
+  - action: action_reset_slots
+  
+
+- story: extract_kpi_user_clarify_then_affirm
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: extract_kpi
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - requested_slot: place
+  - slot_was_set:
+    - requested_slot: "Berlin"
+  - slot_was_set:
+    - requested_slot: time
+  - slot_was_set:
+    - requested_slot: "2021"
+  - slot_was_set:
+    - requested_slot: kpi
+  - slot_was_set:
+    - requested_slot: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: deny
+  - action: utter_ask_for_clarification
+  - action: action_query_confirm
+  - intent: affirm
+  - action: utter_query_completed
+  - action: action_execute_query
+  - action: action_reset_slots  
+
+- story: extract_kpi_user_clarify_then_deny
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: extract_kpi
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - requested_slot: place
+  - slot_was_set:
+    - requested_slot: "Berlin"
+  - slot_was_set:
+    - requested_slot: time
+  - slot_was_set:
+    - requested_slot: "2021"
+  - slot_was_set:
+    - requested_slot: kpi
+  - slot_was_set:
+    - requested_slot: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: deny
+  - action: utter_ask_for_clarification
+  # - or:
+  #   - intent: change_place
+  #   - intent: change_time
+  #   - intent: change_kpi
+  - action: action_query_confirm
+  - intent: deny
+  - action: utter_ask_for_clarification
+  # - or:
+  #   - intent: change_place
+  #   - intent: change_time
+  #   - intent: change_kpi
+  - action: action_query_confirm
+  - intent: affirm
+  - action: utter_query_completed
+  - action: action_reset_slots  
