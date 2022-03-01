@@ -79,8 +79,13 @@ class ActionExecuteQuery(Action):
         time = tracker.get_slot("time")
         kpi = tracker.get_slot("kpi")
 
-
-        q = f"SELECT no_total_locations FROM \"E-Mobility\".emo_historical WHERE state='{place}' AND month=202112; "
+        if kpi == "Locations":
+            q = f"SELECT no_total_locations FROM \"E-Mobility\".emo_historical WHERE state='{place}' AND month={time}; "
+        elif kpi == "Charging stations":
+            q = f"SELECT no_total_stations FROM \"E-Mobility\".emo_historical WHERE state='{place}' AND month={time}; "
+        else:
+            q = f"SELECT no_total_chargepoints FROM \"E-Mobility\".emo_historical WHERE state='{place}' AND month={time}; "
+            
         cur.execute(q)
         result = cur.fetchall()
         if len(result) == 1:

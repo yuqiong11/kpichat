@@ -58,13 +58,13 @@ nlu:
 
 - intent: extract_kpi
   examples: |
-    - what is the number of [locations](kpi) in [Berlin](place) in [December 2021](time)?
-    - Give me the number of [chargingpoints](kpi) in [Berlin](place) in [December 2022](time)?
-    - In [Hamburg](place), how many [chargingpoints](kpi) are there in [December 2021](time)?
-    - In [April 2020](time), how many [chargingstations](kpi) does [Dresden](place) have?
-    - I want to know the number of [chargingpoints](kpi) in [Sachsen](place) [now](time)?
+    - what is the number of [locations]{"entity": "kpi", "value": "Locations"} in [Berlin](place) in [December 2021]{"entity": "time", "value": "202112"}?
+    - Give me the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Berlin](place) in [December 2022]{"entity": "time", "value": "202212"}?
+    - In [Hamburg](place), how many [chargingpoints]{"entity": "kpi", "value": "Charging points"} are there in [May 2021]{"entity": "time", "value": "202105"}?
+    - In [April 2020]{"entity": "time", "value": "202004"}, how many [chargingstations]{"entity": "kpi", "value": "Charging stations"} does [Dresden](place) have?
+    - I want to know the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Sachsen](place) [now]{"entity": "time", "value": "202201"}?
     - Tell me about [Bayern](place).
-    - How many [locations](kpi) are there in [Kassel](place)?
+    - How many [locations]{"entity": "kpi", "value": "Locations"} are there in [Kassel](place)?
 
 # - intent: change_query
 #   examples: |
