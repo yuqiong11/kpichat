@@ -1,7 +1,6 @@
 version: "3.0"
-
 nlu:
-- intent: greet
+- intent: chitchat/greet
   examples: |
     - hey
     - hello
@@ -16,8 +15,7 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
-- intent: goodbye
+- intent: chitchat/goodbye
   examples: |
     - cu
     - good by
@@ -29,13 +27,15 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
-- intent: chatbot_service
+- intent: faq/service
   examples: |
     - help
     - what can you do?
-
-
+- intent: faq/locations_info
+  examples: |
+    - what does locations mean?
+    - definition of locations
+    - what is locations?
 - intent: affirm
   examples: |
     - yes
@@ -45,7 +45,6 @@ nlu:
     - that sounds good
     - correct
     - true
-
 - intent: deny
   examples: |
     - no
@@ -55,38 +54,15 @@ nlu:
     - don't like that
     - no way
     - not really
-
 - intent: extract_kpi
   examples: |
-    - what is the number of [locations]{"entity": "kpi", "value": "Locations"} in [Berlin](place) in [December 2021]{"entity": "time", "value": "202112"}?
-    - Give me the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Berlin](place) in [December 2022]{"entity": "time", "value": "202212"}?
-    - In [Hamburg](place), how many [chargingpoints]{"entity": "kpi", "value": "Charging points"} are there in [May 2021]{"entity": "time", "value": "202105"}?
-    - In [April 2020]{"entity": "time", "value": "202004"}, how many [chargingstations]{"entity": "kpi", "value": "Charging stations"} does [Dresden](place) have?
-    - I want to know the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Sachsen](place) [now]{"entity": "time", "value": "202201"}?
+    - what is the number of [locations]{"entity": "kpi", "value": "Locations"} in [Berlin](place) in [December 2021](DATE)?
+    - Give me the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Berlin](place) in [December 2022](DATE)?
+    - In [Hamburg](place), how many [chargingpoints]{"entity": "kpi", "value": "Charging points"} are there in [May 2021](DATE)?
+    - In [April 2020](DATE), how many [chargingstations]{"entity": "kpi", "value": "Charging stations"} does [Dresden](place) have?
+    - I want to know the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Sachsen](place) [now](DATE)?
     - Tell me about [Bayern](place).
     - How many [locations]{"entity": "kpi", "value": "Locations"} are there in [Kassel](place)?
+    - What's the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Berlin][{"entity": "place"}, {"entity": "place"}]?
+    - June [2020](DATE)
 
-# - intent: change_query
-#   examples: |
-#     - place is [Berlin](place)
-#     - change the place to [Heidelberg](place)
-#     - make place [Frankfurt](place)
-#     - place: [Brandenburg](place)
-#     - place should be [Saarland](place)
-#     - time is [April 2019](time)
-#     - change the time to [Jan 2020](time)
-#     - make time [Dec 2021](time)
-#     - time: [November of 2020](time)
-#     - time should be [August 2022](time)
-#     - kpi is [locations](kpi)
-#     - change the kpi to [Charging points per 1,000 cars](kpi)
-#     - make kpi [Charging stations](kpi)
-#     - kpi: [Percentage of target](kpi)
-#     - kpi should be [chargingpoints](kpi)
-
-- intent: bot_challenge
-  examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?

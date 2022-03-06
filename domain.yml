@@ -1,87 +1,23 @@
-# version: "3.0"
-
-# intents:
-#   - affirm
-#   - deny
-#   - greet
-#   - thankyou
-#   - goodbye
-#   - search_concerts
-#   - search_venues
-#   - compare_reviews
-#   - bot_challenge
-#   - nlu_fallback
-#   - how_to_get_started
-
-# entities:
-#   - name
-
-# slots:
-#   concerts:
-#     type: list
-#     influence_conversation: false
-#     mappings:
-#     - type: custom
-#   venues:
-#     type: list
-#     influence_conversation: false
-#     mappings:
-#     - type: custom
-#   likes_music:
-#     type: bool
-#     influence_conversation: true
-#     mappings:
-#     - type: custom
-
-# responses:
-#   utter_greet:
-#     - text: "Hey there!"
-#   utter_goodbye:
-#     - text: "Goodbye :("
-#   utter_default:
-#     - text: "Sorry, I didn't get that, can you rephrase?"
-#   utter_youarewelcome:
-#     - text: "You're very welcome."
-#   utter_iamabot:
-#     - text: "I am a bot, powered by Rasa."
-#   utter_get_started:
-#     - text: "I can help you find concerts and venues. Do you like music?"
-#   utter_awesome:
-#     - text: "Awesome! You can ask me things like \"Find me some concerts\" or \"What's a good venue\""
-
-# actions:
-#   - action_search_concerts
-#   - action_search_venues
-#   - action_show_concert_reviews
-#   - action_show_venue_reviews
-#   - action_set_music_preference
-
-# session_config:
-#   session_expiration_time: 60  # value in minutes
-#   carry_over_slots_to_new_session: true
-
 version: "3.0"
 
 intents:
-  - greet
-  - goodbye
+  - chitchat:
+      is_retrieval_intent: true
   - affirm
   - deny
   - extract_kpi
-  # - change_place
-  # - change_time
-  # - change_kpi
   - mood_unhappy
-  - bot_challenge
-  - chatbot_service
+  - faq:
+      is_retrieval_intent: true
   - request_kpi_form
 
 
 entities:
 - place
 - kpi
-- time
-slots: 
+- DATE
+
+slots:
   place:
     type: text
     influence_conversation: true
@@ -97,34 +33,26 @@ slots:
     mappings:
     - type: from_entity
       entity: kpi
-      # conditions:
-      # - active_loop: kpi_form
-      #   requested_slot: kpi
-  time: 
+
+  DATE:
     type: text
     influence_conversation: true
     mappings:
     - type: from_entity
-      entity: time
-      # conditions:
-      # - active_loop: kpi_form
-      #   requested_slot: time
-  confirm:
-    type: bool
-    influence_conversation: true
+      entity: DATE
+
+  mapped_time: 
+    type: text
+    initial_value: None
     mappings:
-    - type: from_intent
-      intent: affirm
-      value: true
-    - type: from_intent
-      intent: deny
-      value: false
+    - type: custom
+
 forms:
   kpi_form:
     required_slots:
       - place
       - kpi
-      - time
+      - DATE
 
 
 responses:
@@ -134,7 +62,7 @@ responses:
   utter_ask_kpi:
   - text: "Which KPI are you interested in?"
 
-  utter_ask_time:
+  utter_ask_DATE:
   - text: "What time are you interested?"
 
   utter_state_sql:
@@ -158,29 +86,18 @@ responses:
   utter_ask_for_clarification:
   - text: "Please correct the false part."
   
-  utter_greet:
+  utter_chitchat/greet:
   - text: "hi"
+  - text: "hello"
+  utter_chitchat/goodbye:
+  - text: "goodbye"
+  - text: "bye"
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://media-cdn.tripadvisor.com/media/photo-s/11/a7/72/0f/vegetarian-menu.jpg"
+  utter_faq/service:
+  - text: "KPIs that are available: Locations, Charging stations, Charging points, Charging points per 1,000 cars, Cars per charging point, Percentage of target.//You can type the KPI name for the KPI description or start directly asking me questions regarding the KPI within Germany."
 
-  utter_service_1:
-  - text: "KPIs that are available: Locations, Charging stations, Charging points, Charging points per 1,000 cars, Cars per charging point, Percentage of target."
-  utter_service_2:
-  - text: "You can type the KPI name for the KPI description or start directly asking me questions regarding the KPI within Germany."
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  utter_faq/locations_info:
+  - text: "locations: number of charging infrastructure places."
 
 actions:
   - utter_ask_place
@@ -190,7 +107,7 @@ actions:
   - action_reset_slots
   - action_query_confirm
   - action_execute_query
-#   - validate_kpi_form
+  - action_convert_date
 
 session_config:
   session_expiration_time: 60
