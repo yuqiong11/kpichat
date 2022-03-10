@@ -1,5 +1,56 @@
 version: "3.0"
 nlu:
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - true
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+- intent: reset
+  examples: |
+    - reset
+    - I want to reset
+    - reset all
+- intent: check_slot_input
+  examples: |
+    - check
+    - check status
+    - check info
+    - check entries
+- intent: extract_kpi
+  examples: |
+    - what is the number of [locations]{"entity": "kpi", "value": "Locations"} in [Berlin](place) in [December 2021](DATE)?
+    - what is [charging points per 1,000 cars]{"entity": "kpi", "value": "Charging points per 1,000 cars"} in [Brandenburg](place) in [December 2021](DATE)?
+    - Give me the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Berlin](place) in [December 2022](DATE)?
+    - Give me the number of [cars per charging points]{"entity": "kpi", "value": "Cars per charging point"} in [Mecklenburg-Vorpommern](place) in [December 2022](DATE)?
+    - In [Hamburg](place), how many [chargingpoints]{"entity": "kpi", "value": "Charging points"} are there in [May 2021](DATE)?
+    - In [April 2020](DATE), how many [chargingstations]{"entity": "kpi", "value": "Charging stations"} does [Dresden](place) have?
+    - In [April 2020](DATE), how many [cars per chargingpoint]{"entity": "kpi", "value": "Cars per charging point"} does [Mecklenburg-Vorpommern](place) have?
+    - I want to know the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Sachsen](place) [now](DATE)?
+    - I want to know [chargingpoints per cars]{"entity": "kpi", "value": "Charging points per 1,000 cars"} in [Hamburg](place) [next month](DATE)?
+    - Tell me about situation of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Bayern](place).
+    - Tell me about situation of [charging stations]{"entity": "kpi", "value": "Charging stations"} in [Schleswig-Holstein](place).
+    - How many [locations]{"entity": "kpi", "value": "Locations"} are there in [Kassel](place) in [May,2019](DATE)?
+    - How many [charging stations]{"entity": "kpi", "value": "Charging stations"} are there in [Mecklenburg-Vorpommern](place)?
+    - What's the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Berlin](place)?
+    - [Percentage of target]{"entity": "kpi", "value": "Percentage of target"} in [Leipzig](place).
+    - [Cars per charging points]{"entity": "kpi", "value": "Cars per charging point"} in [Sachsen-Anhalt](place).
+    - number of [charging points]{"entity": "kpi", "value": "Charging points"} in [Sept 2019](DATE) in [Thüringen](place).
+    - [Percentage of target]{"entity": "kpi", "value": "Percentage of target"} of [Bayern](place) [at the end of 2021](DATE).
+
+
 - intent: chitchat/greet
   examples: |
     - hey
@@ -36,33 +87,28 @@ nlu:
     - what does locations mean?
     - definition of locations
     - what is locations?
-- intent: affirm
+- intent: faq/chargingstations_info
   examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
-    - true
-- intent: deny
+    - what does charging stations mean?
+    - definition of chargingstations
+    - what is Charging stations?
+- intent: faq/chargingpoints_info
   examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
-- intent: extract_kpi
+    - what does charging points mean?
+    - definition of chargingpoints
+    - what is Charging points?
+- intent: faq/chargingpoints_per_car_info
   examples: |
-    - what is the number of [locations]{"entity": "kpi", "value": "Locations"} in [Berlin](place) in [December 2021](DATE)?
-    - Give me the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Berlin](place) in [December 2022](DATE)?
-    - In [Hamburg](place), how many [chargingpoints]{"entity": "kpi", "value": "Charging points"} are there in [May 2021](DATE)?
-    - In [April 2020](DATE), how many [chargingstations]{"entity": "kpi", "value": "Charging stations"} does [Dresden](place) have?
-    - I want to know the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Sachsen](place) [now](DATE)?
-    - Tell me about [Bayern](place).
-    - How many [locations]{"entity": "kpi", "value": "Locations"} are there in [Kassel](place)?
-    - What's the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Berlin][{"entity": "place"}, {"entity": "place"}]?
-    - June [2020](DATE)
-
+    - what does charging points per car mean?
+    - definition of charging points per car
+    - what is Charging points per car?
+- intent: faq/car_per_chargingpoints_info
+  examples: |
+    - what does car per charging points mean?
+    - definition of car per charging points.
+    - what is Car per charging points?
+- intent: faq/percentage_target_info
+  examples: |
+    - what does percentage of target mean?
+    - definition of Percentage of target.
+    - what is percentage of target?

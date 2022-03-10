@@ -10,6 +10,8 @@ intents:
   - faq:
       is_retrieval_intent: true
   - request_kpi_form
+  - reset
+  - check_slot_input
 
 
 entities:
@@ -33,6 +35,9 @@ slots:
     mappings:
     - type: from_entity
       entity: kpi
+      # conditions:
+      # - active_loop: kpi_form
+      #   requested_slot: kpi  
 
   DATE:
     type: text
@@ -40,6 +45,9 @@ slots:
     mappings:
     - type: from_entity
       entity: DATE
+      # conditions:
+      # - active_loop: kpi_form
+      #   requested_slot: DATE   
 
   mapped_time: 
     type: text
@@ -49,6 +57,9 @@ slots:
 
 forms:
   kpi_form:
+    ignored_intents: 
+    - chitchat
+    - faq
     required_slots:
       - place
       - kpi
@@ -95,17 +106,28 @@ responses:
 
   utter_faq/service:
   - text: "KPIs that are available: Locations, Charging stations, Charging points, Charging points per 1,000 cars, Cars per charging point, Percentage of target.//You can type the KPI name for the KPI description or start directly asking me questions regarding the KPI within Germany."
-
   utter_faq/locations_info:
-  - text: "locations: number of charging infrastructure places."
+  - text: "Locations: number of charging infrastructure places."
+  utter_faq/chargingstations_info:
+  - text: "Charging stations: number of charging stations. A charging station, also called an EV charger or electric vehicle supply equipment (EVSE), is a piece of equipment that supplies electrical power for charging plug-in electric vehicles (including hybrids, neighborhood electric vehicles, trucks, buses, and others). A charging station can have one or more charging points." 
+  utter_faq/chargingpoints_info:
+  - text: "Charging points: number of charging points. A charging point is an interface with which either only one electric vehicle can be charged or only one battery of an electric vehicle can be exchanged at the same time.
+"
+  utter_faq/chargingpoints_per_car_info:
+  - text: "Charging points per 1,000 cars: number of charging points per 1,000 registered passenger cars."
+  utter_faq/car_per_chargingpoints_info:
+  - text: "Cars per charging point: number of registered passenger cars per charging point."
+  utter_faq/percentage_target_info:
+  - text: "Percentage of target: achieved share of charging points in relation to the required minimum number of charging points for 2030."
 
 actions:
   - utter_ask_place
-  - utter_ask_time
+  - utter_ask_DATE
   - utter_ask_kpi
   - action_query_clarify
   - action_reset_slots
   - action_query_confirm
+  - action_slot_check
   - action_execute_query
   - action_convert_date
 

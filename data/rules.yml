@@ -12,6 +12,18 @@ rules:
   - intent: faq
   - action: utter_faq
 
+- rule: reset
+  steps:
+  - intent: reset
+  - action: action_reset_slots
+  - action: action_slot_check
+
+- rule: check_slot_input
+  steps:
+  - intent: check_slot_input
+  - action: action_slot_check
+  
+
 - rule: Activate form
   steps:
   - intent: extract_kpi

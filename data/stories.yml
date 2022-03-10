@@ -104,6 +104,7 @@ stories:
     - kpi: null  
   - slot_was_set:
     - mapped_time: null
+
 - story: interactive_story_1
   steps:
   - intent: chitchat
@@ -142,7 +143,32 @@ stories:
     - DATE: null
   - slot_was_set:
     - mapped_time: null
-  - intent: chitchat/greet
-  - action: utter_chitchat/greet
-  - intent: faq/service
-  - action: utter_faq/service
+  - intent: chitchat
+  - action: utter_chitchat
+  - intent: faq
+  - action: utter_faq
+
+- story: interactive_story_2
+  steps:
+  - intent: extract_kpi
+    entities:
+    - place: Berlin
+    - DATE: May 2020
+    - place: Berlin
+    - DATE: May 2020
+  - slot_was_set:
+    - place: Berlin
+  - slot_was_set:
+    - DATE: May 2020
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - requested_slot: kpi
+  - slot_was_set:
+    - kpi: chargingstations
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_convert_date
+  - slot_was_set:
+    - mapped_time: '202006'

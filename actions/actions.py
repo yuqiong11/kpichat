@@ -61,8 +61,8 @@ class ActionConvertDate(Action):
         if slot_month == "":
             if DATE == 'now':
                 current_month = datetime.datetime.now().month
-                slot_year=str(required_date.year)
-                if len(current_month) == 1:
+                slot_year=str(datetime.datetime.now().year)
+                if current_month < 10:
                     slot_month='0'+str(current_month)
                 else:
                     slot_month=current_month
@@ -144,6 +144,18 @@ class ActionResetSlots(Action):
     def run(self, dispatcher, tracker, domain):
         return [SlotSet("place", None), SlotSet("kpi", None), SlotSet("DATE", None), SlotSet("mapped_time", None)]
 
+class ActionSlotCheck(Action):
+
+    def name(self) -> Text:
+        return "action_slot_check"
+
+    def run(self, dispatcher, tracker, domain):
+        place = tracker.get_slot("place")
+        DATE = tracker.get_slot("DATE")
+        kpi = tracker.get_slot("kpi")
+        dispatcher.utter_message(text=f"the place is {place}, kpi is {kpi}, time is {DATE}.")
+
+        return []
 
 class ActionQueryConfirm(Action): 
 
@@ -179,17 +191,32 @@ class ActionExecuteQuery(Action):
         mapped_time = tracker.get_slot("mapped_time")
         kpi = tracker.get_slot("kpi")
 
-        if kpi == "Locations":
-            q = f"SELECT no_total_locations FROM \"E-Mobility\".emo_historical WHERE state='{place}' AND month={mapped_time}; "
-        elif kpi == "Charging stations":
-            q = f"SELECT no_total_stations FROM \"E-Mobility\".emo_historical WHERE state='{place}' AND month={mapped_time}; "
+        # first: convert kpi to its column name in database
+        if kpi == 'Locations':
+            kpi_value = 'no_total_locations'
+        elif kpi == 'Charging stations':
+            kpi_value = 'no_total_stations'
+        elif kpi == 'Charging points':
+            kpi_value = 'no_total_chargepoints'
+
+        # second: check different state types
+        if place in ('Berlin', 'Hamburg'):
+            state_value=f"state='{place}'"
+        elif place in ('Sachsen','Baden-Württemberg','Bayern', 'Brandenburg', 'Hessen', 'Niedersachsen', 
+                    'Mecklenburg-Vorpommern', 'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen-Anhalt',
+                    'Schleswig-Holstein', 'Thüringen'):
+            state_value=f"state='{place}'"
+            kpi_value=f"SUM({kpi_value})"
         else:
-            q = f"SELECT no_total_chargepoints FROM \"E-Mobility\".emo_historical WHERE state='{place}' AND month={mapped_time}; "
+            state_value=f"county LIKE '%{place}%'"
+
+        q = f"SELECT {kpi_value} FROM \"E-Mobility\".emo_historical WHERE {state_value} AND month={mapped_time}; "
+        
 
         cur.execute(q)
         result = cur.fetchall()
         if len(result) == 1:
-            dispatcher.utter_message(text=str(result[0][0]))
+            dispatcher.utter_message(text=str(round(result[0][0])))
 
         return []
 

@@ -16,19 +16,25 @@
 # if s2 in None:
 #     print('good')
 
-abc = ["apple", "banana", "cherry"]
+# abc = ["apple", "banana", "cherry"]
 
-for e in abc:
-  print(e)
-  if e == 'banana':
-    print('heeee')
-    break
+# for e in abc:
+#   print(e)
+#   if e == 'banana':
+#     print('heeee')
+#     break
 
-# print('got it')
+# # print('got it')
 
-fruits = ["apple", "banana", "cherry"]
-for x in fruits:
-  print(x)
-  if x == "banana":
-    print('hiiii')
-    break
+# fruits = ["apple", "banana", "cherry"]
+# for x in fruits:
+#   print(x)
+#   if x == "banana":
+#     print('hiiii')
+#     break
+'''
+a='hi'
+if a in ['hello', 'hi']:
+  print('it is a greeting')'''
+
+print(round(8))
