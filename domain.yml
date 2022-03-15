@@ -96,6 +96,15 @@ responses:
 
   utter_ask_for_clarification:
   - text: "Please correct the false part."
+
+  utter_out_of_scope:
+  - text: "Oops, I am stumped..."
+
+  utter_please_rephrase:
+  - text: "Sorry, could you rephrase that?"
+
+  utter_default:
+  - text: "I'm sorry, I can't help you."
   
   utter_chitchat/greet:
   - text: "hi"
@@ -105,7 +114,7 @@ responses:
   - text: "bye"
 
   utter_faq/service:
-  - text: "KPIs that are available: Locations, Charging stations, Charging points, Charging points per 1,000 cars, Cars per charging point, Percentage of target.//You can type the KPI name for the KPI description or start directly asking me questions regarding the KPI within Germany."
+  - text: "KPIs that are available: Locations, Charging stations, Charging points, Charging points per 1,000 cars, Cars per charging point, Percentage of target.\nYou can type the KPI name for the KPI description or start directly asking me questions regarding the KPI within Germany."
   utter_faq/locations_info:
   - text: "Locations: number of charging infrastructure places."
   utter_faq/chargingstations_info:
@@ -130,6 +139,7 @@ actions:
   - action_slot_check
   - action_execute_query
   - action_convert_date
+
 
 session_config:
   session_expiration_time: 60

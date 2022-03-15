@@ -49,6 +49,29 @@ nlu:
     - [Cars per charging points]{"entity": "kpi", "value": "Cars per charging point"} in [Sachsen-Anhalt](place).
     - number of [charging points]{"entity": "kpi", "value": "Charging points"} in [Sept 2019](DATE) in [Thüringen](place).
     - [Percentage of target]{"entity": "kpi", "value": "Percentage of target"} of [Bayern](place) [at the end of 2021](DATE).
+    - what is the number of [locations]{"entity": "kpi", "value": "Locations"} in [Berlin](place) in [December 2021](DATE)?
+    - what is [charging points per 1,000 cars]{"entity": "kpi", "value": "Charging points per 1,000 cars"} in [Brandenburg](place) in [December 2021](DATE)?
+    - Give me the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Berlin](place) in [December 2022](DATE)?
+    - Give me the number of [cars per charging points]{"entity": "kpi", "value": "Cars per charging point"} in [Mecklenburg-Vorpommern](place) in [December 2022](DATE)?
+    - In [Hamburg](place), how many [chargingpoints]{"entity": "kpi", "value": "Charging points"} are there in [May 2021](DATE)?
+    - In [April 2020](DATE), how many [chargingstations]{"entity": "kpi", "value": "Charging stations"} does [Dresden](place) have?
+    - In [June 2020](DATE), how many [locations]{"entity": "kpi", "value": "Locations"} does [Mecklenburg-Vorpommern](place) have?
+    - I want to know the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Sachsen](place) [now](DATE)?
+    - I want to know [chargingpoints per cars]{"entity": "kpi", "value": "Charging points per 1,000 cars"} in [Hamburg](place) [next month](DATE)?
+    - Tell me about situation of [locations]{"entity": "kpi", "value": "Locations"} in [Thüringen](place).
+    - Tell me about situation of [charging stations]{"entity": "kpi", "value": "Charging stations"} in [Schleswig-Holstein](place).
+    - How many [chargingstations]{"entity": "kpi", "value": "Charging stations"} are there in [Kassel](place) in [May,2019](DATE)?
+    - How many [locations]{"entity": "kpi", "value": "Locations"} are there in [Mecklenburg-Vorpommern](place)?
+    - What's the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Berlin](place)?
+    - [charging stations]{"entity": "kpi", "value": "Charging stations"} in [Bayern](place).
+    - [Cars per charging points]{"entity": "kpi", "value": "Cars per charging point"} in [Sachsen-Anhalt](place).
+    - number of [charging points]{"entity": "kpi", "value": "Charging points"} in [Sept 2019](DATE) in [Thüringen](place).
+    - [cars per chargingpoint]{"entity": "kpi", "value": "Cars per charging point"} of [Bayern](place) [at the end of 2021](DATE).
+    - [chargingpoints]{"entity": "kpi", "value": "Charging points"}
+    - [chargingstations]{"entity": "kpi", "value": "Charging stations"}
+    - [charging points]{"entity": "kpi", "value": "Charging points"}
+    - [charging stations]{"entity": "kpi", "value": "Charging stations"}
+    - [locations]{"entity": "kpi", "value": "Locations"}
 
 
 - intent: chitchat/greet
@@ -87,28 +110,41 @@ nlu:
     - what does locations mean?
     - definition of locations
     - what is locations?
+    - locations
 - intent: faq/chargingstations_info
   examples: |
     - what does charging stations mean?
     - definition of chargingstations
     - what is Charging stations?
+    - chargingstations
+    - charging stations
 - intent: faq/chargingpoints_info
   examples: |
     - what does charging points mean?
     - definition of chargingpoints
     - what is Charging points?
+    - chargingpoints
+    - charging points
 - intent: faq/chargingpoints_per_car_info
   examples: |
     - what does charging points per car mean?
     - definition of charging points per car
     - what is Charging points per car?
+    - charging points per car
 - intent: faq/car_per_chargingpoints_info
   examples: |
     - what does car per charging points mean?
     - definition of car per charging points.
     - what is Car per charging points?
+    - car per charging points
 - intent: faq/percentage_target_info
   examples: |
     - what does percentage of target mean?
     - definition of Percentage of target.
     - what is percentage of target?
+    - percentage of target
+- intent: out_of_scope
+  examples: |
+    - I want to know about tesla
+    - I want to buy a electric car
+    - how is the charging infrastructure in the US?

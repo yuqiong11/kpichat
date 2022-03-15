@@ -34,8 +34,11 @@ class ActionConvertDate(Action):
         'Jul', 'Aug', 'Sept',
         'Oct', 'Nov', 'Dec'
         ]
-        months_of_number = [
+        months_of_number_1 = [
         '01.20', '02.20', '03.20', '04.20', '05.20', '06.20', '07.20', '08.20', '09.20', '10.20', '11.20', '12.20'    
+        ]
+        months_of_number_2 = [
+        '.01', '.02', '.03', '.04', '.05', '.06', '.07', '.08', '.09', '.10', '.11', '.12'   
         ]
         years = ['2022', '2021', '2020', '2019', '2018', '2017']
         special_words_01 = ['beginning', 'first']
@@ -107,8 +110,16 @@ class ActionConvertDate(Action):
                         slot_month = '0'+str(i+1)
         
         if slot_month == "":
-            for i in range(len(months_of_number)):
-                if months_of_number[i] in DATE:
+            for i in range(len(months_of_number_1)):
+                if months_of_number_1[i] in DATE:
+                    if i >= 9:
+                        slot_month = str(i+1)
+                    else:
+                        slot_month = '0'+str(i+1)
+
+        if slot_month == "":
+            for i in range(len(months_of_number_2)):
+                if months_of_number_2[i] in DATE:
                     if i >= 9:
                         slot_month = str(i+1)
                     else:
@@ -153,7 +164,7 @@ class ActionSlotCheck(Action):
         place = tracker.get_slot("place")
         DATE = tracker.get_slot("DATE")
         kpi = tracker.get_slot("kpi")
-        dispatcher.utter_message(text=f"the place is {place}, kpi is {kpi}, time is {DATE}.")
+        dispatcher.utter_message(text=f"place: {place}\n kpi: {kpi}\n time:{DATE}")
 
         return []
 
@@ -166,7 +177,7 @@ class ActionQueryConfirm(Action):
         place = tracker.get_slot("place")
         mapped_time = tracker.get_slot("mapped_time")
         kpi = tracker.get_slot("kpi")
-        dispatcher.utter_message(text=f"the place is {place}, kpi is {kpi}, time is {mapped_time}?",
+        dispatcher.utter_message(text=f"place: {place}\n kpi: {kpi}\n time:{mapped_time}?",
         buttons= [
             {"title": "yes","payload": "/affirm"},
             {"title": "no", "payload": "/deny"}
@@ -190,6 +201,7 @@ class ActionExecuteQuery(Action):
         place = tracker.get_slot("place")
         mapped_time = tracker.get_slot("mapped_time")
         kpi = tracker.get_slot("kpi")
+        DATE = tracker.get_slot("DATE")
 
         # first: convert kpi to its column name in database
         if kpi == 'Locations':
@@ -200,23 +212,26 @@ class ActionExecuteQuery(Action):
             kpi_value = 'no_total_chargepoints'
 
         # second: check different state types
-        if place in ('Berlin', 'Hamburg'):
-            state_value=f"state='{place}'"
-        elif place in ('Sachsen','Baden-Württemberg','Bayern', 'Brandenburg', 'Hessen', 'Niedersachsen', 
-                    'Mecklenburg-Vorpommern', 'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen-Anhalt',
-                    'Schleswig-Holstein', 'Thüringen'):
-            state_value=f"state='{place}'"
-            kpi_value=f"SUM({kpi_value})"
+        if place == 'Germany':
+            q = f"SELECT SUM({kpi_value}) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time}; "
         else:
-            state_value=f"county LIKE '%{place}%'"
+            if place in ('Berlin', 'Hamburg'):
+                state_value=f"state='{place}'"
+            elif place in ('Sachsen','Baden-Württemberg','Bayern', 'Brandenburg', 'Hessen', 'Niedersachsen', 
+                        'Mecklenburg-Vorpommern', 'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen-Anhalt',
+                        'Schleswig-Holstein', 'Thüringen'):
+                state_value=f"state='{place}'"
+                kpi_value=f"SUM({kpi_value})"
+            else:
+                state_value=f"county LIKE '%{place}%'"
 
-        q = f"SELECT {kpi_value} FROM \"E-Mobility\".emo_historical WHERE {state_value} AND month={mapped_time}; "
+            q = f"SELECT {kpi_value} FROM \"E-Mobility\".emo_historical WHERE {state_value} AND month={mapped_time}; "
         
 
         cur.execute(q)
         result = cur.fetchall()
         if len(result) == 1:
-            dispatcher.utter_message(text=str(round(result[0][0])))
+            dispatcher.utter_message(text=f"The number of {kpi} in {place} in {DATE} is "+str(round(result[0][0])))
 
         return []
 

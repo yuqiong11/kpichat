@@ -40,9 +40,9 @@ pipeline:
     epochs: 100
     retrieval_intent: faq 
     constrain_similarities: true
-  # - name: FallbackClassifier
-  #   threshold: 0.3
-  #   ambiguity_threshold: 0.1
+  - name: FallbackClassifier
+    threshold: 0.7
+    ambiguity_threshold: 0.1
   # - name: SpacyNLP
   # - name: SpacyTokenizer
   # - name: SpacyFeaturizer
