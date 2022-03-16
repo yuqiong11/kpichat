@@ -21,19 +21,35 @@ rules:
 - rule: check_slot_input
   steps:
   - intent: check_slot_input
-  - action: action_slot_check
+  - action: action_slot_check  
 
-# it is useless since RASA NLU and RASA CORE work saparately, i.e. intent classification is not influenced by previous action
-# - rule: force_intent
-#   steps:
-#   - action: utter_ask_kpi
-#   - intent: extract_kpi
-  
-  
-
-- rule: Activate form
+- rule: Activate form agg
   steps:
-  - intent: extract_kpi
+  - intent: agg_query
+  - action: kpi_form
+  - active_loop: kpi_form
+
+- rule: Activate form group sort
+  steps:
+  - intent: group_sort_query
+  - action: kpi_form
+  - active_loop: kpi_form
+
+- rule: Activate form filter
+  steps:
+  - intent: filter_query
+  - action: kpi_form
+  - active_loop: kpi_form
+
+- rule: Activate form limit
+  steps:
+  - intent: limit_query
+  - action: kpi_form
+  - active_loop: kpi_form
+
+- rule: Activate form window
+  steps:
+  - intent: window_query
   - action: kpi_form
   - active_loop: kpi_form
 
@@ -59,7 +75,3 @@ rules:
   steps:
   - intent: nlu_fallback
   - action: utter_please_rephrase
-
-
-
- 

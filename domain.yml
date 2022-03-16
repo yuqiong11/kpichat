@@ -5,8 +5,12 @@ intents:
       is_retrieval_intent: true
   - affirm
   - deny
-  - extract_kpi
-  - mood_unhappy
+  - agg_query
+  - group_sort_query
+  - filter_query
+  - limit_query
+  - window_query
+  - out_of_scope
   - faq:
       is_retrieval_intent: true
   - request_kpi_form
@@ -18,6 +22,15 @@ entities:
 - place
 - kpi
 - DATE
+- max
+- min
+- avg
+- desc
+- asc
+- le
+- ge
+- bet
+- CARDINAL
 
 slots:
   place:
@@ -25,35 +38,79 @@ slots:
     influence_conversation: true
     mappings:
     - type: from_entity
-      entity: place
-      # conditions:
-      # - active_loop: kpi_form
-      #   requested_slot: place   
+      entity: place  
   kpi:
     type: text
     influence_conversation: true
     mappings:
     - type: from_entity
       entity: kpi
-      # conditions:
-      # - active_loop: kpi_form
-      #   requested_slot: kpi  
-
   DATE:
     type: text
     influence_conversation: true
     mappings:
     - type: from_entity
       entity: DATE
-      # conditions:
-      # - active_loop: kpi_form
-      #   requested_slot: DATE   
-
   mapped_time: 
     type: text
     initial_value: None
     mappings:
     - type: custom
+  max:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: max
+  min:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: min
+  avg:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: avg
+  desc:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: desc
+  asc:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: asc
+  le:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: le
+  ge:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: ge
+  bet:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: bet
+  CARDINAL:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: CARDINAL
+
 
 forms:
   kpi_form:
@@ -68,22 +125,13 @@ forms:
 
 responses:
   utter_ask_place:
-  - text: "Which place are you interested in?"
+  - text: "Which place are you interested in? You can type name of a federal state/city or simply 'county' or 'federal state'."
 
   utter_ask_kpi:
   - text: "Which KPI are you interested in?"
 
   utter_ask_DATE:
   - text: "What time are you interested?"
-
-  utter_state_sql:
-  - text: "SELECT SUM({kpi}) FROM \"E-Mobility\".emo_historical WHERE state='{place}' AND month={time};"
-
-  utter_state_city_sql:
-  - text: "SELECT {kpi} FROM \"E-Mobility\".emo_historical WHERE state='{place}' AND month={time};"
-
-  utter_county_sql:
-  - text: "SELECT {kpi} FROM \"E-Mobility\".emo_historical WHERE county='{place}' AND month={time};"
 
   utter_query_received:
   - text: "Ok, query received. Please confirm the following."
@@ -137,7 +185,11 @@ actions:
   - action_reset_slots
   - action_query_confirm
   - action_slot_check
-  - action_execute_query
+  - action_execute_agg_query
+  - action_execute_group_sort_query
+  - action_execute_filter_query
+  - action_execute_limit_query
+  - action_execute_window_query
   - action_convert_date
 
 
