@@ -24,11 +24,18 @@ pipeline:
   - name: DIETClassifier
     epochs: 150
     constrain_similarities: true
-  - name: rasa_nlu_examples.extractors.FlashTextEntityExtractor
-    case_sensitive: False
-    path: ./place.txt
-    entity_name: place
-    encoding: 'utf-8'
+  # - name: rasa_nlu_examples.extractors.FlashTextEntityExtractor
+  #   case_sensitive: False
+  #   path: ./GPE_any.txt
+  #   entity_name: place
+    # encoding: 'utf-8'
+  # - name: fuzzy_extractor.FuzzyEntityExtractor
+  #   thres: 0.9
+  - name: rapid_fuzzy_extractor.RapidFuzzyEntityExtractor
+  # - name: RegexEntityExtractor
+  #   case_sensitive: False
+  #   use_lookup_tables: True
+  #   use_regexes: False
   - name: SpacyEntityExtractor
     dimensions: ["DATE", "CARDINAL"]
   - name: EntitySynonymMapper

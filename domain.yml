@@ -110,7 +110,21 @@ slots:
     mappings:
     - type: from_entity
       entity: CARDINAL
-
+  stored_intent:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
+  stored_user_input:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
+  stored_entities_indices:
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: custom
 
 forms:
   kpi_form:
@@ -129,6 +143,14 @@ responses:
 
   utter_ask_kpi:
   - text: "Which KPI are you interested in?"
+    buttons:
+    - title: "Location"
+      payload: '/inform{{"kpi":"Locations"}}'
+    - title: "Charging station"
+      payload: '/inform{{"kpi":"Charging stations"}}'
+    - title: "Charging point"
+      payload: '/inform{{"kpi":"Charging points"}}'
+
 
   utter_ask_DATE:
   - text: "What time are you interested?"
@@ -191,6 +213,8 @@ actions:
   - action_execute_limit_query
   - action_execute_window_query
   - action_convert_date
+  - validate_kpi_form
+  - action_tem_store
 
 
 session_config:
