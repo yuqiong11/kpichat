@@ -66,9 +66,9 @@ rules:
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: "202001"
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: "202001"
   wait_for_user_input: false
 
 - rule: out-of-scope

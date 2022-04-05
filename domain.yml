@@ -125,6 +125,11 @@ slots:
     influence_conversation: false
     mappings:
     - type: custom
+  new_training_data:
+    type: boolean
+    influence_conversation: False
+    mappings:
+    - type: custom
 
 forms:
   kpi_form:

@@ -1,4 +1,4 @@
-cluster_sql_mapping = {
+CLUSTERS_SQL_MAPPING = {
     "agg_query": 
     {
     'cluster0': 'SELECT SUM({kpi}) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time};',
@@ -41,7 +41,7 @@ cluster_sql_mapping = {
 }
 
 
-query_clusters = {
+QUERY_CLUSTERS = {
     "agg_query":
     {
         'cluster0':
@@ -202,3 +202,6 @@ query_clusters = {
         ]
     }
 }
+
+
+    

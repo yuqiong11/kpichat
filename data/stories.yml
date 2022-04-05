@@ -16,9 +16,9 @@ stories:
   - slot_was_set:
     - requested_slot: null 
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: "202001"
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: "202001"
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
@@ -40,9 +40,9 @@ stories:
   - slot_was_set:
     - requested_slot: null 
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: "202001"
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: "202001"
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
@@ -64,9 +64,9 @@ stories:
   - slot_was_set:
     - requested_slot: null 
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: "202001"
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: "202001"
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
@@ -88,9 +88,9 @@ stories:
   - slot_was_set:
     - requested_slot: null 
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: "202001"
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: "202001"
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
@@ -112,9 +112,9 @@ stories:
   - slot_was_set:
     - requested_slot: null 
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: "202001"
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: "202001"
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
@@ -138,9 +138,9 @@ stories:
   - slot_was_set:
     - requested_slot: null 
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: "202001"
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: "202001"
   - action: utter_query_received
   - action: action_query_confirm
   - intent: deny
@@ -165,9 +165,9 @@ stories:
   - slot_was_set:
     - requested_slot: null 
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: "202001"
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: "202001"
   - action: utter_query_received
   - action: action_query_confirm
   - intent: deny
@@ -203,9 +203,9 @@ stories:
   - slot_was_set:
     - requested_slot: null
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: '202006'
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: '202006'
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
@@ -247,9 +247,9 @@ stories:
   - slot_was_set:
     - requested_slot: null
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: '202107'
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: '202107'
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
@@ -288,9 +288,9 @@ stories:
   - slot_was_set:
     - requested_slot: null
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: '202103'
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: '202103'
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
@@ -331,9 +331,9 @@ stories:
   - slot_was_set:
     - requested_slot: null
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: '202201'
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: '202201'
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
@@ -370,9 +370,9 @@ stories:
   - slot_was_set:
     - requested_slot: null
   - active_loop: null
-  - action: action_convert_date
-  - slot_was_set:
-    - mapped_time: '202008'
+  # - action: action_convert_date
+  # - slot_was_set:
+  #   - mapped_time: '202008'
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
@@ -386,3 +386,52 @@ stories:
     - DATE: null
   - slot_was_set:
     - mapped_time: null
+- story: interactive_story_4
+  steps:
+  - intent: agg_query
+    entities:
+    - min: lowest
+    - kpi: Locations
+    - place: Offenbac
+    - DATE: Feb 2020
+    - place: Offenbach
+    - DATE: Feb 2020
+  - slot_was_set:
+    - place: Offenbach
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: Feb 2020
+  - slot_was_set:
+    - min: lowest
+  - action: action_tem_store
+  - slot_was_set:
+    - stored_intent: agg_query
+  - slot_was_set:
+    - stored_user_input: The lowest number of locations of in Offenbac in Feb 2020?
+  - slot_was_set:
+    - stored_entities_indices:
+        kpi_idx:
+          start: 21
+          end: 30
+        DATE_idx:
+          start: 49
+          end: 57
+        place_idx:
+          start: 37
+          end: 45
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: Offenbach
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: Feb 2020
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_execute_agg_query

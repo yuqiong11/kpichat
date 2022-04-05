@@ -278,3 +278,6 @@ def change_letter(input_str, mask, start, end):
 # print(test)
 
 # print('hi how are you'[3:5])
+
+# my_dict = {'a': 1, 'b': 2}
+# print('a' in my_dict)

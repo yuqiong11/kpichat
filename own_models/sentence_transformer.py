@@ -11,16 +11,16 @@ import sys
 path = 'e:/User/yuqiong.weng/Chatbot/kpibot/mappings'
 sys.path.insert(0, path)
 
-from sql_mapping import cluster_sql_mapping, query_clusters
+from sql_mapping import CLUSTERS_SQL_MAPPING, QUERY_CLUSTERS
 
 
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # Parameters
-default_params = {
+DEFAULT_PARAMS = {
     'model': model,
-    'query_clusters': query_clusters,
-    'mapping': cluster_sql_mapping,
+    'query_clusters': QUERY_CLUSTERS,
+    'mapping': CLUSTERS_SQL_MAPPING,
     'path': "./own_models/centroids.pt",
     'load_centroids': True
 }
@@ -100,13 +100,13 @@ def output_template(query, intent, query_clusters, mapping, path, model, load_ce
     return mapping[intent][cluster_name]
 
 # test
-new_query = 'The lowest number of [kpi] of in [place_county] in [DATE]?'
-print(output_template(new_query, "agg_query", query_clusters, cluster_sql_mapping, "./own_models/centroids.pt", model,  load_centroids=True))
+new_query = 'The lowest number of [kpi] in [place_state] in [DATE]?'
+print(output_template(new_query, "agg_query", QUERY_CLUSTERS, CLUSTERS_SQL_MAPPING, "./own_models/centroids.pt", model,  load_centroids=True))
 
 
 
 
-
+# The lowest number of locations of in Sachsen in Feb 2020?
 
 
 

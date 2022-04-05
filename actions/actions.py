@@ -25,10 +25,11 @@ sys.path.insert(0, path)
 path = 'e:/User/yuqiong.weng/Chatbot/kpibot/utils'
 sys.path.insert(0, path)
 from time_mapping import convert_time
-from kpi_mapping import kpi_mapping
-from sql_mapping import cluster_sql_mapping, query_clusters
-from sentence_transformer import output_template, default_params
-from constants import state_list
+# from kpi_mapping import kpi_mapping
+# from sql_mapping import cluster_sql_mapping, query_clusters
+from query_translation import QueryTranslation
+from sentence_transformer import output_template, DEFAULT_PARAMS
+from constants import STATE_LIST
 
 
 class ValidateKpiForm(FormValidationAction):
@@ -84,10 +85,10 @@ class ActionQueryClarify(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         place = tracker.get_slot("place")
-        mapped_time = tracker.get_slot("mapped_time")
+        DATE = tracker.get_slot("DATE")
         kpi = tracker.get_slot("kpi")
         dispatcher.utter_message(text=f"place is {place}")
-        dispatcher.utter_message(text=f"time is {mapped_time}")
+        dispatcher.utter_message(text=f"time is {DATE}")
         dispatcher.utter_message(text=f"kpi is {kpi}")
 
         return []
@@ -124,9 +125,9 @@ class ActionQueryConfirm(Action):
 
     def run(self, dispatcher, tracker, domain):
         place = tracker.get_slot("place")
-        mapped_time = tracker.get_slot("mapped_time")
+        DATE = tracker.get_slot("DATE")
         kpi = tracker.get_slot("kpi")
-        dispatcher.utter_message(text=f"place: {place}\n kpi: {kpi}\n time:{mapped_time}?",
+        dispatcher.utter_message(text=f"place: {place}\n kpi: {kpi}\n time:{DATE}?",
         buttons= [
             {"title": "yes","payload": "/affirm"},
             {"title": "no", "payload": "/deny"}
@@ -170,8 +171,18 @@ class ActionTemIntent(Action):
                         'start': entity['start'],
                         'end': entity['end']
                     }
-
-        return [SlotSet("stored_intent", intent), SlotSet("stored_user_input", user_input), SlotSet("stored_entities_indices", {'kpi_idx': kpi_idx, 'DATE_idx': DATE_idx, 'place_idx': place_idx})]
+        
+        SlotSet_list = [SlotSet("stored_intent", intent), SlotSet("stored_user_input", user_input), SlotSet("stored_entities_indices", {'kpi_idx': kpi_idx, 'DATE_idx': DATE_idx, 'place_idx': place_idx})]
+        # set a new slot to indicate all 3 entities are present in user input
+        try:
+            if kpi_idx and DATE_idx and place_idx:
+                SlotSet_list.append(SlotSet("new_training_data", True))
+            else:
+                SlotSet_list.append(SlotSet("new_training_data", False))
+        except Exception:
+            pass
+        
+        return SlotSet_list
 
 class ActionExecuteAggQuery(Action):
    def name(self) -> Text:
@@ -198,35 +209,16 @@ class ActionExecuteAggQuery(Action):
         user_input = tracker.get_slot("stored_user_input")
         entities_indices = tracker.get_slot("stored_entities_indices")
         
-        # intent = tracker.latest_message['intent'].get('name')
-        
+        # query translation
+        query_translating = QueryTranslation(kpi, place, DATE, entities_indices, user_input, intent)
+        q = query_translating.vaild_sql()
 
-        # first: convert kpi to its column name in database
-        kpi = kpi_mapping.get(f"{kpi}")
-
-        # mask user input
-        
-        kpi_start, kpi_end = entities_indices.get('kpi_idx')['start'], entities_indices.get('kpi_idx')['end']
-        place_start, place_end = entities_indices.get('place_idx')['start'], entities_indices.get('place_idx')['end']
-        DATE_start, DATE_end = entities_indices.get('DATE_idx')['start'], entities_indices.get('DATE_idx')['end']
-        kpi_raw = user_input[kpi_start:kpi_end]
-        place_raw = user_input[place_start:place_end]
-        DATE_raw = user_input[DATE_start:DATE_end]
-
-        masked_query = user_input.replace(kpi_raw, "[kpi]")
-        masked_query = user_input.replace(DATE_raw, "[mapped_time]")
-        if place in state_list:
-            masked_query = user_input.replace(place_raw, "[place_state]")
-        else:
-            masked_query = user_input.replace(place_raw, "[place_county]")
-
-        # third: sql mapping
-        q = output_template(masked_query, intent, **default_params)
         dispatcher.utter_message(text=q)
-        # cur.execute(q)
-        # result = cur.fetchall()
-        # if len(result) == 1:
-        #     dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0][0])))
+
+        cur.execute(q)
+        result = cur.fetchall()
+        if len(result) == 1:
+            dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0][0])))
 
         return []
 
