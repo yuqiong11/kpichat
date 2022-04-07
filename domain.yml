@@ -35,19 +35,19 @@ entities:
 slots:
   place:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
     - type: from_entity
       entity: place  
   kpi:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
     - type: from_entity
       entity: kpi
   DATE:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
     - type: from_entity
       entity: DATE
@@ -126,8 +126,8 @@ slots:
     mappings:
     - type: custom
   new_training_data:
-    type: boolean
-    influence_conversation: False
+    type: bool
+    influence_conversation: false
     mappings:
     - type: custom
 
@@ -219,7 +219,8 @@ actions:
   - action_execute_window_query
   - action_convert_date
   - validate_kpi_form
-  - action_tem_store
+  - action_tem_intentmessage
+  - action_tem_entities
 
 
 session_config:

@@ -35,7 +35,7 @@ class RapidFuzzyEntityExtractor(GraphComponent):
         return {
             # threshold for filtering 
             "entity_name": "place",
-            "thres": 0.85,
+            "thres": 0.9,
             "scorer": jaro_winkler_similarity
         }
 
