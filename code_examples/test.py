@@ -281,3 +281,24 @@ def change_letter(input_str, mask, start, end):
 
 # my_dict = {'a': 1, 'b': 2}
 # print('a' in my_dict)
+
+
+import json 
+
+def load_query_clusters(path):
+    with open(path, "r") as clusters_file:
+        query_clusters = json.load(clusters_file)
+    return query_clusters
+
+
+def add_new_data(path, new_data, intent, cluster_name, clusters):
+    clusters[intent][cluster_name].append(new_data)
+    with open(path, 'w') as clusters_file:
+        clusters_file.write(json.dumps(clusters))
+
+
+# clusters=load_query_clusters('test.txt')
+# add_new_data('test.txt', 'hiiii', 'agg_query', 'cluster0', clusters)
+
+
+print(len({'a':1, 'b':2}))

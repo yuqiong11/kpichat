@@ -5,11 +5,11 @@ CLUSTERS_SQL_MAPPING = {
     'cluster1': 'SELECT MAX({kpi}) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time};', 
     'cluster2': 'SELECT MIN({kpi}) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time};',
     'cluster3': 'SELECT AVG({kpi}) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time};',
-    'cluster4': 'SELECT SUM({kpi}) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state={place};',
-    'cluster5': 'SELECT MAX({kpi}) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state={place};',
-    'cluster6': 'SELECT MIN({kpi}) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state={place};',
-    'cluster7': 'SELECT AVG({kpi}) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state={place};',
-    'cluster8': 'SELECT {kpi} FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND county LIKE \'%{place}%\';',  
+    'cluster4': 'SELECT SUM({kpi}), state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state=\'{place}\';',
+    'cluster5': 'SELECT MAX({kpi}), state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state=\'{place}\';',
+    'cluster6': 'SELECT MIN({kpi}), state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state=\'{place}\';',
+    'cluster7': 'SELECT AVG({kpi}), state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state=\'{place}\';',
+    'cluster8': 'SELECT {kpi}, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND county LIKE \'%{place}%\';',  
     'cluster9': 'SELECT SUM({kpi})/COUNT(DISTINCT(state)) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time};'            
     },
     "group_sort_query":
@@ -41,6 +41,26 @@ CLUSTERS_SQL_MAPPING = {
 }
 
 
+import json 
+
+def load_query_clusters(path):
+    with open(path, "r") as clusters_file:
+        query_clusters = json.load(clusters_file)
+    return query_clusters
+
+
+def add_new_data(path, new_data, intent, cluster_name):
+    clusters = load_query_clusters(path)
+    clusters[intent][cluster_name].append(new_data)
+    with open(path, 'w') as clusters_file:
+        clusters_file.write(json.dumps(clusters))
+
+    print('closed')
+
+
+
+
+
 QUERY_CLUSTERS = {
     "agg_query":
     {
@@ -61,8 +81,8 @@ QUERY_CLUSTERS = {
         ],
         'cluster3':
         [
-            'The average number of [kpi] [mapped_time] of county.',
-            'how many [kpi] on average does a county have?'
+            'What is the average number of [kpi] of county in [mapped_time].',
+            'how many [kpi] on average does a county have in [mapped_time]?'
         ],
         'cluster4':
         [
@@ -92,7 +112,7 @@ QUERY_CLUSTERS = {
         'cluster9':
         [
             'what is the average number of [kpi] of a federal state in [mapped_time]',
-            'how many [kpi] on average does a state have at [mapped_time]?'
+            'how many [kpi] on average does a state have in [mapped_time]?'
         ]
     },
     "group_sort_query":
@@ -119,44 +139,31 @@ QUERY_CLUSTERS = {
     {
         'cluster0':
         [
-            # 'above average',
-            # 'counties',
             'Give me all counties that have [kpi] above average in [mapped_time].',
             'show all county which have over average [kpi] in [mapped_time].'
         ],
         'cluster1':
         [
-            # 'below average',
-            # 'counties',
             'In [mapped_time], give me counties that have [kpi] below average in [mapped_time].',
             'show all counties which have under average [kpi] in [mapped_time].'
         ],
         'cluster2':
         [
-            # 'between',
-            # 'counties',
             'show all counties that have between [number_l]-[number_r] [kpi] [mapped_time].',
             'which counties have [number_l]-[number_r] number of [kpi] in [mapped_time]?'
         ],
         'cluster3':
         [
-            # '[le]',
-            # '[ge]',
-            # 'counties',
             'show all counties that have [le] [kpi] in [mapped_time].',
             'Give me counties whose number of [kpi] is [ge] [mapped_time].'
         ],
         'cluster4':
         [
-            # 'above average',
-            # 'states',
             'Give me all states that have [kpi] above average in [mapped_time].',
             'show states which have over average [kpi] in [mapped_time].'
         ],
         'cluster5':
         [
-            # 'below average',
-            # 'states',
             'In [mapped_time], give me states that have [kpi] below average in [mapped_time].',
             'show all states which have under average [kpi] in [mapped_time].'    
         ],
@@ -203,5 +210,12 @@ QUERY_CLUSTERS = {
     }
 }
 
-
+# with open('query_clusters.txt', 'w') as clusters_file:
+#     clusters_file.write(json.dumps(QUERY_CLUSTERS))
     
+
+
+ 
+     
+
+

@@ -23,40 +23,38 @@ rules:
   - intent: check_slot_input
   - action: action_slot_check  
 
-- rule: Activate form agg
+- rule: Activate form
   steps:
-  - intent: agg_query
-  - action: action_tem_store
   - action: kpi_form
   - active_loop: kpi_form
 
-- rule: Activate form group sort
-  steps:
-  - intent: group_sort_query
-  - action: action_tem_store
-  - action: kpi_form
-  - active_loop: kpi_form
+# - rule: Activate form group sort
+#   steps:
+#   - intent: group_sort_query
+#   - action: action_tem_store
+#   - action: kpi_form
+#   - active_loop: kpi_form
 
-- rule: Activate form filter
-  steps:
-  - intent: filter_query
-  - action: action_tem_store
-  - action: kpi_form
-  - active_loop: kpi_form
+# - rule: Activate form filter
+#   steps:
+#   - intent: filter_query
+#   - action: action_tem_store
+#   - action: kpi_form
+#   - active_loop: kpi_form
 
-- rule: Activate form limit
-  steps:
-  - intent: limit_query
-  - action: action_tem_store
-  - action: kpi_form
-  - active_loop: kpi_form
+# - rule: Activate form limit
+#   steps:
+#   - intent: limit_query
+#   - action: action_tem_store
+#   - action: kpi_form
+#   - active_loop: kpi_form
 
-- rule: Activate form window
-  steps:
-  - intent: window_query
-  - action: action_tem_store
-  - action: kpi_form
-  - active_loop: kpi_form
+# - rule: Activate form window
+#   steps:
+#   - intent: window_query
+#   - action: action_tem_store
+#   - action: kpi_form
+#   - active_loop: kpi_form
 
 - rule: Submit form
   condition:

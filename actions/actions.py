@@ -17,6 +17,7 @@ from rasa_sdk.types import DomainDict
 import psycopg2
 # importing sys
 import sys
+from mappings.sql_mapping import load_query_clusters
 # adding target folder to the system path
 path = 'e:/User/yuqiong.weng/Chatbot/kpibot/mappings'
 sys.path.insert(0, path)
@@ -26,10 +27,10 @@ path = 'e:/User/yuqiong.weng/Chatbot/kpibot/utils'
 sys.path.insert(0, path)
 from time_mapping import convert_time
 # from kpi_mapping import kpi_mapping
-# from sql_mapping import cluster_sql_mapping, query_clusters
+from sql_mapping import add_new_data
 from query_translation import QueryTranslation
-from sentence_transformer import output_template, DEFAULT_PARAMS
-from constants import STATE_LIST
+# from sentence_transformer import output_template, DEFAULT_PARAMS
+from constants import QUERY_CLUSTERS_PATH
 
 
 class ValidateKpiForm(FormValidationAction):
@@ -134,10 +135,10 @@ class ActionQueryConfirm(Action):
         ])
         return []
 
-class ActionTemIntent(Action):
+class ActionTemIntentMessage(Action):
 
     def name(self) -> Text:
-        return "action_tem_store"
+        return "action_tem_intentmessage"
 
     def run(self, dispatcher, tracker, domain):
 
@@ -149,39 +150,63 @@ class ActionTemIntent(Action):
         intent = tracker.latest_message['intent'].get('name')
         # store user input
         user_input = tracker.latest_message['text']
+        
+        SlotSet_list = [SlotSet("stored_intent", intent), SlotSet("stored_user_input", user_input)]
+        # set a new slot to indicate all 3 entities are present in user input
+        # try:
+        #     if kpi_idx and DATE_idx and place_idx:
+        #         SlotSet_list.append(SlotSet("new_training_data", True))
+        #     else:
+        #         SlotSet_list.append(SlotSet("new_training_data", False))
+        # except Exception:
+        #     pass
 
-        # store indices of entities
+        return SlotSet_list
+
+class ActionTemEntities(Action):
+
+    def name(self) -> Text:
+        return "action_tem_entities"
+
+    def run(self, dispatcher, tracker, domain):
+
+        """
+        action triggered directly after intent like agg_query, stores data for later use
+
+        """
+        # store indices of entities if all entities available
         entities = tracker.latest_message['entities']
 
-        for entity in entities:
-            for k,v in entity.items():
-                if v == 'kpi':
-                    kpi_idx = {
-                        'start': entity['start'],
-                        'end': entity['end']
-                    }                   
-                  
-                elif v == 'DATE':
-                    DATE_idx = {
-                        'start': entity['start'],
-                        'end': entity['end']
-                    }
-                elif v == 'place':
-                    place_idx = {
-                        'start': entity['start'],
-                        'end': entity['end']
-                    }
+        if len(entities) == 3:
+            for entity in entities:
+                for k,v in entity.items():
+                    if v == 'kpi':
+                        kpi_idx = {
+                            'start': entity['start'],
+                            'end': entity['end']
+                        }                   
+                    
+                    elif v == 'DATE':
+                        DATE_idx = {
+                            'start': entity['start'],
+                            'end': entity['end']
+                        }
+                    elif v == 'place':
+                        place_idx = {
+                            'start': entity['start'],
+                            'end': entity['end']
+                        }
         
-        SlotSet_list = [SlotSet("stored_intent", intent), SlotSet("stored_user_input", user_input), SlotSet("stored_entities_indices", {'kpi_idx': kpi_idx, 'DATE_idx': DATE_idx, 'place_idx': place_idx})]
+        SlotSet_list = [SlotSet("stored_entities_indices", {'kpi_idx': kpi_idx, 'DATE_idx': DATE_idx, 'place_idx': place_idx})]
         # set a new slot to indicate all 3 entities are present in user input
-        try:
-            if kpi_idx and DATE_idx and place_idx:
-                SlotSet_list.append(SlotSet("new_training_data", True))
-            else:
-                SlotSet_list.append(SlotSet("new_training_data", False))
-        except Exception:
-            pass
-        
+        # try:
+        #     if kpi_idx and DATE_idx and place_idx:
+        #         SlotSet_list.append(SlotSet("new_training_data", True))
+        #     else:
+        #         SlotSet_list.append(SlotSet("new_training_data", False))
+        # except Exception:
+        #     pass
+
         return SlotSet_list
 
 class ActionExecuteAggQuery(Action):
@@ -208,17 +233,20 @@ class ActionExecuteAggQuery(Action):
         intent = tracker.get_slot("stored_intent")
         user_input = tracker.get_slot("stored_user_input")
         entities_indices = tracker.get_slot("stored_entities_indices")
+        update_signal = tracker.get_slot("new_training_data")
         
         # query translation
         query_translating = QueryTranslation(kpi, place, DATE, entities_indices, user_input, intent)
         q = query_translating.vaild_sql()
-
+            
         dispatcher.utter_message(text=q)
 
         cur.execute(q)
-        result = cur.fetchall()
-        if len(result) == 1:
-            dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0][0])))
+        results = cur.fetchall()
+        for result in results:
+            dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {result[1]} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0])))
+        # add new training data
+        # query_translating.update_clusters(update_signal)
 
         return []
 

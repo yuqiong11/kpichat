@@ -120,3 +120,6 @@ def convert_time(old_time):
         mapped_time = slot_year+slot_month
 
     return mapped_time
+
+
+print(convert_time("the beginning of 2022?"))

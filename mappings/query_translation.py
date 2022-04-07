@@ -1,14 +1,16 @@
+from turtle import update
 from time_mapping import convert_time
 from kpi_mapping import KPI_MAPPING
-from sql_mapping import CLUSTERS_SQL_MAPPING, QUERY_CLUSTERS
+from sql_mapping import load_query_clusters, add_new_data
 import sys
 path = 'e:/User/yuqiong.weng/Chatbot/kpibot/own_models'
 sys.path.insert(0, path)
 from sentence_transformer import output_template, DEFAULT_PARAMS
 path = 'e:/User/yuqiong.weng/Chatbot/kpibot/utils'
 sys.path.insert(0, path)
-from constants import STATE_LIST
+from constants import STATE_LIST, QUERY_CLUSTERS_PATH
 
+DEFAULT_PARAMS['load_centroids'] = True
 
 class QueryTranslation:
 
@@ -19,6 +21,7 @@ class QueryTranslation:
         self.entities_indices = entities_indices
         self.user_input = user_input
         self.intent = intent
+        self.cluster_name = None
 
     def kpi_mapping(self):
         return KPI_MAPPING.get(f"{self.kpi}")
@@ -36,16 +39,22 @@ class QueryTranslation:
 
         masked_query = self.user_input.replace(kpi_raw, "[kpi]")
         masked_query = masked_query.replace(DATE_raw, "[mapped_time]")
-        if self.place in STATE_LIST:
-            masked_query = masked_query.replace(place_raw, "[place_state]")
-        else:
-            masked_query = masked_query.replace(place_raw, "[place_county]")
+
+        if self.place not in ('Germany','state','county','federal state','states','counties','federal states'):
+            if self.place in STATE_LIST:
+                masked_query = masked_query.replace(place_raw, "[place_state]")
+            else:
+                masked_query = masked_query.replace(place_raw, "[place_county]")
+
+        print(masked_query)
 
         return masked_query
 
     def sql_mapping(self):
         masked_query = self.mask()
-        return output_template(masked_query, self.intent, **DEFAULT_PARAMS)
+        template, cluster_name = output_template(masked_query, self.intent, **DEFAULT_PARAMS)
+        self.cluster_name = cluster_name
+        return template
 
     def vaild_sql(self):
         mapped_kpi = self.kpi_mapping()
@@ -57,6 +66,22 @@ class QueryTranslation:
         if '{mapped_time}' in output_sql:
             output_sql = output_sql.replace('{mapped_time}', mapped_time)        
         if '{place}' in output_sql:
-            output_sql = output_sql.replace('{place}', f"'{self.place}'")
+            output_sql = output_sql.replace('{place}', self.place)
+
+        print(output_sql)
   
         return output_sql
+
+    def update_clusters(self, update_signal):
+        if update_signal:
+            masked_q = self.mask()
+            cluster_name = self.cluster_name
+            add_new_data(QUERY_CLUSTERS_PATH, masked_q, self.intent, cluster_name)
+        else:
+            pass
+
+
+
+
+
+    
