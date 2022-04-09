@@ -301,4 +301,5 @@ def add_new_data(path, new_data, intent, cluster_name, clusters):
 # add_new_data('test.txt', 'hiiii', 'agg_query', 'cluster0', clusters)
 
 
-print(len({'a':1, 'b':2}))
+# print(len({'a':1, 'b':2}))
+print('202202' > '202203')

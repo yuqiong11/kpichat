@@ -1,0 +1,126 @@
+version: "3.0"
+stories:
+- story: validate_place
+  steps:
+  - intent: agg_query
+    entities:
+    - kpi: Charging points
+    - DATE: December 2021
+    - place: London
+    - DATE: December 2021
+  - slot_was_set:
+    - place: London
+  - slot_was_set:
+    - kpi: Charging points
+  - slot_was_set:
+    - DATE: December 2021
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: null
+  - slot_was_set:
+    - kpi: Charging points
+  - slot_was_set:
+    - DATE: December 2021
+  - slot_was_set:
+    - requested_slot: place
+  - slot_was_set:
+    - place: Leipzig
+  - slot_was_set:
+    - place: Leipzig
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_execute_agg_query
+  - action: action_reset_slots
+
+- story: validate_time
+  steps:
+  - intent: agg_query
+    entities:
+    - min: lowest
+    - kpi: Locations
+    - place: county
+    - DATE: Feb 2024
+    - place: county
+    - DATE: Feb 2024
+  - slot_was_set:
+    - place: county
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: Feb 2024
+  - slot_was_set:
+    - min: lowest
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: county
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: null
+  - slot_was_set:
+    - requested_slot: DATE
+  - slot_was_set:
+    - DATE: Feb 2020
+  - slot_was_set:
+    - DATE: Feb 2020
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_execute_agg_query
+  - action: action_reset_slots
+
+
+- story: validate place+time
+  steps:
+  - intent: agg_query
+    entities:
+    - avg: average
+    - kpi: Charging points
+    - DATE: the first month of 2024
+    - place: Washington
+    - DATE: the first month of 2024
+  - slot_was_set:
+    - place: Washington
+  - slot_was_set:
+    - kpi: Charging points
+  - slot_was_set:
+    - DATE: the first month of 2024
+  - slot_was_set:
+    - avg: average
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: null
+  - slot_was_set:
+    - kpi: Charging points
+  - slot_was_set:
+    - DATE: null
+  - slot_was_set:
+    - requested_slot: place
+  - slot_was_set:
+    - place: Sachsen-Anhalt
+  - slot_was_set:
+    - place: Sachsen-Anhalt
+  - slot_was_set:
+    - requested_slot: DATE
+  - slot_was_set:
+    - DATE: Feb 2020
+  - slot_was_set:
+    - DATE: Feb 2020
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_execute_agg_query
+  - action: action_reset_slots

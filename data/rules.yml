@@ -28,34 +28,6 @@ rules:
   - action: kpi_form
   - active_loop: kpi_form
 
-# - rule: Activate form group sort
-#   steps:
-#   - intent: group_sort_query
-#   - action: action_tem_store
-#   - action: kpi_form
-#   - active_loop: kpi_form
-
-# - rule: Activate form filter
-#   steps:
-#   - intent: filter_query
-#   - action: action_tem_store
-#   - action: kpi_form
-#   - active_loop: kpi_form
-
-# - rule: Activate form limit
-#   steps:
-#   - intent: limit_query
-#   - action: action_tem_store
-#   - action: kpi_form
-#   - active_loop: kpi_form
-
-# - rule: Activate form window
-#   steps:
-#   - intent: window_query
-#   - action: action_tem_store
-#   - action: kpi_form
-#   - active_loop: kpi_form
-
 - rule: Submit form
   condition:
   - active_loop: kpi_form
@@ -64,9 +36,6 @@ rules:
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  # - action: action_convert_date
-  # - slot_was_set:
-  #   - mapped_time: "202001"
   wait_for_user_input: false
 
 - rule: out-of-scope

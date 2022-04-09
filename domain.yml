@@ -35,27 +35,22 @@ entities:
 slots:
   place:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
     - type: from_entity
       entity: place  
   kpi:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
     - type: from_entity
       entity: kpi
   DATE:
     type: text
-    influence_conversation: false
+    influence_conversation: true
     mappings:
     - type: from_entity
       entity: DATE
-  mapped_time: 
-    type: text
-    initial_value: None
-    mappings:
-    - type: custom
   max:
     type: text
     influence_conversation: false
@@ -110,26 +105,12 @@ slots:
     mappings:
     - type: from_entity
       entity: CARDINAL
-  stored_intent:
+  mapped_time: 
     type: text
-    influence_conversation: false
+    initial_value: None
     mappings:
     - type: custom
-  stored_user_input:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: custom
-  stored_entities_indices:
-    type: any
-    influence_conversation: false
-    mappings:
-    - type: custom
-  new_training_data:
-    type: bool
-    influence_conversation: false
-    mappings:
-    - type: custom
+
 
 forms:
   kpi_form:
@@ -148,17 +129,9 @@ responses:
 
   utter_ask_kpi:
   - text: "Which KPI are you interested in?"
-    buttons:
-    - title: "Location"
-      payload: '/inform{{"kpi":"Locations"}}'
-    - title: "Charging station"
-      payload: '/inform{{"kpi":"Charging stations"}}'
-    - title: "Charging point"
-      payload: '/inform{{"kpi":"Charging points"}}'
-
 
   utter_ask_DATE:
-  - text: "What time are you interested?"
+  - text: "What time are you interested? Please choose a timestamp only between January 2017 and January 2023."
 
   utter_query_received:
   - text: "Ok, query received. Please confirm the following."
@@ -219,8 +192,6 @@ actions:
   - action_execute_window_query
   - action_convert_date
   - validate_kpi_form
-  - action_tem_intentmessage
-  - action_tem_entities
 
 
 session_config:
