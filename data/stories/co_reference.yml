@@ -1,0 +1,36 @@
+version: "3.0"
+
+stories:
+- story: query_with_coref
+  steps:
+  - intent: agg_query
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_execute_agg_query
+  - intent: co_reference
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_execute_agg_query

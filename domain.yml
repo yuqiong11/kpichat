@@ -16,6 +16,7 @@ intents:
   - request_kpi_form
   - reset
   - check_slot_input
+  - co_reference
 
 
 entities:
@@ -31,6 +32,7 @@ entities:
 - ge
 - bet
 - CARDINAL
+- place_list
 
 slots:
   place:
@@ -105,6 +107,12 @@ slots:
     mappings:
     - type: from_entity
       entity: CARDINAL
+  place_list:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: place_list
   mapped_time: 
     type: text
     initial_value: None

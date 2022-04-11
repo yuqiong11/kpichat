@@ -11,7 +11,7 @@ from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.events import SlotSet
+from rasa_sdk.events import SlotSet, AllSlotsReset
 from rasa_sdk.types import DomainDict
 
 import psycopg2
@@ -102,9 +102,10 @@ class ActionResetSlots(Action):
         return "action_reset_slots"
 
     def run(self, dispatcher, tracker, domain):
-        return [SlotSet("place", None), SlotSet("kpi", None), SlotSet("DATE", None), SlotSet("mapped_time", None), 
-        SlotSet("max", None), SlotSet("min", None), SlotSet("avg", None), SlotSet("desc", None),
-        SlotSet("asc", None), SlotSet("le", None), SlotSet("ge", None), SlotSet("bet", None), SlotSet("CARDINAL", None)]
+        # return [SlotSet("place", None), SlotSet("kpi", None), SlotSet("DATE", None), SlotSet("mapped_time", None), 
+        # SlotSet("max", None), SlotSet("min", None), SlotSet("avg", None), SlotSet("desc", None),
+        # SlotSet("asc", None), SlotSet("le", None), SlotSet("ge", None), SlotSet("bet", None), SlotSet("CARDINAL", None)]
+        return [AllSlotsReset()]
 
 class ActionSlotCheck(Action):
 
@@ -128,7 +129,7 @@ class ActionQueryConfirm(Action):
         place = tracker.get_slot("place")
         DATE = tracker.get_slot("DATE")
         kpi = tracker.get_slot("kpi")
-        dispatcher.utter_message(text=f"place: {place}\n kpi: {kpi}\n time:{DATE}?",
+        dispatcher.utter_message(text=f"place: {place}\n kpi: {kpi}\n time:{DATE}",
         buttons= [
             {"title": "yes","payload": "/affirm"},
             {"title": "no", "payload": "/deny"}
@@ -166,7 +167,7 @@ class ActionExecuteAggQuery(Action):
             if not is_prediction:
                 dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0]))+".")
             else:
-                dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} will be approximately "+str(round(result[0]))+".")
+                dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0]))+".")
                 dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is January 2022.")
         return []
 
@@ -191,12 +192,16 @@ class ActionExecuteGroupSortQuery(Action):
         desc = tracker.get_slot("desc")
         asc = tracker.get_slot("asc")
 
-        
-        q = QueryTranslator.group_sort_query(kpi, place, DATE, desc=desc, asc=asc)
+        translator = QueryTranslator()
+        is_prediction = translator.kpi_is_prediction(DATE)
+   
+        q = translator.group_sort_query(kpi, place, DATE, desc=desc, asc=asc)
 
         cur.execute(q)
-        result = cur.fetchall()
-        dispatcher.utter_message(text=f"{result[0]}")
+        results = cur.fetchall()
+
+        for result in results:
+            dispatcher.utter_message(text=f"{result[0]}")
 
         return []
 
@@ -223,11 +228,24 @@ class ActionExecuteFilterQuery(Action):
         bet = tracker.get_slot("bet")
         user_input = tracker.latest_message['text']
 
-        q = QueryTranslator.filter_query(kpi, place, DATE, user_input, ge=ge, le=le, bet=bet)
+        translator = QueryTranslator()
+        is_prediction = translator.kpi_is_prediction(DATE)
+
+        q = translator.filter_query(kpi, place, DATE, user_input, ge=ge, le=le, bet=bet)
         
         cur.execute(q)
-        result = cur.fetchall()
-        dispatcher.utter_message(text=f"{result}")
+        results = cur.fetchall()
+        print(results)
+
+        if len(results) <= 20:
+            for result in results:
+                dispatcher.utter_message(text=f"{result[0]}")
+        else:
+            i = 20
+            while i != 0:
+                for result in results:
+                   dispatcher.utter_message(text=f"{result[0]}")
+                i -= 1 
 
         return []
 
@@ -251,11 +269,15 @@ class ActionExecuteLimitQuery(Action):
         CARDINAL = tracker.get_slot("CARDINAL")
         user_input = tracker.latest_message['text']
 
-        q = QueryTranslator.limit_query(kpi, place, DATE, user_input, CARDINAL)
+        translator = QueryTranslator()
+        is_prediction = translator.kpi_is_prediction(DATE)
+
+        q = translator.limit_query(kpi, place, DATE, user_input, CARDINAL)
 
         cur.execute(q)
-        result = cur.fetchall()
-        dispatcher.utter_message(text=f"{result}")
+        results = cur.fetchall()
+        for result in results:
+            dispatcher.utter_message(text=f"{result[0]}")
 
         return []
 
@@ -275,16 +297,18 @@ class ActionExecuteWindowQuery(Action):
       
         kpi = tracker.get_slot("kpi")
         DATE = tracker.get_slot("DATE")
-        number = tracker.get_slot("number")
-        user_input = tracker.latest_message['text']
-        places = tracker.latest_message['entities'][0]['value']
+        place = tracker.get_slot("place")
+        place_list = tracker.get_slot("place_list")
 
-        q = QueryTranslator.window_query()
+
+        translator = QueryTranslator()
+        is_prediction = translator.kpi_is_prediction(DATE)
+        q = translator.window_query(kpi, place, DATE, place_list)
 
         cur.execute(q)
-        result = cur.fetchall()
-        for i in result:
-            dispatcher.utter_message(text=f"{i[0], i[1]}")
+        results = cur.fetchall()
+        for result in results:
+            dispatcher.utter_message(text=f"{result[0]}")
 
         return []
 

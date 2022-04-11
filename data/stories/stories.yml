@@ -19,7 +19,7 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_agg_query
-  - action: action_reset_slots
+
 
   
 - story: group_sort_query_with_confirm
@@ -40,7 +40,7 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_group_sort_query
-  - action: action_reset_slots
+
 
 - story: filter_query_with_confirm
   steps:
@@ -60,7 +60,7 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_filter_query
-  - action: action_reset_slots 
+
 
 - story: limit_query_with_confirm
   steps:
@@ -80,7 +80,7 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_limit_query
-  - action: action_reset_slots 
+
 
 - story: window_query_with_confirm
   steps:
@@ -100,7 +100,7 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_window_query
-  - action: action_reset_slots
+
 
 - story: agg_query_user_clarify_then_affirm
   steps:
@@ -123,13 +123,64 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_agg_query
-  - action: action_reset_slots
+
+
+- story: group_and_filter
+  steps:
+  - intent: group_sort_query
+  - slot_was_set:
+    - place: state
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: by the end of 2022
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: state
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: by the end of 2022
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_execute_group_sort_query
+  - intent: filter_query
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - DATE: now
+  - slot_was_set:
+    - le: more than 100
+  - slot_was_set:
+    - CARDINAL: more than 100
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: now
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_execute_filter_query
+
 
 
 - story: interactive_story_1
   steps:
   - intent: chitchat
   - action: utter_chitchat
+  - action: action_reset_slots
   - intent: agg_query
     entities:
     - kpi: Charging points
@@ -154,19 +205,12 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_agg_query
-  - action: action_reset_slots
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - mapped_time: null
   - intent: chitchat
   - action: utter_chitchat
+  - action: action_reset_slots
   - intent: faq
   - action: utter_faq
+  - action: action_reset_slots
 
 - story: interactive_story_2
   steps:
@@ -194,15 +238,6 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_agg_query
-  - action: action_reset_slots
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - mapped_time: null
   - intent: agg_query
     entities:
     - min: lowest
@@ -231,14 +266,6 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_agg_query
-  - action: action_reset_slots
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - mapped_time: null
   - intent: faq
   - action: utter_faq
+  - action: action_reset_slots

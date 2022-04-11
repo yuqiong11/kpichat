@@ -302,4 +302,9 @@ def add_new_data(path, new_data, intent, cluster_name, clusters):
 
 
 # print(len({'a':1, 'b':2}))
-print('202202' > '202203')
+# print('202202' > '202203')
+
+# for _ in "hello, where are you":
+#     print(_)
+
+print("hello, where are, you".split(","))

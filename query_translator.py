@@ -72,7 +72,7 @@ class QueryTranslator(CheckTime):
         return selected_template
 
     def group_sort_query(self, kpi, place, time, desc=None, asc=None):
-        mapped_time = self.time_mapping()
+        mapped_time = self.time_mapping(time)
         kpi_value = self.kpi_mapping(kpi)
 
         templates = {
@@ -81,19 +81,28 @@ class QueryTranslator(CheckTime):
             'template3': f"SELECT SUM({kpi_value}), state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} GROUP BY state ORDER BY sum ASC;", 
         }
 
-        if desc == None and asc == None:
+        if desc is None and asc is None:
             selected_template = templates['template1']
-        elif desc != None:
+        elif desc is not None:
             selected_template = templates['template2']
-        elif asc != None:
+        elif asc is not None:
             selected_template = templates['template3']
         
         return selected_template
 
 
-    def filter_query(self, kpi, place, time, user_input, ge=None, le=None, bet=None):
-        mapped_time = self.time_mapping()
+    def filter_query(self, kpi, place, time, ge=None, le=None, bet=None):
+        mapped_time = self.time_mapping(time)
         kpi_value = self.kpi_mapping(kpi)
+        if ge != None:
+            symbol = '>='
+            number = ge.split()[-1]
+        elif le != None:
+            symbol = '<='
+            number = le.split()[-1]
+        elif bet != None:
+            number_l = bet.split()[1]
+            number_r = bet.split()[-1]
 
         templates = {
             'template1': f"SELECT county, {kpi_value} FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND {kpi_value} > (SELECT AVG({kpi_value}) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time});",
@@ -106,18 +115,18 @@ class QueryTranslator(CheckTime):
             'template8': f"SELECT state, SUM({kpi_value}) FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} GROUP BY state HAVING SUM({kpi_value}) {symbol} {number};",           
         }
         if place.lower() in STATE_LIST:
-            if "abover average" or "over average" in user_input:
+            if ge == "above average" or ge == "over average":
                 selected_template = templates['template5']
-            elif "below average" or "under average" in user_input:
+            elif le == "below average" or le == "under average":
                 selected_template = templates['template6']
             elif bet:
                 selected_template = templates['template7']
             elif le or ge:
                 selected_template = templates['template8']
         else:
-            if "abover average" or "over average" in user_input:
+            if ge == "abover average" or ge == "over average":
                 selected_template = templates['template1']
-            elif "below average" or "under average" in user_input:
+            elif le == "below average" or le == "under average":
                 selected_template = templates['template2']
             elif bet:
                 selected_template = templates['template3']
@@ -127,7 +136,7 @@ class QueryTranslator(CheckTime):
         return selected_template
 
     def limit_query(self, kpi, place, time, user_input, CARDINAL):
-        mapped_time = self.time_mapping()
+        mapped_time = self.time_mapping(time)
         kpi_value = self.kpi_mapping(kpi)
 
         templates = {
@@ -143,14 +152,23 @@ class QueryTranslator(CheckTime):
         
         return selected_template
 
-    def window_query(self, kpi, time, place):
-        mapped_time = self.time_mapping()
+    def window_query(self, kpi, time, place, place_list=None):
+        mapped_time = self.time_mapping(time)
         kpi_value = self.kpi_mapping(kpi)
 
+
+        if place_list:
+            place_value = ""
+            place_list = place_list.split(",")
+            for element in place_list:
+                element = element.strip()
+                place_value += element
+            place_value = "("+place_value+")"
+        elif place:
+            place_value = place
+
         templates = {
-            'template1': f"SELECT SUM({kpi_value}), state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state IN {place} GROUP BY state;"
+            'template1': f"SELECT SUM({kpi_value}), state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state IN {place_value} GROUP BY state;"
         }
-
-
         
         return templates['template1']
