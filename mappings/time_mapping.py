@@ -15,7 +15,7 @@ class CheckTime:
         return time > '202301' or time < '201701'
 
     def kpi_is_prediction(self, time):
-        return self.time_mapping(time) > '202201'
+        return self.time_mapping(time) > '202203'
 
     def convert_time(self,old_time):
         '''
@@ -69,7 +69,7 @@ class CheckTime:
                         slot_month='12'
 
             if slot_month == "":
-                if old_time == 'now':
+                if old_time == 'now' or old_time == 'the moment':
                     current_month = datetime.datetime.now().month
                     slot_year=str(datetime.datetime.now().year)
                     if current_month < 10:

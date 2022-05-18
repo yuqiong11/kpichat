@@ -418,8 +418,11 @@ Warendorf
 Unna
 Steinburg
 federal state
+federalstate
 federal states
+federalstates
 state
 states
 county
 counties
+countys

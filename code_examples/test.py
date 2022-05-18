@@ -307,4 +307,15 @@ def add_new_data(path, new_data, intent, cluster_name, clusters):
 # for _ in "hello, where are you":
 #     print(_)
 
-print("hello, where are, you".split(","))
+# print("hello, where are, you".split(","))
+# import psycopg2
+# conn = psycopg2.connect("host=81.169.137.234 dbname=workbench user=david.reyer password=start_david")
+# cur = conn.cursor()
+# q = f"SELECT no_total_locations FROM \"E-Mobility\".emo_historical WHERE month=202001 AND county LIKE '%Amberg%';"
+# cur.execute(q)
+# results = cur.fetchall()
+# for result in results:
+#     print(f"result[0], result[1]")
+print("state" in "states")
+
+# print(boolean(None))

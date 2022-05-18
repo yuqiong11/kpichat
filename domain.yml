@@ -9,7 +9,7 @@ intents:
   - group_sort_query
   - filter_query
   - limit_query
-  - window_query
+  # - window_query
   - out_of_scope
   - faq:
       is_retrieval_intent: true
@@ -17,6 +17,8 @@ intents:
   - reset
   - check_slot_input
   - co_reference
+  - change_slot
+  # - restart
 
 
 entities:
@@ -33,6 +35,8 @@ entities:
 - bet
 - CARDINAL
 - place_list
+- top
+- bottom
 
 slots:
   place:
@@ -107,6 +111,18 @@ slots:
     mappings:
     - type: from_entity
       entity: CARDINAL
+  top:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: top
+  bottom:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: bottom
   place_list:
     type: text
     influence_conversation: false
@@ -115,7 +131,10 @@ slots:
       entity: place_list
   mapped_time: 
     type: text
-    initial_value: None
+    mappings:
+    - type: custom
+  stored_slots:
+    type: any
     mappings:
     - type: custom
 
@@ -137,6 +156,13 @@ responses:
 
   utter_ask_kpi:
   - text: "Which KPI are you interested in?"
+    buttons:
+    - title: "Location"
+      payload: '/inform{{"kpi":"Locations"}}'
+    - title: "Charging station"
+      payload: '/inform{{"kpi":"Charging stations"}}'
+    - title: "Charging point"
+      payload: '/inform{{"kpi":"Charging points"}}'
 
   utter_ask_DATE:
   - text: "What time are you interested? Please choose a timestamp only between January 2017 and January 2023."
@@ -151,16 +177,16 @@ responses:
   - text: "Query now in process..."
 
   utter_ask_for_clarification:
-  - text: "Please correct the false part."
+  - text: "Please correct the false part using the format 'place: xxx'. "
 
   utter_out_of_scope:
   - text: "Oops, I am stumped..."
 
-  utter_please_rephrase:
+  utter_ask_rephrase:
   - text: "Sorry, could you rephrase that?"
 
   utter_default:
-  - text: "I'm sorry, I can't help you."
+  - text: "I'm sorry, I can't help you. You can type '/restart' to restart the conversation."
   
   utter_chitchat/greet:
   - text: "hi"
@@ -200,6 +226,11 @@ actions:
   - action_execute_window_query
   - action_convert_date
   - validate_kpi_form
+  - action_check_coref
+  - action_store_slots
+  - action_reset_slots_except_stored
+  - action_set_stored
+  # - action_restart
 
 
 session_config:
