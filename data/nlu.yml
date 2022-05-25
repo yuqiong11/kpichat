@@ -1,11 +1,11 @@
-version: "3.0"
+version: "3.1"
 nlu:
 - intent: agg_query
   examples: |
     - What's the number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in [Berlin](place) by [the end of 2019](DATE)?
     - What's the [cars per charging points]{"entity": "kpi", "value": "Cars per charging point"} in [Berlin](place) at [the beginning of 2020](DATE)?
     - Tell me how many [locations]{"entity": "kpi", "value": "Locations"} are there in [July 2021](DATE)?
-    - What's the number of [chargingpoint]{"entity": "kpi", "value": "Charging points"} in [Berlin](place)?
+    - What's the number of [point]{"entity": "kpi", "value": "Charging points"} in [Berlin](place)?
     - What's the total number of [locations]{"entity": "kpi", "value": "Locations"} in [Germany](place) in [May 2018](DATE)?
     - What's the number of [locations]{"entity": "kpi", "value": "Locations"} in [Sachsen](place) in [May 2021](DATE)
     - I want to know [chargingpoints per cars]{"entity": "kpi", "value": "Charging points per 1,000 cars"} in [Hamburg](place) [next month](DATE)?
@@ -22,7 +22,7 @@ nlu:
     - What's the [largest](max) number of [locations]{"entity": "kpi", "value": "Locations"} of a county in [Thüringen](place) in [beginning of 2021](DATE)?
     - What's the [most](max) number of [locations]{"entity": "kpi", "value": "Locations"} of a [county](place) in [November 2021](DATE)?
     - Show the [county](place) which has the [most](max) [locations]{"entity": "kpi", "value": "Locations"} [last month](DATE).
-    - The [highest](max) number of [charging station]{"entity": "kpi", "value": "Charging stations"} of a [county](place) in [May 2021](DATE)
+    - The [highest](max) number of [station]{"entity": "kpi", "value": "Charging stations"} of a [county](place) in [May 2021](DATE)
     - the [county](place) that has the [most] [locations]{"entity": "kpi", "value": "Locations"} at [end of 2020](DATE).
     - I want to know the [bigest](max) number of [charging points]{"entity": "kpi", "value": "Charging points"} of a county in [Rheinland-Pfalz](place) in [May 2021](DATE)
     - I am interested in the [smallest](min) number of [locations]{"entity": "kpi", "value": "Locations"} of a [county](place) in [now](DATE)
@@ -31,7 +31,7 @@ nlu:
     - Show the [average](avg) number of [locations]{"entity": "kpi", "value": "Locations"} of a county in [Nordrhein-Westfalen](place) in [May 2021](DATE)
     - What's the [mean](avg) number of [locations]{"entity": "kpi", "value": "Locations"} of a [federal state](place) [now](DATE)
     - The [avg](avg) number of [charging station]{"entity": "kpi", "value": "Charging stations"} of all [federal states](place).
-    - What is the [average](avg) number of [charging stations]{"entity": "kpi", "value": "Charging stations"} of all [federal states](place) [last month](DATE).
+    - What is the [average](avg) number of [stations]{"entity": "kpi", "value": "Charging stations"} of all [federal states](place) [last month](DATE).
     - I want to know [average](avg) number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} of a county in [Bayern](place) in [Sept 2021](DATE)
     - What is the [average](avg) [locations]{"entity": "kpi", "value": "Locations"} number the [first month of 2020](DATE)?
     - The [average](avg) number of [chargestations]{"entity": "kpi", "value": "Charging stations"} [last month](DATE) in [Sachsen-Anhalt](place).
@@ -55,7 +55,9 @@ nlu:
     - Which [federal state] has the [lowest](min) [cars per chargingpoint]{"entity": "kpi", "value": "Cars per charging point"}?
     - Return [cars per chargingpoints]{"entity": "kpi", "value": "Cars per charging point"} for [Coburg](place) [last month](DATE).
     - Return the [state](place) which has the [highest](max) [percentage_of_target]{"entity": "kpi", "value": "Percentage of target"} [now](DATE).
+    - what is the value of number of [stations]{"entity": "kpi", "value": "Charging stations"} in [Berlin](place) in [Jan 2020](DATE).
     - At [end of 2020](DATE), the [average](avg) number of [percentage of target]{"entity": "kpi", "value": "Percentage of target"} of all [states](place).
+    - The [average](avg) number of [charging stations]{"entity": "kpi", "value": "Charging stations"} of all [states](place) At [end of 2020](DATE).
 
 - intent: group_sort_query
   examples: |
@@ -64,15 +66,16 @@ nlu:
     - Give a [asc](asc) order of the [charging stations]{"entity": "kpi", "value": "Charging stations"} of [federal state](place) in [July 2022](DATE)
     - Give a [ascending](asc) order of number of [charging points]{"entity": "kpi", "value": "Charging points"} in each [federal state](place) in [January 2021](DATE).
     - Give number of [cars/chargepoints]{"entity": "kpi", "value": "Cars per charging point"} in each [federal state](place) in [twelfth month 2021](DATE) by descending(desc) order.
-    - Show number of [chargingpoints]{"entity": "kpi", "value": "Charging points"} in each [federal state](place) by ascending(asc) order [the first month of 2021](DATE).
+    - Show number of [points]{"entity": "kpi", "value": "Charging points"} in each [federal state](place) by ascending(asc) order [the first month of 2021](DATE).
     - tell me number of [locations]{"entity": "kpi", "value": "Locations"} in each [state](place) at [the beginning of 2022](DATE)
+    - tell me number of [charging points]{"entity": "kpi", "value": "Charging points"} of all [states](place) [now](DATE).
     - please return [charging stations]{"entity": "kpi", "value": "Charging stations"} group by [state](place).
     - I want to know number of [chargingstations]{"entity": "kpi", "value": "Charging stations"} in each of the [federal state](place).
     - so for each [federal state](place), show the number of [locations]{"entity": "kpi", "value": "Locations"} at [the moment](DATE).
     - Order [locations]{"entity": "kpi", "value": "Locations"} for each [state](place) [descending](desc).
     - Give a overview of number of [chargingstations]{"entity": "kpi", "value": "Charging stations"} in each [federal state](place) in [January 2022](DATE).
     - number of [locations]{"entity": "kpi", "value": "Locations"} group by [federal state](place).
-    - For each [state](place), the number of [cars per chargingpoints]{"entity": "kpi", "value": "Cars per charging point"} in [April2020](DATE).
+    - For each [state](place), the number of [cars per charging points]{"entity": "kpi", "value": "Cars per charging point"} in [April2020](DATE).
     - Give [descending](desc) order of [chargingpoints per cars]{"entity": "kpi", "value": "Charging points per 1,000 cars"} in all [states](place) [next month](DATE).
     - Order [percentage of target]{"entity": "kpi", "value": "Percentage of target"} [ascendingly](asc) for each [federalstate](place).
     - Return [desc](desc) order of the [percentage_of_target]{"entity": "kpi", "value": "Percentage of target"} in every [state](place) of [now](DATE).
@@ -81,7 +84,7 @@ nlu:
 
 - intent: filter_query
   examples: |
-    - Give me all [counties](place) that have [chargingpoints]{"entity": "kpi", "value": "Charging points"} [above](ge) [1000](CARDINAL) in [January 2021](DATE).
+    - Give me all [counties](place) that have [points]{"entity": "kpi", "value": "Charging points"} [above](ge) [1000](CARDINAL) in [January 2021](DATE).
     - Give me all [counties](place) that have [at least](ge) [1000](CARDINAL) [chargingpoints]{"entity": "kpi", "value": "Charging points"} at [the moment](DATE).
     - show all [counties](place) that have [more than](ge) [1000](CARDINAL) [locations]{"entity": "kpi", "value": "Locations"} in [January 2021](DATE).
     - return all [counties](place) which have [more than](ge) [2000](CARDINAL) [cars per chargingpoints]{"entity": "kpi", "value": "Cars per charging point"} at [the end of 2021](DATE). 
@@ -93,7 +96,7 @@ nlu:
     - show all [states](place) that have [above average](ge) [chargingpoints per car]{"entity": "kpi", "value": "Charging points per 1,000 cars"} in [2019.03](DATE).
     - show all [states](place) that have [smaller than](le) [600](CARDINAL) [charging points]{"entity": "kpi", "value": "Charging points"} in [Feb 2022](DATE).
     - show all [states](place) that have [below](le) [600](CARDINAL) [cars per chargingpoint]{"entity": "kpi", "value": "Cars per charging point"} in [March 2022](DATE).
-    - show all [state](place) that have [below average](le) [600](CARDINAL) [chargingstations]{"entity": "kpi", "value": "Charging stations"} in [Jan 2020](DATE).
+    - show all [state](place) that have [below average](le) [600](CARDINAL) [stations]{"entity": "kpi", "value": "Charging stations"} in [Jan 2020](DATE).
     - show all [state](place) that have [between 600 and 800](bet) [locations]{"entity": "kpi", "value": "Locations"} in [October 2021](DATE).
     - Give me all [state](place) that have [chargingpoints]{"entity": "kpi", "value": "Charging points"} [above average](ge) in [last month](DATE).
     - Give me all [states](place) that have [Percentage of target]{"entity": "kpi", "value": "Percentage of target"} [below average](le) in [next month](DATE).
@@ -159,6 +162,15 @@ nlu:
     - What about [under average](le)?
     - How about [above average](ge)?
     - What about [over average](ge)?
+    - What about [min](min)?
+    - what about [minimum](min)
+    - What about [max](max)?
+    - what about [maximum](max)?
+    - How about [average](avg)
+    - what about [largest](max)?
+    - how about the [highest](max)?
+    - and the [lowest](min)
+    - and what is it with [smallest](min)?
 
 
 - intent: change_slot
@@ -211,6 +223,9 @@ nlu:
     - check status
     - check info
     - check entries
+- intent: welcome_msg
+  examples: |
+    - Hi, I am here to help you with e-mobility questions. Type 'help' for more information.
 - intent: chitchat/greet
   examples: |
     - hey

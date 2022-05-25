@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>  
+    <title>E-Mobility</title>
+    <link rel="stylesheet" href="style.css">  
 </head>
 <body>
-    <h1>hi, this is the test site for the chatbot</h1>
-    <div id="rasa-chat-widget" data-websocket-url="https://localhost:5005/"></div>
-    <script src="https://unpkg.com/@rasahq/rasa-chat" type="application/javascript"></script> 
+    <!-- <h1>hi, this is the test site for the chatbot</h1> -->
+    <!-- <div id="rasa-chat-widget" data-websocket-url="https://localhost:5005/"></div>
+    <script src="https://unpkg.com/@rasahq/rasa-chat" type="application/javascript"></script>  -->
     <script>!(function () {
         let e = document.createElement("script"),
           t = document.head || document.getElementsByTagName("head")[0];
@@ -22,7 +23,13 @@
               {
                 customData: { language: "en" },
                 socketUrl: "http://localhost:5005",
+                // initPayload: "Hi, I am here to help you with e-mobility questions.",
+                initPayload: "/welcome_msg",
+                title: "E-Mobility chatbot",
                 // add other props here
+                params: {
+                storage: "session"
+              }
               },
               null
             );

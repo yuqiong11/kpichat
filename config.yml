@@ -47,7 +47,7 @@ policies:
 # # If you'd like to customize them, uncomment and adjust the policies.
 # # See https://rasa.com/docs/rasa/policies for more information.
   - name: AugmentedMemoizationPolicy
-    max_history: 10
+    max_history: 8
   - name: RulePolicy
   - name: TEDPolicy
     max_history: 8

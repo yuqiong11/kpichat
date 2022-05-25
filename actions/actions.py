@@ -179,7 +179,7 @@ class ActionExecuteAggQuery(Action):
         translator = QueryTranslator()
         is_prediction = translator.kpi_is_prediction(DATE)
         q = translator.agg_query(kpi, place, DATE, max=max, min=min, avg=avg)
-        dispatcher.utter_message(text=q)
+        # dispatcher.utter_message(text=q)
         cur.execute(q)
         results = cur.fetchall()
     
@@ -187,16 +187,16 @@ class ActionExecuteAggQuery(Action):
             for result in results:
                 if len(result) == 1:
                     if not is_prediction:
-                        dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0]))+".")
+                        dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
                     else:
-                        dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0]))+".")
-                        dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is March 2022.")
+                        dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
+                        dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is April 2022.")
                 else:
                     if not is_prediction:
-                        dispatcher.utter_message(text=f"{result[1]} has the {max if max != None else ''}{min if min != None else ''} number of {kpi} {'' if DATE == 'now' else 'in'} {DATE}, which is "+str(round(result[0]))+".")
+                        dispatcher.utter_message(text=f"{result[1]} has the {max if max != None else ''}{min if min != None else ''} number of {kpi} {'' if DATE == 'now' else 'in'} {DATE}, which is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
                     else:
-                        dispatcher.utter_message(text=f"{result[1]} has the {max if max != None else ''}{min if min != None else ''} number of {kpi} {'' if DATE == 'now' else 'in'} {DATE}, which is "+str(round(result[0]))+".")
-                        dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is March 2022.")
+                        dispatcher.utter_message(text=f"{result[1]} has the {max if max != None else ''}{min if min != None else ''} number of {kpi} {'' if DATE == 'now' else 'in'} {DATE}, which is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
+                        dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is April 2022.")
         else:
             dispatcher.utter_message(text="No results found for your query.")
 
@@ -229,7 +229,7 @@ class ActionExecuteGroupSortQuery(Action):
         is_prediction = translator.kpi_is_prediction(DATE)
    
         q = translator.group_sort_query(kpi, place, DATE, desc=desc, asc=asc, max=max, min=min)
-        print(q)
+        # print(q)
 
         cur.execute(q)
         results = cur.fetchall()
@@ -237,12 +237,12 @@ class ActionExecuteGroupSortQuery(Action):
 
         if results:
             for result in results:
-                res += f"{result[1]}, {round(result[0])}\n"
+                res += f"{result[1]}, {round(result[0]) if kpi != 'Percentage of target' else round(result[0],1)}{'%' if kpi == 'Percentage of target' else ''}\n"
 
             dispatcher.utter_message(text=res)
 
             if is_prediction:
-                dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is March 2022.")
+                dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is April 2022.")
 
         else:
             dispatcher.utter_message(text="No results found for your query.")
@@ -285,17 +285,17 @@ class ActionExecuteFilterQuery(Action):
 
             if len(results) <= 20:
                 for result in results:
-                    res += f"{result[0]}, {round(result[1])}\n"
+                    res += f"{result[0]}, {round(result[1]) if kpi != 'Percentage of target' else round(result[1],1)}{'%' if kpi == 'Percentage of target' else ''}\n"
             else:
-                res += f"In total {len(results)} returned. Here are the first 20 results:\n"
+                res += f"In total {len(results)} returned. Here are the first 20 results:\n\n"
                 results = results[:20]
                 for result in results:
-                    res += f"{result[0]}, {round(result[1])}\n"
+                    res += f"{result[0]}, {round(result[1]) if kpi != 'Percentage of target' else round(result[1],1)}{'%' if kpi == 'Percentage of target' else ''}\n"
                 
 
             dispatcher.utter_message(text=res)
             if is_prediction:
-                dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is March 2022.")
+                dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is April 2022.")
 
         else:
             dispatcher.utter_message(text="No results found for your query.")
@@ -335,11 +335,11 @@ class ActionExecuteLimitQuery(Action):
         res =""
         if results:
             for result in results:
-                res += f"{result[1]}, {round(result[0])}\n"
+                res += f"{result[1]}, {round(result[0]) if kpi != 'Percentage of target' else round(result[0],1)}{'%' if kpi == 'Percentage of target' else ''}\n"
 
             dispatcher.utter_message(text=res)
             if is_prediction:
-                dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is March 2022.")
+                dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is April 2022.")
 
         else:
             dispatcher.utter_message(text="No results found for your query.")
