@@ -63,8 +63,8 @@ class QueryTranslator(CheckTime):
             # 'template27': f""
         }
 
-        if kpi in ("Cars per charging point", "Charging points per 1,000 cars", "Percentage of target") and "state" in place.lower():
-            if kpi == "Cars per charging point":
+        if kpi in ("Cars_per_charging_point", "Charging_points_per_1,000_cars", "Percentage_of_target") and "state" in place.lower():
+            if kpi == "Cars_per_charging_point":
                 if avg:
                     selected_template = templates['template20']
                 elif max:
@@ -73,7 +73,7 @@ class QueryTranslator(CheckTime):
                     selected_template = templates['template18']
                 else:
                     selected_template = templates['template14']
-            elif kpi == "Charging points per 1,000 cars":
+            elif kpi == "Charging_points_per_1,000_cars":
                 if avg:
                     selected_template = templates['template19']
                 elif max:
@@ -82,7 +82,7 @@ class QueryTranslator(CheckTime):
                     selected_template = templates['template16']
                 else:
                     selected_template = templates['template13']
-            elif kpi == "Percentage of target":
+            elif kpi == "Percentage_of_target":
                 if avg:
                     selected_template = templates['template24']
                 elif max:
@@ -120,7 +120,7 @@ class QueryTranslator(CheckTime):
             else:
                 selected_template = templates['template6']
 
-        return selected_template
+        return selected_template, place, mapped_time
 
     def group_sort_query(self, kpi, place, time, desc=None, asc=None, max=None, min=None):
         mapped_time = self.time_mapping(time)
@@ -141,21 +141,21 @@ class QueryTranslator(CheckTime):
             'template12': f"SELECT 100*SUM(no_total_chargepoints)/SUM(normalized_chargepoint_target) AS p_o_t, state FROM \"E-Mobility\".emo_historical WHERE month = {mapped_time} GROUP BY state ASC;",
         }
 
-        if kpi == "Cars per charging point":
+        if kpi == "Cars_per_charging_point":
             if desc is None and asc is None:
                 selected_template = templates['template4']
             elif desc:
                 selected_template = templates['template5']
             elif asc:
                 selected_template = templates['template6']
-        elif kpi == "Charging points per 1,000 cars":
+        elif kpi == "Charging_points_per_1,000_cars":
             if desc is None and asc is None:
                 selected_template = templates['template7']
             elif desc:
                 selected_template = templates['template8']
             elif asc:
                 selected_template = templates['template9']
-        elif kpi == "Percentage of target":
+        elif kpi == "Percentage_of_target":
             if desc is None and asc is None:
                 selected_template = templates['template10']
             elif desc:
@@ -170,7 +170,7 @@ class QueryTranslator(CheckTime):
             elif asc:
                 selected_template = templates['template3']
         
-        return selected_template
+        return selected_template, place, mapped_time
 
 
     def filter_query(self, kpi, place, time, ge=None, le=None, bet=None, CARDINAL=None):
@@ -214,7 +214,7 @@ class QueryTranslator(CheckTime):
 
         
         if "state" in place.lower():
-            if kpi in ("Locations", "Charging stations", "Charging points"):
+            if kpi in ("Locations", "Charging_stations", "Charging_points"):
                 if ge == "above average" or ge == "over average" or ge == "more than average":
                     selected_template = templates['template5']
                 elif le == "below average" or le == "under average":
@@ -223,7 +223,7 @@ class QueryTranslator(CheckTime):
                     selected_template = templates['template7']
                 elif le or ge:                
                     selected_template = templates['template8']
-            elif kpi == "Cars per charging point":
+            elif kpi == "Cars_per_charging_point":
                 if ge == "above average" or ge == "over average" or ge == "more than average":
                     selected_template = templates['template11']
                 elif le == "below average" or le == "under average":
@@ -232,7 +232,7 @@ class QueryTranslator(CheckTime):
                     selected_template = templates['template16']
                 elif le or ge:                
                     selected_template = templates['template15']
-            elif kpi == "Charging points per 1,000 cars":
+            elif kpi == "Charging_points_per_1,000_cars":
                 if ge == "above average" or ge == "over average" or ge == "more than average":
                     selected_template = templates['template13']
                 elif le == "below average" or le == "under average":
@@ -241,7 +241,7 @@ class QueryTranslator(CheckTime):
                     selected_template = templates['template18']
                 elif le or ge:                
                     selected_template = templates['template17']
-            elif kpi == "Percentage of target":
+            elif kpi == "Percentage_of_target":
                 if ge == "above average" or ge == "over average" or ge == "more than average":
                     selected_template = templates['template9']
                 elif le == "below average" or le == "under average":
@@ -261,7 +261,7 @@ class QueryTranslator(CheckTime):
             elif le or ge:
                 selected_template = templates['template4']
         
-        return selected_template
+        return selected_template, place, mapped_time
 
     def limit_query(self, kpi, place, time, CARDINAL, top, bottom):
         mapped_time = self.time_mapping(time)
@@ -282,28 +282,28 @@ class QueryTranslator(CheckTime):
 
         # check if it is top or below
         if "state" in place.lower():
-            if kpi in ("Locations", "Charging stations", "Charging points"):
+            if kpi in ("Locations", "Charging_stations", "Charging_points"):
                 if top:
                     selected_template = templates['template1']
                 elif bottom:
                     selected_template = templates['template2']
                 else:
                     selected_template = templates['template1']
-            elif kpi == "Cars per charging point":
+            elif kpi == "Cars_per_charging_point":
                 if top:
                     selected_template = templates['template5']
                 elif bottom:
                     selected_template = templates['template6']
                 else:
                     selected_template = templates['template5']   
-            elif kpi == "Charging points per 1,000 cars":
+            elif kpi == "Charging_points_per_1,000_cars":
                 if top:
                     selected_template = templates['template7']
                 elif bottom:
                     selected_template = templates['template8']
                 else:
                     selected_template = templates['template7']
-            elif kpi == "Percentage of target":
+            elif kpi == "Percentage_of_target":
                 if top:
                     selected_template = templates['template9']
                 elif bottom:
@@ -318,25 +318,25 @@ class QueryTranslator(CheckTime):
             else:
                 selected_template = templates['template3']
         
-        return selected_template
+        return selected_template, place, mapped_time
 
-    def window_query(self, kpi, time, place, place_list=None):
-        mapped_time = self.time_mapping(time)
-        kpi_value = self.kpi_mapping(kpi)
+    # def window_query(self, kpi, time, place, place_list=None):
+    #     mapped_time = self.time_mapping(time)
+    #     kpi_value = self.kpi_mapping(kpi)
 
 
-        if place_list:
-            place_value = ""
-            place_list = place_list.split(",")
-            for element in place_list:
-                element = element.strip()
-                place_value += element
-            place_value = "("+place_value+")"
-        elif place:
-            place_value = place
+    #     if place_list:
+    #         place_value = ""
+    #         place_list = place_list.split(",")
+    #         for element in place_list:
+    #             element = element.strip()
+    #             place_value += element
+    #         place_value = "("+place_value+")"
+    #     elif place:
+    #         place_value = place
 
-        templates = {
-            'template1': f"SELECT SUM({kpi_value}), state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state IN {place_value} GROUP BY state;"
-        }
+    #     templates = {
+    #         'template1': f"SELECT SUM({kpi_value}), state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time} AND state IN {place_value} GROUP BY state;"
+    #     }
         
-        return templates['template1']
+    #     return templates['template1']

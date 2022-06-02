@@ -26,8 +26,14 @@ pipeline:
   - name: DIETClassifier
     epochs: 150
     constrain_similarities: true
-  - name: rapid_fuzzy_extractor.RapidFuzzyEntityExtractor
+  - name: rapid_fuzzy_extractor_place.RapidFuzzyEntityExtractorForPlace
+  - name: rapid_fuzzy_extractor_newkpi.RapidFuzzyEntityExtractorForNewKPI
   - name: EntitySynonymMapper
+  # - name: RegexEntityExtractor
+  #   case_sensitive: False
+  #   use_lookup_tables: True
+  #   use_regexes: True
+  #   "use_word_boundaries": True
   - name: ResponseSelector
     epochs: 50
     retrieval_intent: chitchat
@@ -37,7 +43,7 @@ pipeline:
     retrieval_intent: faq 
     constrain_similarities: true
   - name: FallbackClassifier
-    threshold: 0.5
+    threshold: 0.3
     ambiguity_threshold: 0.1
 
 # Configuration for Rasa Core.

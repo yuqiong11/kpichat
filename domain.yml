@@ -19,6 +19,7 @@ intents:
   - co_reference
   - change_slot
   - welcome_msg
+  - start_define_kpi
   # - restart
 
 
@@ -38,6 +39,8 @@ entities:
 - place_list
 - top
 - bottom
+- kpi_name
+- kpi_definition
 
 slots:
   place:
@@ -138,17 +141,40 @@ slots:
     type: any
     mappings:
     - type: custom
+  kpi_name:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: new_kpi_form
+        requested_slot: kpi_name
+  kpi_definition:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: new_kpi_form
+        requested_slot: kpi_definition
 
 
 forms:
   kpi_form:
-    ignored_intents: 
-    - chitchat
-    - faq
+    # ignored_intents: 
+    # - chitchat
+    # - faq
+    # - nlu_fallback
     required_slots:
       - place
       - kpi
       - DATE
+  new_kpi_form:
+    # ignored_intents: 
+    # - chitchat
+    # - faq
+    # - nlu_fallback
+    required_slots:
+      - kpi_name
+      - kpi_definition
 
 
 responses:
@@ -168,11 +194,17 @@ responses:
   utter_ask_DATE:
   - text: "What time are you interested? Please choose a timestamp only between January 2017 and January 2023."
 
+  utter_ask_kpi_name:
+  - text: "What is the name of the new KPI?"
+
+  utter_ask_kpi_definition:
+  - text: "What is the definition of the new KPI? Please add '@' in front of each argument, e.g. @charging_point"
+
   utter_query_received:
   - text: "Ok, query received. Please confirm the following."
 
-  utter_query_confirm:
-  - text: "the place is {place}, kpi is {kpi}, time is {time}"
+  # utter_query_confirm:
+  # - text: "the place is {place}, kpi is {kpi}, time is {time}"
 
   utter_query_completed:
   - text: "Query now in process..."
@@ -197,20 +229,20 @@ responses:
   - text: "bye"
 
   utter_faq/service:
-  - text: "KPIs that are available: Locations, Charging stations, Charging points, Charging points per 1,000 cars, Cars per charging point, Percentage of target.\nYou can type the KPI name for the KPI description or start directly asking me questions regarding the KPI within Germany."
+  - text: "KPIs that are available: Locations, Charging_stations, Charging_points, Charging_points_per_1,000_cars, Cars_per_charging_point, Percentage_of_target.\nYou can type the KPI name for the KPI description or start directly asking me questions regarding the KPI within Germany."
   utter_faq/locations_info:
   - text: "Locations: number of charging infrastructure places."
   utter_faq/chargingstations_info:
-  - text: "Charging stations: number of charging stations. A charging station, also called an EV charger or electric vehicle supply equipment (EVSE), is a piece of equipment that supplies electrical power for charging plug-in electric vehicles (including hybrids, neighborhood electric vehicles, trucks, buses, and others). A charging station can have one or more charging points." 
+  - text: "Charging_stations: number of charging stations. A charging station, also called an EV charger or electric vehicle supply equipment (EVSE), is a piece of equipment that supplies electrical power for charging plug-in electric vehicles (including hybrids, neighborhood electric vehicles, trucks, buses, and others). A charging station can have one or more charging points." 
   utter_faq/chargingpoints_info:
-  - text: "Charging points: number of charging points. A charging point is an interface with which either only one electric vehicle can be charged or only one battery of an electric vehicle can be exchanged at the same time.
+  - text: "Charging_points: number of charging points. A charging point is an interface with which either only one electric vehicle can be charged or only one battery of an electric vehicle can be exchanged at the same time.
 "
   utter_faq/chargingpoints_per_car_info:
-  - text: "Charging points per 1,000 cars: number of charging points per 1,000 registered passenger cars."
+  - text: "Charging_points_per_1,000_cars: number of charging points per 1,000 registered passenger cars."
   utter_faq/car_per_chargingpoints_info:
-  - text: "Cars per charging point: number of registered passenger cars per charging point."
+  - text: "Cars_per_charging_point: number of registered passenger cars per charging point."
   utter_faq/percentage_target_info:
-  - text: "Percentage of target: achieved share of charging points in relation to the required minimum number of charging points for 2030."
+  - text: "Percentage_of_target: achieved share of charging points in relation to the required minimum number of charging points for 2030."
 
   utter_welcome:
   - text: "Hi, I'm here to help you with E-Mobility questions. You can type 'help' for more information."
@@ -227,7 +259,7 @@ actions:
   - action_execute_group_sort_query
   - action_execute_filter_query
   - action_execute_limit_query
-  - action_execute_window_query
+  # - action_execute_window_query
   - action_convert_date
   - validate_kpi_form
   - action_check_coref
@@ -236,6 +268,9 @@ actions:
   - action_set_stored
   - action_two_stage_fallback
   - action_restart
+  - action_new_kpi_confirm
+  - action_end_define_kpi
+  - action_save_kpi_name_lookup
 
 
 session_config:

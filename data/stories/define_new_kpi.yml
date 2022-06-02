@@ -1,0 +1,31 @@
+version: "3.1"
+
+stories:
+# - story: scenario_1_affirm
+#   steps:
+#   - intent: start_define_kpi
+#   - action: utter_ask_kpi_name
+#   - intent: give_kpi_name
+#   - action: action_save_kpi_name_lookup
+#   - action: utter_ask_kpi_definition
+#   - intent: give_kpi_definition
+#   - action: action_new_kpi_confirm
+#   - intent: affirm
+#   - action: action_end_define_kpi
+
+- story: scenario_1_affirm
+  steps:
+  - intent: start_define_kpi
+  - action: new_kpi_form
+  - active_loop: new_kpi_form
+  - slot_was_set:
+    - kpi_name: "Chargers per square kilometer"
+  - slot_was_set:
+    - kpi_definition: "number of chargingpoints / area"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: action_new_kpi_confirm
+  - intent: affirm
+  - action: action_save_kpi_name_lookup
+  - action: action_end_define_kpi

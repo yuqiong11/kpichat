@@ -57,7 +57,7 @@ rules:
   - intent: change_slot
   - action: action_query_confirm
 
-- rule: Activate form
+- rule: Activate kpi form
   steps:
   - action: kpi_form
   - active_loop: kpi_form
@@ -70,11 +70,34 @@ rules:
   - slot_was_set:
     - requested_slot: null 
 
-- rule: Submit form
+- rule: Submit kpi form
   condition:
   - active_loop: kpi_form
   steps:
   - action: kpi_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  wait_for_user_input: false
+
+
+- rule: Activate new kpi form
+  steps:
+  - intent: start_define_kpi
+  - action: new_kpi_form
+  - active_loop: new_kpi_form
+  # - slot_was_set:
+  #   - kpi_name: "Chargers per square kilometer"
+  # - slot_was_set:
+  #   - kpi_definition: "number of chargingpoints / area"
+  # - slot_was_set:
+  #   - requested_slot: null 
+
+- rule: Submit new kpi form
+  condition:
+  - active_loop: new_kpi_form
+  steps:
+  - action: new_kpi_form
   - active_loop: null
   - slot_was_set:
     - requested_slot: null

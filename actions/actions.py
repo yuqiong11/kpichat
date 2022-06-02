@@ -15,14 +15,22 @@ from rasa_sdk.events import SlotSet, AllSlotsReset
 from rasa_sdk.types import DomainDict
 
 import psycopg2
+import pymongo
 import datetime
 import sys
+
+from utils.constants import PREDEFINED_KPI
 path = 'e:/User/yuqiong.weng/Chatbot/kpibot/mappings'
 sys.path.insert(0, path)
 from time_mapping import CheckTime
 
 from query_translator import QueryTranslator
+from db import Querymethods
+from process_newKPI import ResolveKPIDefinition
 
+# ----------------------------------------
+# validate forms
+# ----------------------------------------
 
 class ValidateKpiForm(FormValidationAction):
     def name(self) -> Text:
@@ -32,7 +40,7 @@ class ValidateKpiForm(FormValidationAction):
     @staticmethod
     def places_db() -> List[Text]:
         """Database of supported places"""
-        with open('./GPE_Germany.txt', 'r', encoding='utf8') as f:
+        with open('../lookup/GPE_Germany.txt', 'r', encoding='utf8') as f:
             data = f.read()
             places = data.split('\n')
 
@@ -77,24 +85,9 @@ class ValidateKpiForm(FormValidationAction):
             # validation succeeded, set the slot
             return {"DATE": slot_value}
 
-# class ActionChangeSlot(Action):
-
-#     def name(self) -> Text:
-#         return "action_change_slot"
-
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#         place = tracker.get_slot("place")
-#         DATE = tracker.get_slot("DATE")
-#         kpi = tracker.get_slot("kpi")
-#         dispatcher.utter_message(text=f"place is {place}")
-#         dispatcher.utter_message(text=f"time is {DATE}")
-#         dispatcher.utter_message(text=f"kpi is {kpi}")
-
-#         return []
-
-
+# -----------------------------------------------
+# util actions
+# -----------------------------------------------
 
 
 class ActionQueryClarify(Action):
@@ -155,6 +148,10 @@ class ActionQueryConfirm(Action):
         ])
         return []
 
+# --------------------------------------------
+# excute queries in postgresql
+# --------------------------------------------
+
 class ActionExecuteAggQuery(Action):
    def name(self) -> Text:
       return "action_execute_agg_query"
@@ -165,8 +162,6 @@ class ActionExecuteAggQuery(Action):
         runs after intent agg_query.
         
         """
-        conn = Querymethods.set_connect()
-        cur = conn.cursor()
 
         place = tracker.get_slot("place")
         kpi = tracker.get_slot("kpi")
@@ -174,31 +169,79 @@ class ActionExecuteAggQuery(Action):
         max = tracker.get_slot("max")
         min = tracker.get_slot("min")
         avg = tracker.get_slot("avg")
-        # user_input = tracker.latest_message['text']
 
-        translator = QueryTranslator()
-        is_prediction = translator.kpi_is_prediction(DATE)
-        q = translator.agg_query(kpi, place, DATE, max=max, min=min, avg=avg)
-        # dispatcher.utter_message(text=q)
-        cur.execute(q)
-        results = cur.fetchall()
-    
-        if results:
-            for result in results:
-                if len(result) == 1:
-                    if not is_prediction:
-                        dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
+
+        if kpi in PREDEFINED_KPI:
+
+            translator = QueryTranslator()
+            is_prediction = translator.kpi_is_prediction(DATE)
+            q, place, time = translator.agg_query(kpi, place, DATE, max=max, min=min, avg=avg)
+
+            results = Querymethods.execute_query(q)
+        
+            if results:
+                for result in results:
+                    if len(result) == 1:
+                        if not is_prediction:
+                            dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
+                        else:
+                            dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
+                            dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is April 2022.")
                     else:
-                        dispatcher.utter_message(text=f"The {max if max != None else ''}{min if min != None else ''}{avg if avg != None else ''} number of {kpi} in {'' if place.lower() != ('state' or 'county') else 'a'} {place} {'' if DATE == 'now' else 'in'} {DATE} is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
-                        dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is April 2022.")
-                else:
-                    if not is_prediction:
-                        dispatcher.utter_message(text=f"{result[1]} has the {max if max != None else ''}{min if min != None else ''} number of {kpi} {'' if DATE == 'now' else 'in'} {DATE}, which is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
-                    else:
-                        dispatcher.utter_message(text=f"{result[1]} has the {max if max != None else ''}{min if min != None else ''} number of {kpi} {'' if DATE == 'now' else 'in'} {DATE}, which is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
-                        dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is April 2022.")
+                        if not is_prediction:
+                            dispatcher.utter_message(text=f"{result[1]} has the {max if max != None else ''}{min if min != None else ''} number of {kpi} {'' if DATE == 'now' else 'in'} {DATE}, which is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
+                        else:
+                            dispatcher.utter_message(text=f"{result[1]} has the {max if max != None else ''}{min if min != None else ''} number of {kpi} {'' if DATE == 'now' else 'in'} {DATE}, which is "+str(round(result[0]) if kpi != 'Percentage of target' else round(result[0],1))+f"{'%' if kpi == 'Percentage of target' else ''}"+".")
+                            dispatcher.utter_message(text="Please be aware that this is a prediction based on past values. The latest timestamp is April 2022.")
+            else:
+                dispatcher.utter_message(text="No results found for your query.")
+
         else:
-            dispatcher.utter_message(text="No results found for your query.")
+
+            client = Querymethods.set_mongodb_connect()
+            emobility = client["emobility"]
+            new_kpi_definition = emobility["new_kpi_definition"]
+            statistics = emobility["statistics"]
+
+            # start process user-defined KPI
+            # look for KPI definition
+            KPI_definition = Querymethods.find_value(new_kpi_definition, "kpi_difinition", kpi, "kpi_definition")
+
+            # extract parameters
+            params = ResolveKPIDefinition.parameter_extraction()
+
+            # search for entries in collection 'statistics'
+            # args_list = ResolveKPIDefinition.argument_filling(params)
+    
+            for param in params:
+                if param in PREDEFINED_KPI:
+                    # get the value for predefined kpi
+                    q, place, time = translator.agg_query(kpi, place, DATE, max=max, min=min, avg=avg)
+
+                    results = Querymethods.execute_query(q)            
+                    processed_result_predefined = [result[0] for result in results]
+                    
+                else:
+                    # check if other params are in the knowledgebase 'statistics'. If not, ask the user for missing information
+                    results_name = Querymethods.find_value(statistics, "name", param, "entries")
+                    # {{'Berlin': 500}, {'Hamburg':600}}
+                    if results_name:
+                        results_value = Querymethods.find_value(results_name, "name", place, "value")
+                        if results_value:
+                            processed_result_userdefined = results_value["value"]
+                        else: 
+                            [SlotSet("ask_user", True)]
+                    else:
+                        [SlotSet("ask_user", True)]
+
+            
+            # replace variable with value
+            value_string = ResolveKPIDefinition.arithmetic()
+
+            # calculation
+            result = ResolveKPIDefinition.output(value_string)
+
+
 
         return []
 
@@ -214,8 +257,6 @@ class ActionExecuteGroupSortQuery(Action):
         runs after intent group_sort_query
         
         """
-        conn = Querymethods.set_connect()
-        cur = conn.cursor()
 
         place = tracker.get_slot("place")
         kpi = tracker.get_slot("kpi")
@@ -228,11 +269,9 @@ class ActionExecuteGroupSortQuery(Action):
         translator = QueryTranslator()
         is_prediction = translator.kpi_is_prediction(DATE)
    
-        q = translator.group_sort_query(kpi, place, DATE, desc=desc, asc=asc, max=max, min=min)
-        # print(q)
+        q, place, time = translator.group_sort_query(kpi, place, DATE, desc=desc, asc=asc, max=max, min=min)
 
-        cur.execute(q)
-        results = cur.fetchall()
+        results = Querymethods.execute_query(q)
         res =""
 
         if results:
@@ -261,8 +300,6 @@ class ActionExecuteFilterQuery(Action):
         runs after intent filter_query
         
         """
-        conn = Querymethods.set_connect()
-        cur = conn.cursor()
 
         place = tracker.get_slot("place")
         kpi = tracker.get_slot("kpi")
@@ -275,10 +312,9 @@ class ActionExecuteFilterQuery(Action):
         translator = QueryTranslator()
         is_prediction = translator.kpi_is_prediction(DATE)
 
-        q = translator.filter_query(kpi, place, DATE, ge=ge, le=le, bet=bet, CARDINAL=CARDINAL)
+        q, place, time = translator.filter_query(kpi, place, DATE, ge=ge, le=le, bet=bet, CARDINAL=CARDINAL)
         
-        cur.execute(q)
-        results = cur.fetchall()
+        results = Querymethods.execute_query(q)
         res =""
 
         if results:
@@ -313,24 +349,19 @@ class ActionExecuteLimitQuery(Action):
         runs after intent limit_query
         
         """
-        conn = Querymethods.set_connect()
-        cur = conn.cursor()
-      
         place = tracker.get_slot("place")
         kpi = tracker.get_slot("kpi")
         DATE = tracker.get_slot("DATE")
         CARDINAL = tracker.get_slot("CARDINAL")
         top = tracker.get_slot("top")
         bottom = tracker.get_slot("bottom")
-        # user_input = tracker.latest_message['text']
 
         translator = QueryTranslator()
         is_prediction = translator.kpi_is_prediction(DATE)
 
-        q = translator.limit_query(kpi, place, DATE, CARDINAL, top, bottom)
+        q, place, time = translator.limit_query(kpi, place, DATE, CARDINAL, top, bottom)
 
-        cur.execute(q)
-        results = cur.fetchall()
+        results = Querymethods.execute_query(q)
 
         res =""
         if results:
@@ -347,50 +378,84 @@ class ActionExecuteLimitQuery(Action):
         return []
 
 
-class ActionExecuteWindowQuery(Action):
-   def name(self) -> Text:
-      return "action_execute_window_query"
+# class ActionExecuteWindowQuery(Action):
+#    def name(self) -> Text:
+#       return "action_execute_window_query"
 
-   def run(self, dispatcher, tracker, domain):
+#    def run(self, dispatcher, tracker, domain):
 
-        """
-        runs after intent window_query
+#         """
+#         runs after intent window_query
         
-        """
-        conn = Querymethods.set_connect()
-        cur = conn.cursor()
+#         """
+#         conn = Querymethods.set_connect()
+#         cur = conn.cursor()
       
-        kpi = tracker.get_slot("kpi")
-        DATE = tracker.get_slot("DATE")
-        place = tracker.get_slot("place")
-        place_list = tracker.get_slot("place_list")
+#         kpi = tracker.get_slot("kpi")
+#         DATE = tracker.get_slot("DATE")
+#         place = tracker.get_slot("place")
+#         place_list = tracker.get_slot("place_list")
 
 
-        translator = QueryTranslator()
-        is_prediction = translator.kpi_is_prediction(DATE)
-        q = translator.window_query(kpi, place, DATE, place_list)
+#         translator = QueryTranslator()
+#         is_prediction = translator.kpi_is_prediction(DATE)
+#         q = translator.window_query(kpi, place, DATE, place_list)
 
-        cur.execute(q)
-        results = cur.fetchall()
-        for result in results:
-            dispatcher.utter_message(text=f"{result[0]}")
+#         cur.execute(q)
+#         results = cur.fetchall()
+#         for result in results:
+#             dispatcher.utter_message(text=f"{result[0]}")
 
-        return []
+#         return []
 
-# establish postgresql connection
-class Querymethods():
-    def set_connect():
-        '''
-        try to connect the db, if error occurs, print it
-        '''
-        try:
-            conn = psycopg2.connect("host=81.169.137.234 dbname=workbench user=david.reyer password=start_david")
-        except Exception as e:
-            print(e)
+# --------------------------------------------
+# establish database connection
+# --------------------------------------------
 
-        return conn
+# class Querymethods():
+#     def set_postgresql_connect(self):
+#         '''
+#         try to connect postgresql, if error occurs, print it
+#         '''
+#         try:
+#             conn = psycopg2.connect("host=81.169.137.234 dbname=workbench user=david.reyer password=start_david")
+#         except Exception as e:
+#             print(e)
 
+#         return conn
+
+#     def set_mongodb_connect(self):
+#         '''
+#         try to connect mongodb, if error occurs, print it
+#         '''
+#         try:
+#             client = pymongo.MongoClient("localhost", 27017)
+
+#         except Exception as e:
+#             print(e)
+
+#         return client
+
+#     def execute_query(self, query):
+#         '''
+#         try to execute query
+#         '''
+#         try: 
+#             conn = self.set_postgresql_connect()
+#             cur = conn.cursor()
+#             cur.execute(query)
+#             results = cur.fetchall()
+
+#         except Exception as e:
+#             print(e)
+    
+#         return results
+
+
+# --------------------------------------------
 # coref start from here
+# --------------------------------------------
+
 class ActionCheckCoref(Action):
    def name(self) -> Text:
       return "action_check_coref"
@@ -525,3 +590,58 @@ class ActionSetStored(Action):
                 if slot != new_slot:
                     return_slots.append(SlotSet(slot, v))    
         return return_slots
+
+# ------------------------------------------------------
+# Below are the actions of self-learning
+# ------------------------------------------------------
+
+class ActionSaveNameLookup(Action):
+
+    def name(self) -> Text:
+        return "action_save_kpi_name_lookup"
+
+    def run(self, dispatcher, tracker, domain):
+        # get the slot
+        kpi_name = tracker.get_slot("kpi_name")
+        # write it into the file
+        with open('../lookup/New_KPI.txt', 'w') as f:
+            f.write(kpi_name+'\n')
+
+class ActionNewKPIConfirm(Action): 
+
+    def name(self) -> Text:
+        return "action_new_kpi_confirm"
+
+    def run(self, dispatcher, tracker, domain):
+        kpi_name = tracker.get_slot("kpi_name")
+        kpi_definition = tracker.get_slot("kpi_definition")
+        dispatcher.utter_message(text=f"kpi_name: {kpi_name}\n kpi_definition: {kpi_definition}",
+        buttons= [
+            {"title": "yes","payload": "/affirm"},
+            {"title": "no", "payload": "/deny"}
+        ])
+        return []
+
+
+class ActionSaveNewKPI(Action):
+
+    def name(self) -> Text:
+        return "action_end_define_kpi"
+
+    def run(self, dispatcher, tracker, domain):
+        kpi_name = tracker.get_slot("kpi_name")
+        kpi_definition = tracker.get_slot("kpi_definition")
+
+        try:
+            # save it in mongodb
+            client = Querymethods.set_mongodb_connect()
+            db = client['emobility']
+            new_kpi_definition = db['new_kpi_definition']
+            new_kpi_definition.insert_one({"kpi_name": kpi_name, "kpi_definition": kpi_definition})
+            dispatcher.utter_message(text="Good. I have put it in the knowledgebase.")
+
+        except Exception as e:
+            print(e)
+            dispatcher.utter_message(text="An issue occurred...Please try again.")
+
+        return 
