@@ -35,7 +35,7 @@ class RapidFuzzyEntityExtractorForNewKPI(GraphComponent):
         return {
             # threshold for filtering 
             "entity_name": "kpi",
-            "thres": 0.8,
+            "thres": 0.98,
             "scorer": jaro_winkler_similarity
         }
 
@@ -57,10 +57,9 @@ class RapidFuzzyEntityExtractorForNewKPI(GraphComponent):
     @staticmethod
     def names_db() -> List[Text]:
         """Database of KPI names"""
-        with open('../lookup/New_KPI.txt', 'r', encoding='utf8') as f:
+        with open('./lookup/New_KPI.txt', 'r', encoding='utf8') as f:
             data = f.read()
             names = data.split('\n')
-            print(names)
         return names
 
     def process(self, messages: List[Message], model: SpacyModel) -> List[Message]:

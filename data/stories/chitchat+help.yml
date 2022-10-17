@@ -5,10 +5,10 @@ stories:
   steps:
   - intent: chitchat
   - action: utter_chitchat
-  - action: action_reset_slots
+  - action: action_restart
 
 - story: faq
   steps:
   - intent: faq
   - action: utter_faq
-  - action: action_reset_slots
+  - action: action_restart

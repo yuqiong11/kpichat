@@ -9,6 +9,10 @@ stories:
     - place: "Berlin"
     - DATE: "2021"
     - max: "highest"
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_query_classification
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -24,10 +28,11 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_group_sort_query
-  - action: action_store_slots
-  - action: action_reset_slots_except_stored
-
-- story: group_sort_query_affirm_1
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
+- story: group_sort_query_affirm, 3x continue
   steps:
   - intent: group_sort_query
     entities:
@@ -35,6 +40,10 @@ stories:
     - place: "states"
     - DATE: "2021"
     - min: "lowest"
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_query_classification
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -50,17 +59,60 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_group_sort_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
   - action: action_reset_slots_except_stored
+  - action: utter_kpi_query
 
-- story: group_sort_query_affirm_2
+
+- story: (deny)group_sort_query_affirm
+  steps:
+  - intent: group_sort_query
+    entities:
+    - kpi: "locations"
+    - place: "Berlin"
+    - DATE: "2021"
+    - max: "highest"
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_query_classification
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: deny
+  - action: utter_ask_for_clarification
+  - intent: change_slot
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_execute_group_sort_query
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
+- story: (deny)group_sort_query_affirm, 3x continue
   steps:
   - intent: group_sort_query
     entities:
     - kpi: "locations"
     - place: "states"
     - DATE: "2021"
-    - desc: "desc"
+    - min: "lowest"
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_query_classification
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -74,34 +126,14 @@ stories:
   - active_loop: null
   - action: utter_query_received
   - action: action_query_confirm
-  - intent: affirm
-  - action: action_execute_group_sort_query
-  - action: action_store_slots
-  - action: action_reset_slots_except_stored
-
-- story: group_sort_query_affirm_3
-  steps:
-  - intent: group_sort_query
-    entities:
-    - kpi: "locations"
-    - place: "states"
-    - DATE: "2021"
-    - asc: "asc"
-  - action: kpi_form
-  - active_loop: kpi_form
-  - slot_was_set:
-    - place: "states"
-  - slot_was_set:
-    - DATE: "2021"
-  - slot_was_set:
-    - kpi: "locations"
-  - slot_was_set:
-    - requested_slot: null 
-  - active_loop: null
-  - action: utter_query_received
+  - intent: deny
+  - action: utter_ask_for_clarification
+  - intent: change_slot
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_group_sort_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
   - action: action_reset_slots_except_stored
-
+  - action: utter_kpi_query

@@ -1,0 +1,352 @@
+version: "3.1"
+
+stories:
+- story: scenario_1_userdefined_true
+  steps:
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: now
+  - action: action_query_classification
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: false
+  - slot_was_set:
+    - userdefined: true
+  - action: action_execute_agg_query
+  - slot_was_set:
+    - self_learning: true
+  - action: action_continue_agg_query
+  - action: action_continue_options
+- story: scenario_2_userdefined_true_user_affirm_provide_all
+  steps:
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: now
+  - action: action_query_classification
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: false
+  - slot_was_set:
+    - userdefined: true
+  - action: action_execute_agg_query
+  - slot_was_set:
+    - self_learning: true
+  - slot_was_set:
+    - args_to_be_asked: ['population']
+  - action: action_not_found_statistics
+  - intent: affirm
+  - action: args_form
+  - active_loop: args_form
+  - slot_was_set:
+    - arg_1: "Berlin"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: action_map_args
+  - action: action_check_skip
+  - slot_was_set:
+    - has_skip: false
+  - action: action_store_knowledge
+  - action: action_continue_agg_query
+  - action: action_continue_options
+- story: scenario_3_userdefined_true_user_affirm_provide_not_all
+  steps:
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: now
+  - action: action_query_classification
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: false
+  - slot_was_set:
+    - userdefined: true
+  - action: action_execute_agg_query
+  - slot_was_set:
+    - self_learning: true
+  - slot_was_set:
+    - args_to_be_asked: ['population']
+  - action: action_not_found_statistics
+  - intent: affirm
+  - action: args_form
+  - active_loop: args_form
+  - slot_was_set:
+    - arg_1: "Berlin"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: action_map_args
+  - action: action_check_skip
+  - slot_was_set:
+    - has_skip: true
+  - action: action_store_questions
+  - action: action_continue_options
+- story: scenario_4_userdefined_true_user_deny
+  steps:
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: now
+  - action: action_query_classification
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: false
+  - slot_was_set:
+    - userdefined: true
+  - action: action_execute_agg_query
+  - slot_was_set:
+    - self_learning: true
+  - slot_was_set:
+    - args_to_be_asked: ['population']
+  - action: action_not_found_statistics
+  - intent: deny
+  - action: action_store_questions
+  - action: action_continue_options
+
+- story: (deny)scenario_2_userdefined_true_user_affirm_provide_all
+  steps:
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: now
+  - action: action_query_classification
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: deny
+  - action: utter_ask_for_clarification
+  - intent: change_slot
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: false
+  - slot_was_set:
+    - userdefined: true
+  - action: action_execute_agg_query
+  - slot_was_set:
+    - self_learning: true
+  - slot_was_set:
+    - args_to_be_asked: ['population']
+  - action: action_not_found_statistics
+  - intent: affirm
+  - action: args_form
+  - active_loop: args_form
+  - slot_was_set:
+    - arg_1: "Berlin"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: action_map_args
+  - action: action_check_skip
+  - slot_was_set:
+    - has_skip: false
+  - action: action_store_knowledge
+  - action: action_continue_agg_query
+  - action: action_continue_options
+- story: (deny)scenario_3_userdefined_true_user_affirm_provide_not_all
+  steps:
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: now
+  - action: action_query_classification
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: deny
+  - action: utter_ask_for_clarification
+  - intent: change_slot
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: false
+  - slot_was_set:
+    - userdefined: true
+  - action: action_execute_agg_query
+  - slot_was_set:
+    - self_learning: true
+  - slot_was_set:
+    - args_to_be_asked: ['population']
+  - action: action_not_found_statistics
+  - intent: affirm
+  - action: args_form
+  - active_loop: args_form
+  - slot_was_set:
+    - arg_1: "Berlin"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: action_map_args
+  - action: action_check_skip
+  - slot_was_set:
+    - has_skip: true
+  - action: action_store_questions
+  - action: action_continue_options
+- story: (deny)scenario_4_userdefined_true_user_deny
+  steps:
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: now
+  - action: action_query_classification
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: deny
+  - action: utter_ask_for_clarification
+  - intent: change_slot
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: false
+  - slot_was_set:
+    - userdefined: true
+  - action: action_execute_agg_query
+  - slot_was_set:
+    - self_learning: true
+  - slot_was_set:
+    - args_to_be_asked: ['population']
+  - action: action_not_found_statistics
+  - intent: deny
+  - action: action_store_questions
+  - action: action_continue_options

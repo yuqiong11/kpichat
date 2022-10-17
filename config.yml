@@ -13,7 +13,8 @@ pipeline:
   - name: "SpacyNLP"
     model: "en_core_web_md"
     case_sensitive: False
-  - name: WhitespaceTokenizer
+  # - name: SpacyTokenizer
+  - name: whitespace_tokenizer.MyWhitespaceTokenizer
   - name: RegexFeaturizer
   - name: LexicalSyntacticFeaturizer
   - name: CountVectorsFeaturizer
@@ -23,11 +24,11 @@ pipeline:
     max_ngram: 4
   # - name: SpacyEntityExtractor
   #   dimensions: ["CARDINAL"]
+  - name: rapid_fuzzy_extractor_newkpi.RapidFuzzyEntityExtractorForNewKPI
   - name: DIETClassifier
     epochs: 150
     constrain_similarities: true
   - name: rapid_fuzzy_extractor_place.RapidFuzzyEntityExtractorForPlace
-  - name: rapid_fuzzy_extractor_newkpi.RapidFuzzyEntityExtractorForNewKPI
   - name: EntitySynonymMapper
   # - name: RegexEntityExtractor
   #   case_sensitive: False
@@ -39,12 +40,12 @@ pipeline:
     retrieval_intent: chitchat
     constrain_similarities: true
   - name: ResponseSelector
-    epochs: 100
+    epochs: 50
     retrieval_intent: faq 
     constrain_similarities: true
   - name: FallbackClassifier
-    threshold: 0.3
-    ambiguity_threshold: 0.1
+    threshold: 0.25
+    ambiguity_threshold: 0.01
 
 # Configuration for Rasa Core.
 # https://rasa.com/docs/rasa/core/policies/
@@ -53,11 +54,10 @@ policies:
 # # If you'd like to customize them, uncomment and adjust the policies.
 # # See https://rasa.com/docs/rasa/policies for more information.
   - name: AugmentedMemoizationPolicy
-    max_history: 8
+    max_history: 10
   - name: RulePolicy
   - name: TEDPolicy
-    max_history: 8
-    epochs: 100
+    max_history: 10
+    epochs: 80
     constrain_similarities: true
-
 

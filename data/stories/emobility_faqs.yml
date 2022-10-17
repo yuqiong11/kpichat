@@ -1,0 +1,35 @@
+version: "3.1"
+
+stories:
+- story: give 1 faq + deny
+  steps:
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 4
+  - action: action_give_faqs_finished
+  - action: action_continue_options
+  - intent: main_menu
+  - action: action_restart
+  - action: utter_main_menu
+
+- story: give 1 faq + 3x continue
+  steps:
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 4
+  - action: action_give_faqs_finished
+  - action: action_continue_options
+  - intent: continue
+  - action: action_give_faqs_finished
+  - action: action_continue_options
+  - intent: continue
+  - action: action_give_faqs_finished
+  - action: action_continue_options
+  - intent: continue
+  - action: action_give_faqs_finished
+  - action: action_continue_options
+  - intent: main_menu
+  - action: action_restart
+  - action: utter_main_menu

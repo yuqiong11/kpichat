@@ -35,7 +35,7 @@ class RapidFuzzyEntityExtractorForPlace(GraphComponent):
         return {
             # threshold for filtering 
             "entity_name": "place",
-            "thres": 0.9,
+            "thres": 0.93,
             "scorer": jaro_winkler_similarity
         }
 
@@ -57,7 +57,7 @@ class RapidFuzzyEntityExtractorForPlace(GraphComponent):
     @staticmethod
     def places_db() -> List[Text]:
         """Database of supported places"""
-        with open('../lookup/GPE_any.txt', 'r', encoding='utf8') as f:
+        with open('./lookup/GPE_any.txt', 'r', encoding='utf8') as f:
             data = f.read()
             places = data.split('\n')
 

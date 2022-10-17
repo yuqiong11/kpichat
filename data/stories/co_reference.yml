@@ -1,7 +1,7 @@
 version: "3.1"
 
 stories:
-- story: agg_place_kpi_time
+- story: agg_1xcoref
   steps:
   - intent: agg_query
     entities:
@@ -15,6 +15,10 @@ stories:
     - kpi: Locations
   - slot_was_set:
     - DATE: last month
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_query_classification
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -29,66 +33,17 @@ stories:
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: true
+  - slot_was_set:
+    - userdefined: false
   - action: action_execute_agg_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: Berlin
-        kpi: Locations
-        DATE: last month
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
     - place: Hamburg
@@ -99,38 +54,6 @@ stories:
     - kpi: Locations
   - slot_was_set:
     - DATE: last month
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -145,316 +68,32 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_agg_query
-  - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: Hamburg
-        kpi: Locations
-        DATE: last month
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
-  - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
-  - intent: co_reference
-    entities:
-    - kpi: Charging points
-  - slot_was_set:
-    - kpi: Charging points
-  - action: action_set_stored
-  - slot_was_set:
-    - place: Hamburg
-  - slot_was_set:
-    - DATE: last month
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
-  - action: kpi_form
-  - active_loop: kpi_form
-  - slot_was_set:
-    - place: Hamburg
-  - slot_was_set:
-    - kpi: Charging points
-  - slot_was_set:
-    - DATE: last month
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_query_confirm
-  - intent: affirm
-  - action: action_execute_agg_query
-  - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: Hamburg
-        kpi: Charging points
-        DATE: last month
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
-  - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
-  - intent: co_reference
-    entities:
-    - DATE: now
-  - slot_was_set:
-    - DATE: now
-  - action: action_set_stored
-  - slot_was_set:
-    - place: Hamburg
-  - slot_was_set:
-    - kpi: Charging points
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
-  - action: kpi_form
-  - active_loop: kpi_form
-  - slot_was_set:
-    - place: Hamburg
-  - slot_was_set:
-    - kpi: Charging points
-  - slot_was_set:
-    - DATE: now
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_query_confirm
-  - intent: affirm
-  - action: action_execute_agg_query
-  - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: Hamburg
-        kpi: Charging points
-        DATE: now
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
-  - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
-
-- story: agg_min_avg_max
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
+- story: agg_2xcoref
   steps:
   - intent: agg_query
     entities:
-    - max: largest
     - kpi: Locations
+    - place: Berlin
     - DATE: last month
-    - place: county
+    - place: Berlin
   - slot_was_set:
-    - place: county
+    - place: Berlin
   - slot_was_set:
     - kpi: Locations
   - slot_was_set:
     - DATE: last month
+  - action: action_service_mapping
   - slot_was_set:
-    - max: largest
+    - service: 1
+  - action: action_query_classification
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
-    - place: county
+    - place: Berlin
   - slot_was_set:
     - kpi: Locations
   - slot_was_set:
@@ -465,112 +104,31 @@ stories:
   - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: true
+  - slot_was_set:
+    - userdefined: false
   - action: action_execute_agg_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: county
-        kpi: Locations
-        DATE: last month
-        max: largest
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
-    - min: lowest
+    - place: Hamburg
   - slot_was_set:
-    - min: lowest
+    - place: Hamburg
   - action: action_set_stored
-  - slot_was_set:
-    - place: county
   - slot_was_set:
     - kpi: Locations
   - slot_was_set:
     - DATE: last month
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
-    - place: county
+    - place: Hamburg
   - slot_was_set:
     - kpi: Locations
   - slot_was_set:
@@ -580,114 +138,33 @@ stories:
   - active_loop: null
   - action: action_query_confirm
   - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: true
+  - slot_was_set:
+    - userdefined: false
   - action: action_execute_agg_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: county
-        kpi: Locations
-        DATE: last month
-        max: null
-        min: lowest
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
-    - avg: average
+    - kpi: Charging points
   - slot_was_set:
-    - avg: average
+    - kpi: Charging points
   - action: action_set_stored
   - slot_was_set:
-    - place: county
-  - slot_was_set:
-    - kpi: Locations
+    - place: Hamburg
   - slot_was_set:
     - DATE: last month
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
-    - place: county
+    - place: Hamburg
   - slot_was_set:
-    - kpi: Locations
+    - kpi: Charging points
   - slot_was_set:
     - DATE: last month
   - slot_was_set:
@@ -695,112 +172,38 @@ stories:
   - active_loop: null
   - action: action_query_confirm
   - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: true
+  - slot_was_set:
+    - userdefined: false
   - action: action_execute_agg_query
-  - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: county
-        kpi: Locations
-        DATE: last month
-        max: null
-        min: null
-        avg: average
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
-  - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
-  - intent: co_reference
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
+- story: agg_1xcoref3xquery
+  steps:
+  - intent: agg_query
     entities:
-    - max: max
+    - kpi: Locations
+    - place: Berlin
+    - DATE: last month
+    - place: Berlin
   - slot_was_set:
-    - max: max
-  - action: action_set_stored
-  - slot_was_set:
-    - place: county
+    - place: Berlin
   - slot_was_set:
     - kpi: Locations
   - slot_was_set:
     - DATE: last month
+  - action: action_service_mapping
   - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+    - service: 1
+  - action: action_query_classification
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
-    - place: county
+    - place: Berlin
   - slot_was_set:
     - kpi: Locations
   - slot_was_set:
@@ -808,70 +211,216 @@ stories:
   - slot_was_set:
     - requested_slot: null
   - active_loop: null
+  - action: utter_query_received
   - action: action_query_confirm
   - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: true
+  - slot_was_set:
+    - userdefined: false
   - action: action_execute_agg_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: county
-        kpi: Locations
-        DATE: last month
-        max: max
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
+  - action: utter_kpi_query
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
   - slot_was_set:
-    - place: null
+    - place: states
   - slot_was_set:
-    - kpi: null
+    - kpi: Locations
   - slot_was_set:
-    - DATE: null
+    - DATE: now
+  - action: action_service_mapping
   - slot_was_set:
-    - max: null
+    - service: 1
+  - action: kpi_form
+  - active_loop: kpi_form
   - slot_was_set:
-    - min: null
+    - place: "Berlin"
   - slot_was_set:
-    - avg: null
+    - DATE: "2021"
   - slot_was_set:
-    - desc: null
+    - kpi: "locations"
   - slot_was_set:
-    - asc: null
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
   - slot_was_set:
-    - le: null
+    - predefined: true
   - slot_was_set:
-    - ge: null
+    - userdefined: false
+  - action: action_execute_agg_query
+  - action: action_continue_options
+  - intent: continue
+  - action: action_store_slots
+  - action: action_reset_slots_except_stored
+  - action: utter_kpi_query
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
   - slot_was_set:
-    - bet: null
+    - place: states
   - slot_was_set:
-    - CARDINAL: null
+    - kpi: Locations
   - slot_was_set:
-    - top: null
+    - DATE: now
+  - action: action_service_mapping
   - slot_was_set:
-    - bottom: null
+    - service: 1
+  - action: action_query_classification 
+  - action: kpi_form
+  - active_loop: kpi_form
   - slot_was_set:
-    - place_list: null
+    - place: "Berlin"
   - slot_was_set:
-    - mapped_time: null
+    - DATE: "2021"
   - slot_was_set:
-    - requested_slot: null
+    - kpi: "locations"
   - slot_was_set:
-    - session_started_metadata: null
-
-- story: group_asc_desc_time_kpi
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: true
+  - slot_was_set:
+    - userdefined: false
+  - action: action_execute_agg_query
+  - action: action_continue_options
+  - intent: continue
+  - action: action_store_slots
+  - action: action_reset_slots_except_stored
+  - action: utter_kpi_query
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: now
+  - action: action_query_classification
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: true
+  - slot_was_set:
+    - userdefined: false
+  - action: action_execute_agg_query
+  - action: action_continue_options
+  - intent: continue
+  - action: action_store_slots
+  - action: action_reset_slots_except_stored
+  - action: utter_kpi_query
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: now
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_query_classification
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: true
+  - slot_was_set:
+    - userdefined: false
+  - action: action_execute_agg_query
+  - action: action_continue_options
+  - intent: continue
+  - action: action_store_slots
+  - action: action_reset_slots_except_stored
+  - action: utter_kpi_query
+  - intent: agg_query
+    entities:
+    - place: states
+    - kpi: Locations
+    - DATE: now
+  - slot_was_set:
+    - place: states
+  - slot_was_set:
+    - kpi: Locations
+  - slot_was_set:
+    - DATE: now
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_query_classification
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_query_confirm
+  - intent: affirm
+  - action: action_check_predefined_and_userdefined
+  - slot_was_set:
+    - predefined: true
+  - slot_was_set:
+    - userdefined: false
+  - action: action_execute_agg_query
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
+- story: group_4xcoref
   steps:
   - intent: group_sort_query
     entities:
@@ -885,6 +434,10 @@ stories:
     - kpi: Charging points
   - slot_was_set:
     - DATE: the moment
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_query_classification
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -900,107 +453,14 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_group_sort_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: state
-        kpi: Charging points
-        DATE: the moment
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
     - asc: ascending
-  - slot_was_set:
-    - asc: ascending
-  - action: action_set_stored
-  - slot_was_set:
-    - place: state
-  - slot_was_set:
-    - kpi: Charging points
-  - slot_was_set:
-    - DATE: the moment
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -1015,107 +475,14 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_group_sort_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: state
-        kpi: Charging points
-        DATE: the moment
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: ascending
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
     - desc: descending
-  - slot_was_set:
-    - desc: descending
-  - action: action_set_stored
-  - slot_was_set:
-    - place: state
-  - slot_was_set:
-    - kpi: Charging points
-  - slot_was_set:
-    - DATE: the moment
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -1130,107 +497,15 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_group_sort_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: state
-        kpi: Charging points
-        DATE: the moment
-        max: null
-        min: null
-        avg: null
-        desc: descending
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
     - DATE: last month
-  - slot_was_set:
-    - DATE: last month
   - action: action_set_stored
-  - slot_was_set:
-    - place: state
-  - slot_was_set:
-    - kpi: Charging points
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: descending
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -1245,107 +520,14 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_group_sort_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: state
-        kpi: Charging points
-        DATE: last month
-        max: null
-        min: null
-        avg: null
-        desc: descending
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
     - kpi: Charging stations
-  - slot_was_set:
-    - kpi: Charging stations
-  - action: action_set_stored
-  - slot_was_set:
-    - place: state
-  - slot_was_set:
-    - DATE: last month
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: descending
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -1360,67 +542,11 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_group_sort_query
-  - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: state
-        kpi: Charging stations
-        DATE: last month
-        max: null
-        min: null
-        avg: null
-        desc: descending
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
-  - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
-
-- story: limit_top_bottom_kpi_time
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
+- story: limit_coref
   steps:
   - intent: limit_query
     entities:
@@ -1439,6 +565,10 @@ stories:
     - CARDINAL: '3'
   - slot_was_set:
     - top: top
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_query_classification
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -1454,65 +584,11 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_limit_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: states
-        kpi: Charging points
-        DATE: now
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: '3'
-        top: top
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
     - top: top 4
@@ -1522,38 +598,6 @@ stories:
   - slot_was_set:
     - top: top 4
   - action: action_set_stored
-  - slot_was_set:
-    - place: states
-  - slot_was_set:
-    - kpi: Charging points
-  - slot_was_set:
-    - DATE: now
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -1568,65 +612,11 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_limit_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: states
-        kpi: Charging points
-        DATE: now
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: '4'
-        top: top
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
     - bottom: bottom
@@ -1636,38 +626,6 @@ stories:
   - slot_was_set:
     - bottom: bottom
   - action: action_set_stored
-  - slot_was_set:
-    - place: states
-  - slot_was_set:
-    - kpi: Charging points
-  - slot_was_set:
-    - DATE: now
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -1682,105 +640,15 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_limit_query
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: states
-        kpi: Charging points
-        DATE: now
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: '2'
-        top: null
-        bottom: bottom
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - intent: co_reference
     entities:
     - kpi: chargingstations
   - slot_was_set:
     - kpi: Charging stations
   - action: action_set_stored
-  - slot_was_set:
-    - place: states
-  - slot_was_set:
-    - DATE: now
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: bottom
-  - slot_was_set:
-    - CARDINAL: '2'
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -1795,105 +663,17 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_limit_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: states
-        kpi: Charging stations
-        DATE: now
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: '2'
-        top: null
-        bottom: bottom
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
     - DATE: Mar 2021
   - slot_was_set:
     - DATE:  Mar 2021
   - action: action_set_stored
-  - slot_was_set:
-    - place: states
-  - slot_was_set:
-    - kpi: Charging stations
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: bottom
-  - slot_was_set:
-    - CARDINAL: '2'
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -1908,67 +688,11 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_limit_query
-  - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: states
-        kpi: Charging stations
-        DATE: Mar 2021
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: null
-        bet: null
-        CARDINAL: '2'
-        top: null
-        bottom: bottom
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
-  - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
-
-- story: filter_ge_le_time_kpi
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
+- story: filter_coref
   steps:
   - intent: filter_query
     entities:
@@ -1985,6 +709,10 @@ stories:
     - DATE: the beginning of 2022
   - slot_was_set:
     - ge: above average
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_query_classification
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -2000,107 +728,17 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_filter_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: states
-        kpi: Locations
-        DATE: the beginning of 2022
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: above average
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
     - le: below average
   - slot_was_set:
     - le: below average
   - action: action_set_stored
-  - slot_was_set:
-    - place: states
-  - slot_was_set:
-    - kpi: Locations
-  - slot_was_set:
-    - DATE: the beginning of 2022
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -2115,107 +753,17 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_filter_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: states
-        kpi: Locations
-        DATE: the beginning of 2022
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: below average
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
     - DATE: last month
   - slot_was_set:
     - DATE: last month
   - action: action_set_stored
-  - slot_was_set:
-    - place: states
-  - slot_was_set:
-    - kpi: Locations
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: below average
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -2230,107 +778,17 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_filter_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: states
-        kpi: Locations
-        DATE: last month
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: below average
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
     - kpi: Charging stations
   - slot_was_set:
     - kpi: Charging stations
   - action: action_set_stored
-  - slot_was_set:
-    - place: states
-  - slot_was_set:
-    - DATE: last month
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: below average
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
   - action: kpi_form
   - active_loop: kpi_form
   - slot_was_set:
@@ -2345,268 +803,374 @@ stories:
   - action: action_query_confirm
   - intent: affirm
   - action: action_execute_filter_query
-  - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: states
-        kpi: Charging stations
-        DATE: last month
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: below average
-        ge: null
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
-  - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
-
-- story: filter_le
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
+- story: charger type_coref
   steps:
-  - intent: filter_query
+  - intent: charger_type
     entities:
-    - place: states
-    - kpi: Locations
-    - ge: above average
-    - DATE: the beginning of 2022
-    - place: states
+    - place: berlin
+    - charger_type: normal
   - slot_was_set:
-    - place: states
+    - place: berlin
   - slot_was_set:
-    - kpi: Locations
+    - charger_type: normal
+  - action: action_service_mapping
   - slot_was_set:
-    - DATE: the beginning of 2022
+    - service: 1
+  - action: action_query_classification
+  - action: charger_type_form
+  - active_loop: charger_type_form
   - slot_was_set:
-    - ge: above average
-  - action: kpi_form
-  - active_loop: kpi_form
+    - place: berlin
   - slot_was_set:
-    - place: states
+    - charger_type: normal
   - slot_was_set:
-    - kpi: Locations
-  - slot_was_set:
-    - DATE: the beginning of 2022
-  - slot_was_set:
-    - requested_slot: null
+    - requested_slot: null 
   - active_loop: null
   - action: utter_query_received
-  - action: action_query_confirm
-  - intent: affirm
-  - action: action_execute_filter_query
+  - action: action_execute_charger_type_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: states
-        kpi: Locations
-        DATE: the beginning of 2022
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: above average
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: null
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
-  - slot_was_set:
-    - place: null
-  - slot_was_set:
-    - kpi: null
-  - slot_was_set:
-    - DATE: null
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: null
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - CARDINAL: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - bottom: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
+  - action: utter_kpi_query
   - intent: co_reference
     entities:
-    - bottom: below average
+    - charger_type: fast
   - slot_was_set:
-    - bottom: below average
+    - charger_type: fast
   - action: action_set_stored
+  - action: charger_type_form
+  - active_loop: charger_type_form
   - slot_was_set:
-    - place: states
+    - place: berlin
   - slot_was_set:
-    - kpi: Locations
+    - charger_type: normal
   - slot_was_set:
-    - DATE: the beginning of 2022
-  - slot_was_set:
-    - max: null
-  - slot_was_set:
-    - min: null
-  - slot_was_set:
-    - avg: null
-  - slot_was_set:
-    - desc: null
-  - slot_was_set:
-    - asc: null
-  - slot_was_set:
-    - le: null
-  - slot_was_set:
-    - ge: above average
-  - slot_was_set:
-    - bet: null
-  - slot_was_set:
-    - top: null
-  - slot_was_set:
-    - place_list: null
-  - slot_was_set:
-    - mapped_time: null
-  - slot_was_set:
-    - stored_slots: null
-  - slot_was_set:
-    - requested_slot: null
-  - slot_was_set:
-    - session_started_metadata: null
-  - action: kpi_form
-  - active_loop: kpi_form
-  - slot_was_set:
-    - place: states
-  - slot_was_set:
-    - kpi: Locations
-  - slot_was_set:
-    - DATE: the beginning of 2022
-  - slot_was_set:
-    - requested_slot: null
+    - requested_slot: null 
   - active_loop: null
-  - action: action_query_confirm
-  - intent: affirm
-  - action: action_execute_filter_query
+  - action: utter_query_received
+  - action: action_execute_charger_type_query
+  - action: action_continue_options
+  - intent: continue
   - action: action_store_slots
-  - slot_was_set:
-    - stored_slots:
-        place: states
-        kpi: Locations
-        DATE: the beginning of 2022
-        max: null
-        min: null
-        avg: null
-        desc: null
-        asc: null
-        le: null
-        ge: above average
-        bet: null
-        CARDINAL: null
-        top: null
-        bottom: below average
-        place_list: null
-        mapped_time: null
-        stored_slots: null
-        requested_slot: null
-        session_started_metadata: null
   - action: action_reset_slots_except_stored
+  - action: utter_kpi_query
+  - intent: co_reference
+    entities:
+    - place: hamburg
   - slot_was_set:
-    - place: null
+    - place: hamburg
+  - action: action_set_stored
+  - action: charger_type_form
+  - active_loop: charger_type_form
   - slot_was_set:
-    - kpi: null
+    - place: berlin
   - slot_was_set:
-    - DATE: null
+    - charger_type: normal
   - slot_was_set:
-    - max: null
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_execute_charger_type_query
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
+- story: charger operator_coref
+  steps:
+  - intent: charger_operator
+    entities:
+    - place: berlin
+    - operator: allego
   - slot_was_set:
-    - min: null
+    - place: berlin
   - slot_was_set:
-    - avg: null
+    - operator: allego
+  - action: action_service_mapping
   - slot_was_set:
-    - desc: null
+    - service: 1
+  - action: action_query_classification
+  - action: charger_operator_form
+  - active_loop: charger_operator_form
   - slot_was_set:
-    - asc: null
+    - place: berlin
   - slot_was_set:
-    - le: null
+    - operator: allego
   - slot_was_set:
-    - ge: null
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_execute_charger_operator_query
+  - action: action_continue_options
+  - intent: continue
+  - action: action_store_slots
+  - action: action_reset_slots_except_stored
+  - action: utter_kpi_query
+  - intent: co_reference
+    entities:
+    - place: hamburg
   - slot_was_set:
-    - bet: null
+    - place: hamburg
+  - action: action_set_stored
+  - action: charger_operator_form
+  - active_loop: charger_operator_form
   - slot_was_set:
-    - CARDINAL: null
+    - place: hamburg
   - slot_was_set:
-    - top: null
+    - operator: allego
   - slot_was_set:
-    - bottom: null
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_execute_charger_operator_query
+  - action: action_continue_options
+  - intent: continue
+  - action: action_store_slots
+  - action: action_reset_slots_except_stored
+  - action: utter_kpi_query
+  - intent: co_reference
+    entities:
+    - place: munich
   - slot_was_set:
-    - place_list: null
+    - place: munich
+  - action: action_set_stored
+  - action: charger_operator_form
+  - active_loop: charger_operator_form
   - slot_was_set:
-    - mapped_time: null
+    - place: munich
   - slot_was_set:
-    - requested_slot: null
+    - operator: allego
   - slot_was_set:
-    - session_started_metadata: null
+    - requested_slot: null 
+  - active_loop: null
+  - action: utter_query_received
+  - action: action_execute_charger_operator_query
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# - story: filter_le
+#   steps:
+#   - intent: filter_query
+#     entities:
+#     - place: states
+#     - kpi: Locations
+#     - ge: above average
+#     - DATE: the beginning of 2022
+#     - place: states
+#   - slot_was_set:
+#     - place: states
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - DATE: the beginning of 2022
+#   - slot_was_set:
+#     - ge: above average
+#   - action: kpi_form
+#   - active_loop: kpi_form
+#   - slot_was_set:
+#     - place: states
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - DATE: the beginning of 2022
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: utter_query_received
+#   - action: action_query_confirm
+#   - intent: affirm
+#   - action: action_execute_filter_query
+#   - action: action_store_slots
+#   - slot_was_set:
+#     - stored_slots:
+#         place: states
+#         kpi: Locations
+#         DATE: the beginning of 2022
+#         max: null
+#         min: null
+#         avg: null
+#         desc: null
+#         asc: null
+#         le: null
+#         ge: above average
+#         bet: null
+#         CARDINAL: null
+#         top: null
+#         bottom: null
+#         mapped_time: null
+#         stored_slots: null
+#         requested_slot: null
+#         session_started_metadata: null
+#   - action: action_reset_slots_except_stored
+#   - slot_was_set:
+#     - place: null
+#   - slot_was_set:
+#     - kpi: null
+#   - slot_was_set:
+#     - DATE: null
+#   - slot_was_set:
+#     - max: null
+#   - slot_was_set:
+#     - min: null
+#   - slot_was_set:
+#     - avg: null
+#   - slot_was_set:
+#     - desc: null
+#   - slot_was_set:
+#     - asc: null
+#   - slot_was_set:
+#     - le: null
+#   - slot_was_set:
+#     - ge: null
+#   - slot_was_set:
+#     - bet: null
+#   - slot_was_set:
+#     - CARDINAL: null
+#   - slot_was_set:
+#     - top: null
+#   - slot_was_set:
+#     - bottom: null
+#   - slot_was_set:
+#     - mapped_time: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   - slot_was_set:
+#     - session_started_metadata: null
+#   - intent: co_reference
+#     entities:
+#     - bottom: below average
+#   - slot_was_set:
+#     - bottom: below average
+#   - action: action_set_stored
+#   - slot_was_set:
+#     - place: states
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - DATE: the beginning of 2022
+#   - slot_was_set:
+#     - max: null
+#   - slot_was_set:
+#     - min: null
+#   - slot_was_set:
+#     - avg: null
+#   - slot_was_set:
+#     - desc: null
+#   - slot_was_set:
+#     - asc: null
+#   - slot_was_set:
+#     - le: null
+#   - slot_was_set:
+#     - ge: above average
+#   - slot_was_set:
+#     - bet: null
+#   - slot_was_set:
+#     - top: null
+#   - slot_was_set:
+#     - mapped_time: null
+#   - slot_was_set:
+#     - stored_slots: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   - slot_was_set:
+#     - session_started_metadata: null
+#   - action: kpi_form
+#   - active_loop: kpi_form
+#   - slot_was_set:
+#     - place: states
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - DATE: the beginning of 2022
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_query_confirm
+#   - intent: affirm
+#   - action: action_execute_filter_query
+#   - action: action_store_slots
+#   - slot_was_set:
+#     - stored_slots:
+#         place: states
+#         kpi: Locations
+#         DATE: the beginning of 2022
+#         max: null
+#         min: null
+#         avg: null
+#         desc: null
+#         asc: null
+#         le: null
+#         ge: above average
+#         bet: null
+#         CARDINAL: null
+#         top: null
+#         bottom: below average
+#         mapped_time: null
+#         stored_slots: null
+#         requested_slot: null
+#         session_started_metadata: null
+#   - action: action_reset_slots_except_stored
+#   - slot_was_set:
+#     - place: null
+#   - slot_was_set:
+#     - kpi: null
+#   - slot_was_set:
+#     - DATE: null
+#   - slot_was_set:
+#     - max: null
+#   - slot_was_set:
+#     - min: null
+#   - slot_was_set:
+#     - avg: null
+#   - slot_was_set:
+#     - desc: null
+#   - slot_was_set:
+#     - asc: null
+#   - slot_was_set:
+#     - le: null
+#   - slot_was_set:
+#     - ge: null
+#   - slot_was_set:
+#     - bet: null
+#   - slot_was_set:
+#     - CARDINAL: null
+#   - slot_was_set:
+#     - top: null
+#   - slot_was_set:
+#     - bottom: null
+#   - slot_was_set:
+#     - mapped_time: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   - slot_was_set:
+#     - session_started_metadata: null
+
 
