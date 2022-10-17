@@ -1,0 +1,9 @@
+Locations
+Charging_stations
+Charging_points
+Cars_per_charging_point
+Charging_points_per_1,000_cars
+Percentage_of_target
+fast Charging_stations
+normal Charging_stations
+Charging_station_operators

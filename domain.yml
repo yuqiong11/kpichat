@@ -1,196 +1,575 @@
-# version: "3.0"
-
-# intents:
-#   - affirm
-#   - deny
-#   - greet
-#   - thankyou
-#   - goodbye
-#   - search_concerts
-#   - search_venues
-#   - compare_reviews
-#   - bot_challenge
-#   - nlu_fallback
-#   - how_to_get_started
-
-# entities:
-#   - name
-
-# slots:
-#   concerts:
-#     type: list
-#     influence_conversation: false
-#     mappings:
-#     - type: custom
-#   venues:
-#     type: list
-#     influence_conversation: false
-#     mappings:
-#     - type: custom
-#   likes_music:
-#     type: bool
-#     influence_conversation: true
-#     mappings:
-#     - type: custom
-
-# responses:
-#   utter_greet:
-#     - text: "Hey there!"
-#   utter_goodbye:
-#     - text: "Goodbye :("
-#   utter_default:
-#     - text: "Sorry, I didn't get that, can you rephrase?"
-#   utter_youarewelcome:
-#     - text: "You're very welcome."
-#   utter_iamabot:
-#     - text: "I am a bot, powered by Rasa."
-#   utter_get_started:
-#     - text: "I can help you find concerts and venues. Do you like music?"
-#   utter_awesome:
-#     - text: "Awesome! You can ask me things like \"Find me some concerts\" or \"What's a good venue\""
-
-# actions:
-#   - action_search_concerts
-#   - action_search_venues
-#   - action_show_concert_reviews
-#   - action_show_venue_reviews
-#   - action_set_music_preference
-
-# session_config:
-#   session_expiration_time: 60  # value in minutes
-#   carry_over_slots_to_new_session: true
-
-version: "3.0"
+version: "3.1"
 
 intents:
-  - greet
-  - goodbye
+  - chitchat:
+      is_retrieval_intent: true
   - affirm
   - deny
-  - extract_kpi
-  # - change_place
-  # - change_time
-  # - change_kpi
-  - mood_unhappy
-  - bot_challenge
-  - chatbot_service
+  - agg_query
+  - group_sort_query
+  - filter_query
+  - limit_query
+  - out_of_scope
+  - faq:
+      is_retrieval_intent: true
   - request_kpi_form
-
-
+  - reset
+  - check_slot_input
+  - co_reference
+  - change_slot
+  - welcome_message
+  - start_define_kpi
+  - quiz
+  - nearby_search
+  - nearest_search
+  - coreference_radius
+  - coreference_address
+  - choose_service
+  - charger_type
+  - charger_operator
+  - main_menu
+  - continue
+  - date
+  - skip
 entities:
-- place
-- kpi
-- time
-slots: 
+- place:
+    influence_conversation: false
+- kpi:
+    influence_conversation: false
+- DATE:
+    influence_conversation: false
+- max:
+    influence_conversation: false
+- min:
+    influence_conversation: false
+- avg:
+    influence_conversation: false
+- desc:
+    influence_conversation: false
+- asc:
+    influence_conversation: false
+- le:
+    influence_conversation: false
+- ge:
+    influence_conversation: false
+- bet:
+    influence_conversation: false
+- CARDINAL:
+    influence_conversation: false
+- top:
+    influence_conversation: false
+- bottom:
+    influence_conversation: false
+- kpi_name:
+    influence_conversation: false
+- kpi_definition:
+    influence_conversation: false
+- address:
+    influence_conversation: false
+- radius:
+    influence_conversation: false
+- charger_type:
+    influence_conversation: false
+- operator:
+    influence_conversation: false
+- increase:
+    influence_conversation: false
+
+slots:
   place:
-    type: text
-    influence_conversation: true
+    type: list
+    influence_conversation: false
     mappings:
     - type: from_entity
       entity: place
-      # conditions:
-      # - active_loop: kpi_form
-      #   requested_slot: place   
   kpi:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
     - type: from_entity
       entity: kpi
-      # conditions:
-      # - active_loop: kpi_form
-      #   requested_slot: kpi
-  time: 
-    type: text
-    influence_conversation: true
+  DATE:
+    type: list
+    influence_conversation: false
     mappings:
     - type: from_entity
-      entity: time
-      # conditions:
-      # - active_loop: kpi_form
-      #   requested_slot: time
-  confirm:
+      entity: DATE
+  charger_type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: charger_type
+  operator:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: operator 
+  max:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: max
+  min:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: min
+  avg:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: avg
+  desc:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: desc
+  asc:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: asc
+  le:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: le
+  ge:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: ge
+  bet:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: bet
+  CARDINAL:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: CARDINAL
+  top:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: top
+  bottom:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: bottom
+  increase:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: increase
+  mapped_time: 
+    type: text
+    mappings:
+    - type: custom
+  stored_slots:
+    type: any
+    mappings:
+    - type: custom
+  kpi_name:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: new_kpi_form
+        requested_slot: kpi_name
+  kpi_definition:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: new_kpi_form
+        requested_slot: kpi_definition
+  kpi_definition_not_form:
+    type: text
+    mappings:
+    - type: custom
+  predefined:
     type: bool
     influence_conversation: true
     mappings:
-    - type: from_intent
-      intent: affirm
-      value: true
-    - type: from_intent
-      intent: deny
-      value: false
+    - type: custom
+  userdefined:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+  args_to_be_asked:
+    type: list
+    influence_conversation: true
+    mappings:
+    - type: custom
+      # conditions:
+      # - active_loop: missing_info_form
+      #   requested_slot: missing_info
+  args_dict:
+    type: any
+    mappings:
+    - type: custom
+  arg_1:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: args_form
+        requested_slot: arg_1
+  arg_2:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: args_form
+        requested_slot: arg_2
+  arg_3:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: args_form
+        requested_slot: arg_3
+  has_skip:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+  has_skip_quiz:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+  quiz_1:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: quiz_form
+        requested_slot: quiz_1
+  quiz_question:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: custom
+  faqs_q:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: add_faqs_form
+        requested_slot: faqs_q  
+  faqs_a:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: add_faqs_form
+        requested_slot: faqs_a  
+  address:
+    type: text
+    mappings:
+    - type: from_text
+      # intent: coreference_address
+      conditions:
+      - active_loop: nearby_search_form
+        requested_slot: address
+      # - active_loop: nearest_search_form
+      #   requested_slot: address
+  radius:
+    type: text
+    mappings:
+    - type: from_text
+      # intent: coreference_radius
+      conditions:
+      - active_loop: nearby_search_form
+        requested_slot: radius
+  service:
+    type: categorical
+    values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    influence_conversation: true
+    mappings:
+    - type: custom
+  q_type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
+  self_learning:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+
+
 forms:
   kpi_form:
+    # ignored_intents: 
+    # - chitchat
+    # - faq
+    # - nlu_fallback
     required_slots:
       - place
       - kpi
-      - time
+      - DATE
+  charger_type_form:
+    required_slots:
+      - place
+      - charger_type
+  charger_operator_form:
+    required_slots:
+      - place
+      - operator
 
+  new_kpi_form:
+    # ignored_intents: 
+    # - chitchat
+    # - faq
+    # - nlu_fallback
+    required_slots:
+      - kpi_name
+      - kpi_definition
+  args_form:
+    required_slots:
+      - arg_1
+  quiz_form:
+    required_slots:
+      - quiz_1
+  nearby_search_form:
+    required_slots:
+      - address
+      - radius
+  nearest_search_form:
+    required_slots:
+      - address
+  add_faqs_form:
+    required_slots:
+      - faqs_q
+      - faqs_a
 
 responses:
   utter_ask_place:
-  - text: "Which place are you interested in?"
+  - text: "Which place are you interested in? You can enter name of a federal state/city or simply 'county' or 'federal state'."
 
-  utter_ask_kpi:
-  - text: "Which KPI are you interested in?"
+  # utter_ask_kpi:
+  # - text: "Which KPI are you interested in? Choose one from the predefined KPIs or userdefined KPIs or a new KPI you like. Please also enter the kpi again even if it was already included in the query."
+  #   buttons:
+  #   - title: "Location"
+  #     payload: '/inform{{"kpi":"Locations"}}'
+  #   - title: "Charging station"
+  #     payload: '/inform{{"kpi":"Charging stations"}}'
+  #   - title: "Charging point"
+  #     payload: '/inform{{"kpi":"Charging points"}}'
 
-  utter_ask_time:
-  - text: "What time are you interested?"
+  # utter_ask_DATE:
+  # - text: "What time are you interested? Please choose a timestamp only between January 2017 and January 2023."
 
-  utter_state_sql:
-  - text: "SELECT SUM({kpi}) FROM \"E-Mobility\".emo_historical WHERE state='{place}' AND month={time};"
+  # utter_ask_address:
+  # - text: "What is the address of center of the search area?"
 
-  utter_state_city_sql:
-  - text: "SELECT {kpi} FROM \"E-Mobility\".emo_historical WHERE state='{place}' AND month={time};"
+  # utter_ask_radius:
+  # - text: "How many meters should the search area's radius be?"
 
-  utter_county_sql:
-  - text: "SELECT {kpi} FROM \"E-Mobility\".emo_historical WHERE county='{place}' AND month={time};"
+  # utter_ask_faqs_q:
+  # - text: "What is the question?"
+
+  # utter_ask_faqs_a:
+  # - text: "What is the answer?"
+
+  # utter_ask_kpi_name:
+  # - text: "What is the name of the new KPI? The name should be short and concise, add '_' between words, e.g. charging_points_per_square_meter."
+
+  # utter_ask_kpi_definition:
+  # - text: "What is the definition of the new KPI? The definiton is a mathmatical formular how this KPI should be calculated, e.g. @charging_points/@population. If there is no calculation needed, just write the KPI as its definition, e.g. @electric_cars. Please always add '@' in front of each argument."
+
+  utter_kpi_query:
+  - text: "What's your query?"
 
   utter_query_received:
   - text: "Ok, query received. Please confirm the following."
 
-  utter_query_confirm:
-  - text: "the place is {place}, kpi is {kpi}, time is {time}"
+  utter_not_found_kpi:
+  - text: "Sorry, I did not find information about this KPI in knowledgebase. Do you want to define it as a new KPI?"
+
+  utter_not_found_statistics:
+  - text: "Sorry, there is missing knowledge. Can you help me with it?"
+
+  # utter_query_confirm:
+  # - text: "the place is {place}, kpi is {kpi}, time is {time}"
 
   utter_query_completed:
   - text: "Query now in process..."
 
   utter_ask_for_clarification:
-  - text: "Please correct the false part."
+  - text: "Please correct the false part using the format '[name]: xxx', e.g. if you want to change place, you can type 'place: Berlin'."
+
+  # utter_knowledge_stored:
+  # - text: "Thank you! The knowledge is now in the knowledgebase."
+
+  utter_out_of_scope:
+  - text: "Oops, I am stumped..."
+
+  utter_ask_rephrase:
+  - text: "Sorry, could you rephrase that?"
+
+  utter_default:
+  - text: "I’m sorry, I can’t help you. You can type 0 to go back to the main menu and start asking again."
   
-  utter_greet:
+  utter_sorry:
+  - text: "What else can I help you?"
+
+  utter_chitchat/greet:
   - text: "hi"
+  - text: "hello"
+  utter_chitchat/goodbye:
+  - text: "goodbye"
+  - text: "bye"
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://media-cdn.tripadvisor.com/media/photo-s/11/a7/72/0f/vegetarian-menu.jpg"
+  utter_faq/service:
+  - text: "KPIs that are available: Locations, Charging_stations, Charging_points, Charging_points_per_1,000_cars, Cars_per_charging_point, Percentage_of_target.\nYou can type the KPI name for the KPI description or start directly asking me questions regarding the KPI within Germany."
+  utter_faq/locations_info:
+  - text: "Locations: number of charging infrastructure places."
+  utter_faq/chargingstations_info:
+  - text: "Charging_stations: number of charging stations. A charging station, also called an EV charger or electric vehicle supply equipment (EVSE), is a piece of equipment that supplies electrical power for charging plug-in electric vehicles (including hybrids, neighborhood electric vehicles, trucks, buses, and others). A charging station can have one or more charging points." 
+  utter_faq/chargingpoints_info:
+  - text: "Charging_points: number of charging points. A charging point is an interface with which either only one electric vehicle can be charged or only one battery of an electric vehicle can be exchanged at the same time.
+"
+  utter_faq/chargingpoints_per_car_info:
+  - text: "Charging_points_per_1,000_cars: number of charging points per 1,000 registered passenger cars."
+  utter_faq/car_per_chargingpoints_info:
+  - text: "Cars_per_charging_point: number of registered passenger cars per charging point."
+  utter_faq/percentage_target_info:
+  - text: "Percentage_of_target: achieved share of charging points in relation to the required minimum number of charging points for 2030."
 
-  utter_service_1:
-  - text: "KPIs that are available: Locations, Charging stations, Charging points, Charging points per 1,000 cars, Cars per charging point, Percentage of target."
-  utter_service_2:
-  - text: "You can type the KPI name for the KPI description or start directly asking me questions regarding the KPI within Germany."
+  utter_welcome:
+  - text: "Hi, it's E-Mobility chatbot here👋 Let me help you with E-Mobility questions😃"
 
-  utter_did_that_help:
-  - text: "Did that help you?"
+  utter_main_menu:
+  - text: "Here is the main menu. You can choose a service by typing the number. Type 0 to return to the main menu.  \n
+          1. KPI query  \n
+          2. Nearby Search  \n
+          3. KPI definitions  \n
+          4. E-Mobility FAQs   \n
+          5. Add a new KPI  \n
+          6. Add knowledge  \n
+          7. Add FAQs  \n
+          8. Help"
 
-  utter_happy:
-  - text: "Great, carry on!"
+  utter_menu_3:
+  - text: "Definitions of KPIs:  \n
+           'Locations': number of charging infrastructure places.  \n
+           'Charging_stations': number of charging stations. A charging station, also called an EV charger or electric vehicle supply equipment (EVSE), is a piece of equipment that supplies electrical power for charging plug-in electric vehicles (including hybrids, neighborhood electric vehicles, trucks, buses, and others). A charging station can have one or more charging points.'  \n
+           'Charging_points': number of charging points. A charging point is an interface with which either only one electric vehicle can be charged or only one battery of an electric vehicle can be exchanged at the same time.  \n
+           'Charging_points_per_1,000_cars': number of charging points per 1,000 registered passenger cars.  \n
+           'Cars_per_charging_point': number of registered passenger cars per charging point.  \n
+           'Percentage_of_target': achieved share of charging points in relation to the required minimum number of charging points for 2030.  \n
+           'Fast_charging_stations': number of fast charging stations.  \n
+           'Normal_charging_stations': number of normal charging stations(slower than fast ones).  \n
+           'Charging_station_operators': names of charging station operators.  \n
+           "
+  utter_help:
+  - text: "See the details of each service below:  \n
+           1.'KPI query': Query the KPI value. The place should be a federal state or county of Germany. The time should be a month within 01.2017-05.2023.  \n
+           2.'Nearby Search': Find charging stations within a radius around a given place.  \n
+           3.'KPI definitions': The definitions of the available KPIs.  \n
+           4.'E-Mobility FAQs': Introduce facts about emobility in the form of FAQs  \n
+           5.'Add a new KPI': Define a new KPI and add it to the knowledge base.  \n
+           6.'Add knowledge': Answer E-Mobility KPI-related questions.  \n
+           7.'Add FAQs': Add new FAQ pairs to the knowledge base  \n
+           8.'Help': Details of all the services  \n
+           0.'Main menu': Back to main menu"
 
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  utter_thanks_quiz:
+  - text: "Thank you!😀"
 
 actions:
+actions:
   - utter_ask_place
-  - utter_ask_time
-  - utter_ask_kpi
+  - utter_ask_DATE
+  - action_ask_kpi
+  - action_ask_arg_1
+  - action_ask_arg_2
+  - action_ask_arg_3
+  - action_ask_quiz_1
+  - action_ask_address
+  - action_ask_radius
+  - action_ask_faqs_a
+  - action_ask_faqs_q
   - action_query_clarify
-  - action_reset_slots
   - action_query_confirm
-  - action_execute_query
-#   - validate_kpi_form
+  - action_slot_check
+  - action_execute_agg_query
+  - action_execute_group_sort_query
+  - action_execute_filter_query
+  - action_execute_limit_query
+  - action_convert_date
+  - validate_kpi_form
+  - action_check_coref
+  - action_store_slots
+  - action_reset_slots
+  - action_reset_slots_except_stored
+  - action_set_stored
+  - action_two_stage_fallback
+  - action_new_kpi_confirm
+  - action_define_kpi_finished
+  - action_save_kpi_name_lookup
+  - action_not_found_statistics
+  - action_map_args
+  - action_continue_agg_query
+  - action_store_questions
+  - action_check_skip
+  - action_store_knowledge
+  - action_not_found_userdefined
+  - action_quiz_finished
+  - action_nearby_search
+  - action_nearest_search
+  - action_service_mapping
+  - action_no_quiz
+  - action_check_quiz
+  - action_ask_another_quiz
+  - action_kpi_list
+  - action_custom_slot_mapping
+  - action_execute_charger_operator_query
+  - action_execute_charger_type_query
+  - action_add_faqs_finished
+  - action_give_faqs_finished
+  - action_continue_options
+  - action_disambiguate
+  - action_reset_slots_except_service
+  - action_query_classification
+  - action_check_predefined_and_userdefined
+  - validate_args_form
+  - action_restart
+  - action_change_slot
 
 session_config:
   session_expiration_time: 60

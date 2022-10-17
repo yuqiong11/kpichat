@@ -1,0 +1,53 @@
+{
+  "utter_chitchat/greet": [
+    {
+      "text": "hi"
+    },
+    {
+      "text": "hello"
+    }
+  ],
+  "utter_chitchat/goodbye": [
+    {
+      "text": "goodbye"
+    },
+    {
+      "text": "bye"
+    }
+  ],
+  "utter_faq/service": [
+    {
+      "text": "KPIs that are available: Locations, Charging_stations, Charging_points, Charging_points_per_1,000_cars, Cars_per_charging_point, Percentage_of_target.\nYou can type the KPI name for the KPI description or start directly asking me questions regarding the KPI within Germany."
+    }
+  ],
+  "utter_faq/locations_info": [
+    {
+      "text": "Locations: number of charging infrastructure places."
+    }
+  ],
+  "utter_faq/chargingstations_info": [
+    {
+      "text": "Charging_stations: number of charging stations. A charging station, also called an EV charger or electric vehicle supply equipment (EVSE), is a piece of equipment that supplies electrical power for charging plug-in electric vehicles (including hybrids, neighborhood electric vehicles, trucks, buses, and others). A charging station can have one or more charging points."
+    }
+  ],
+  "utter_faq/chargingpoints_info": [
+    {
+      "text": "Charging_points: number of charging points. A charging point is an interface with which either only one electric vehicle can be charged or only one battery of an electric vehicle can be exchanged at the same time. "
+    }
+  ],
+  "utter_faq/chargingpoints_per_car_info": [
+    {
+      "text": "Charging_points_per_1,000_cars: number of charging points per 1,000 registered passenger cars."
+    }
+  ],
+  "utter_faq/car_per_chargingpoints_info": [
+    {
+      "text": "Cars_per_charging_point: number of registered passenger cars per charging point."
+    }
+  ],
+  "utter_faq/percentage_target_info": [
+    {
+      "text": "Percentage_of_target: achieved share of charging points in relation to the required minimum number of charging points for 2030."
+    }
+  ]
+}

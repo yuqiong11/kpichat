@@ -1,0 +1,55 @@
+version: '3.4'
+
+networks:
+    proxy:
+        external:
+            name: reverseproxy_traefik
+
+services:
+  rasa:
+    image: yuqiong11/emobility-chatbot
+    container_name: rasa
+    ports:
+      - 5005:5005
+    volumes:
+      - //d/chatbot:/app
+    command: run --enable-api --cors "*" --endpoints endpoints.yml
+    # command: 
+      # - run --enable-api --cors "*" --endpoints endpoints.yml
+      # - shell
+      # - --debug
+    restart: always
+    labels:
+        - 'traefik.enable=true'
+        - 'traefik.docker.network=reverseproxy_traefik'
+        - 'traefik.http.routers.rasa.entrypoints=https'
+        - 'traefik.http.routers.rasa.rule=Host(`rasa.apps.i-wunder.com`)'
+        - 'traefik.http.routers.rasa.middlewares=allow_frame_i-wunder.com@file, secure-headers@file'
+        - 'traefik.http.services.rasa.loadbalancer.server.port=5005'
+        - 'traefik.http.routers.rasa.tls=true'
+        - 'traefik.http.routers.rasa.tls.certresolver=letsencrypt'
+
+        - 'traefik.http.routers.www-rasa.entrypoints=https'
+        - 'traefik.http.routers.www-rasa.rule=Host(`www.rasa.apps.i-wunder.com`)'
+        - 'traefik.http.routers.www-rasa.middlewares=redirect-www@file, secure-headers@file'
+        - 'traefik.http.routers.www-rasa.service=noop@internal'
+        - 'traefik.http.routers.www-rasa.tls=true'
+        - 'traefik.http.routers.www-rasa.tls.certresolver=letsencrypt'
+    networks:
+        proxy:
+
+  action-server:
+    image: yuqiong11/emobility-actions
+    container_name: action-server
+    restart: always
+    volumes:
+      - //d/chatbot/actions:/app/actions
+    # command: python -m rasa_sdk --actions actions  (wrong command)
+    # command: start   (no registered)
+    # command: run actions (actions is a directory)
+    # command: run /app/actions/actions  (no such file or directory)
+    # command: help
+    ports:
+      - 5055:5055
+    networks:
+        proxy:
