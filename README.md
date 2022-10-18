@@ -92,7 +92,7 @@ socketio:
 ```
 
 ## Deployment
-The deployment includes containerize the chatbot using Docker and expose the chatbot to the internet using Traefik as reverse proxy. The deployment uses docker machine compatible with a older windows version. The latest recommended way for windows 10+ is the docker desktop for windows.
+The deployment includes containerize the chatbot using Docker and expose the chatbot to the internet using Traefik as reverse proxy. The deployment uses docker toolbox a older windows version. For windows 10, docker desktop for windows is available.
 
 1. create two requirements.txt, one for the app directory and one for actions directory
 ```
