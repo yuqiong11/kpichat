@@ -20,7 +20,15 @@ rasa train  --fixed-model-name emobility_bot
 ```
 
 ## Run action server
-1. 
+1. in endpoints.yml, add the url of action server. Replace "action-server" with whatever the container name for action server is.
+```
+action_endpoint:
+ url: "http://action-server:5055/webhook"
+```
+2. run command
+```
+rasa run actions
+```
 
 ## Run chatbot in a shell with debugging 
 ```
@@ -84,7 +92,7 @@ socketio:
 ```
 
 ## Deployment
-The deployment includes containerize the chatbot using Docker and expose the chatbot to the internet using Traefik as reverse proxy
+The deployment includes containerize the chatbot using Docker and expose the chatbot to the internet using Traefik as reverse proxy. The deployment uses docker machine compatible with a older windows version. The latest recommended way for windows 10+ is the docker desktop for windows.
 
 1. create two requirements.txt, one for the app directory and one for actions directory
 ```
@@ -223,4 +231,6 @@ docker ps
 docker image ls  
 # print out the last 10 lines in logs for action server
 docker logs --tail=10 action-server
+# list all networks
+docker network ls
 ```
