@@ -233,4 +233,8 @@ docker image ls
 docker logs --tail=10 action-server
 # list all networks
 docker network ls
+# stop a running container
+docker stop CONTAINER
+# restart a container
+docker restart CONTAINER
 ```
