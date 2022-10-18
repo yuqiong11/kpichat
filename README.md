@@ -6,10 +6,10 @@ pip3 install rasa
 rasa init
 ```
 ## Prepare data for training
-examples of user inputs & chatbot responses in nlu.yml, stories in stories directory, rules in rules.yml
+prepare examples of user inputs & chatbot responses in nlu.yml, stories in stories directory, rules in rules.yml
 
 ## Configure the chatbot
-in config.yml, list the pipeline components for NLU in the pipeline section, including tokenizer, featurizer, intent classifier and entity extractor. Besides, custom actions can be added too. In policies section, choose the policies you want to train the stories and rules.
+in config.yml, list the pipeline components for NLU in the pipeline section, including tokenizer, featurizer, intent classifier and entity extractor. Besides, custom components can be added too. In policies section, choose the policies you want to train the stories and rules.
 
 ## Write custom actions
 custom actions are achieved by Rasa SDK, which is installed alongside Rasa. In actions.py, all business logic should be handled, such as interacting with databases, calling APIs etc. 
