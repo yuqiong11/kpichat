@@ -19,6 +19,9 @@ custom actions are achieved by Rasa SDK, which is installed alongside Rasa. In a
 rasa train  --fixed-model-name emobility_bot
 ```
 
+## Run action server
+1. 
+
 ## Run chatbot in a shell with debugging 
 ```
 rasa shell --debug -m MODEL models/emobility_bot.tar.gz
