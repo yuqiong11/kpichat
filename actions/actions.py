@@ -130,10 +130,7 @@ class ValidateKpiForm(FormValidationAction):
             else:
                 # validation failed, set this slot to None so that the
                 # user will be asked for the slot again
-                if tracker.get_slot("Language") == "english":
-                    dispatcher.utter_message(text="Oops, this place was not found. Please enter a vaild place name by using its official name in German. The place should be a federal state(e.g. Baden-Württemberg) or county(e.g. Dresden) within Germany. Or you can enter general name like 'county' or 'federal state' or 'Germany'.")
-                else:
-                    dispatcher.utter_message(text="Oops, dieser Ort wurde nicht gefunden. Bitte geben Sie einen validen Ort ein. Der Ort kann ein Bundesland sein(z.B. Baden-Württemberg) oder Landkreis(z.B. Dresden) in Deutschland. Oder Sie können auch einen allgemeinen Namen wie z.B. 'Landkreis' or 'Bundesland' oder 'Deutschland' eingeben.")
+                dispatcher.utter_message(text="Oops, this place was not found. Please enter a vaild place name by using its official name in German. The place should be a federal state(e.g. Baden-Württemberg) or county(e.g. Dresden) within Germany. Or you can enter general name like 'county' or 'federal state' or 'Germany'.")
                 return {"place": None}
         else:
             if slot_value[0] in self.places_db():
