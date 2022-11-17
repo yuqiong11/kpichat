@@ -1,0 +1,13 @@
+jarowinkler==1.0.2
+nltk== 3.7
+# psycopg2-binary==2.9.3
+# pymongo==3.10.1
+rapidfuzz==2.0.7
+scikit-learn==0.24.2
+scipy==1.7.3
+# sentence-transformers==2.2.0
+spacy==3.2.3
+spacy-legacy==3.0.9
+spacy-loggers==1.0.1
+thefuzz==0.19.0
+# numpy==1.19.5

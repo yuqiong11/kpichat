@@ -1,0 +1,75 @@
+
+###LEVEL1
+no time:
+What's the number of chargingpoints in Berlin?
+Nov 2019
+
+no place:
+Tell me how many locations are there in July 2021?
+Berlin
+
+
+no kpi:
+What is it in Berlin in May 2020?
+chargingstations
+
+
+no time&place:
+number of chargingpoints
+Hamburg
+Mar 2018
+
+
+place case-sensitive:
+What's the number of chargingpoints in berlin in Dec 2020?
+
+time different expressions:
+What's the number of chargingpoints in Berlin by the end of 2019?
+What's the number of chargingpoints in Berlin at the beginning of 2020?
+What's the number of chargingpoints in Berlin the second month of 2020?
+What's the number of chargingpoints in Berlin last month?
+What's the number of chargingpoints in Berlin at March,2020?
+
+###LEVEL2
+##Aggregation expressions:
+#What's the total number of locations in Germany in May 2021?
+SELECT SUM(no_total_locations) FROM "E-Mobility".emo_historical WHERE month=202105;
+#What's the number of locations in Sachsen in May 2021?
+SELECT SUM(no_total_locations) FROM "E-Mobility".emo_historical WHERE state='Sachsen' AND month=202105;
+#What's the average number of locations of a federal state now?  
+SELECT SUM(no_total_locations)/COUNT(DISTINCT(state)) FROM "E-Mobility".emo_historical WHERE month=202203;
+
+##Group expressions:
+#Give a overview of number of chargingpoints in each federal state in January 2021.
+SELECT SUM(no_total_chargepoints), state FROM "E-Mobility".emo_historical WHERE month=202101 GROUP BY state;
+
+##Sort expressions:
+#Give a descending order of number of chargingpoints in each federal state in January 2021.
+SELECT SUM(no_total_chargepoints), state FROM "E-Mobility".emo_historical WHERE month=202101 GROUP BY state ORDER BY sum DESC;
+
+##Filter expressions:
+#Give me all states that have locations above 500.
+SELECT state, SUM(no_total_locations) FROM "E-Mobility".emo_historical WHERE month=202201 GROUP BY state HAVING SUM(no_total_locations) > 500;
+#Give me all states that have locations above average.
+SELECT state, SUM(no_total_locations) FROM "E-Mobility".emo_historical WHERE month=202203 GROUP BY state HAVING SUM(no_total_locations) > (
+SELECT SUM(no_total_locations)/COUNT(DISTINCT(state)) FROM "E-Mobility".emo_historical WHERE month=202203);
+#Give me all counties that have locations above 500
+SELECT county, no_total_locations FROM "E-Mobility".emo_historical WHERE month=202201 AND no_total_locations > 500;
+#Give me all counties that have locations above average
+SELECT county, no_total_locations FROM "E-Mobility".emo_historical WHERE month=202203 AND no_total_locations > (
+SELECT AVG(no_total_locations) FROM "E-Mobility".emo_historical WHERE month=202203);
+#Give me all states that have locations between 500-800
+SELECT state, SUM(no_total_locations) FROM "E-Mobility".emo_historical WHERE month=202201 GROUP BY state HAVING SUM(no_total_locations) > 500 AND SUM(no_total_locations) < 800;
+#Give me all counties that have locations between 500-800
+SELECT county, no_total_locations FROM "E-Mobility".emo_historical WHERE month=202201 AND no_total_locations > 500 AND no_total_locations < 800;
+
+##Limit expressions:
+#Return the top 3 states that has the most locations.
+SELECT SUM(no_total_chargepoints), state FROM "E-Mobility".emo_historical WHERE month=202101 GROUP BY state ORDER BY sum DESC Limit 3;
+
+###LEVEL3
+##user-defined windows, e.g. time interval , place range and kpi set
+https://stackoverflow.com/questions/53404259/how-to-identify-multiple-entities-in-rasa
+#What's the number of locations in Sachsen, Bayern and Brandenburg in January 2022?
+SELECT SUM(no_total_chargepoints), state FROM "E-Mobility".emo_historical WHERE month=202101 AND state IN ( 'Sachsen', 'Bayern','Brandenburg' ) GROUP BY state;
+#What's the average number of locations in Sachsen, Bayern and Brandenburg in January 2022?

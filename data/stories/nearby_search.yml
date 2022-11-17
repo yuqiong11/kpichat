@@ -1,0 +1,104 @@
+version: "3.1"
+
+stories:
+- story: nearby search + 3x continue
+  steps:
+  - intent: nearby_search
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 2
+  - action: nearby_search_form
+  - active_loop: nearby_search_form
+  - slot_was_set:
+    - address: "Kirchstr. 28, Berlin"
+  - slot_was_set:
+    - radius: 1000
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_nearby_search
+  - action: action_continue_options
+  - intent: continue
+  - action: action_reset_slots_except_service
+  - action: nearby_search_form
+  - active_loop: nearby_search_form
+  - slot_was_set:
+    - address: "Kirchstr. 28, Berlin"
+  - slot_was_set:
+    - radius: 1000
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_nearby_search
+  - action: action_continue_options
+  - intent: continue
+  - action: action_reset_slots_except_service
+  - action: nearby_search_form
+  - active_loop: nearby_search_form
+  - slot_was_set:
+    - address: "Kirchstr. 28, Berlin"
+  - slot_was_set:
+    - radius: 1000
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_nearby_search
+  - action: action_continue_options
+  - intent: continue
+  - action: action_reset_slots_except_service
+  - action: nearby_search_form
+  - active_loop: nearby_search_form
+  - slot_was_set:
+    - address: "Kirchstr. 28, Berlin"
+  - slot_was_set:
+    - radius: 1000
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_nearby_search
+  - action: action_continue_options
+  - intent: main_menu
+  - action: action_restart
+  - action: utter_main_menu
+
+
+- story: nearby search + main menu
+  steps:
+  - intent: nearby_search
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 2
+  - action: nearby_search_form
+  - active_loop: nearby_search_form
+  - slot_was_set:
+    - address: "Kirchstr. 28, Berlin"
+  - slot_was_set:
+    - radius: 1000
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_nearby_search
+  - action: action_continue_options
+  - intent: main_menu
+  - action: action_restart
+  - action: utter_main_menu
+
+
+# - story: nearby search coreference
+#   steps:
+#   - intent: nearby_search
+#   - action: nearby_search_form
+#   - active_loop: nearby_search_form
+#   - slot_was_set:
+#     - address: "Kirchstr. 28, Berlin"
+#   - slot_was_set:
+#     - radius: 1000
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_nearby_search
+#   - intent: coreference_radius
+#   - slot_was_set:
+#     - radius: 1000   
+#   - action: action_nearby_search
+

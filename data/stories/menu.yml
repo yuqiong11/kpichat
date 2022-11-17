@@ -1,0 +1,281 @@
+version: "3.1"
+
+stories:
+- story: main menu
+  steps:
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 0
+  - action: utter_main_menu
+
+- story: service 1(kpi query)_en
+  steps:
+  - intent: welcome_message_en
+  - slot_was_set:
+    - language: english
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_kpi_list
+  - action: utter_kpi_query
+
+- story: service 1(kpi query)_ge
+  steps:
+  - intent: welcome_message_ge
+  - slot_was_set:
+    - language: german
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_kpi_list
+  - action: utter_kpi_query
+
+- story: service 1(kpi query)
+  steps:
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 1
+  - action: action_kpi_list
+  - action: utter_kpi_query
+
+
+- story: service 2(nearby search)_en
+  steps:
+  - intent: welcome_message_en
+  - slot_was_set:
+    - language: english
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 2
+  - action: nearby_search_form
+  - active_loop: nearby_search_form
+  - slot_was_set:
+    - address: "Kirchstr. 28, Berlin"
+  - slot_was_set:
+    - radius: 1000
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_nearby_search
+  - action: action_continue_options
+
+- story: service 2(nearby search)_ge
+  steps:
+  - intent: welcome_message_ge
+  - slot_was_set:
+    - language: german
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 2
+  - action: nearby_search_form
+  - active_loop: nearby_search_form
+  - slot_was_set:
+    - address: "Kirchstr. 28, Berlin"
+  - slot_was_set:
+    - radius: 1000
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_nearby_search
+  - action: action_continue_options
+
+- story: service 2(nearby search)
+  steps:
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 2
+  - action: nearby_search_form
+  - active_loop: nearby_search_form
+  - slot_was_set:
+    - address: "Kirchstr. 28, Berlin"
+  - slot_was_set:
+    - radius: 1000
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_nearby_search
+  - action: action_continue_options
+
+- story: service 3(kpi definitions)_en
+  steps:
+  - intent: welcome_message_en
+  - slot_was_set:
+    - language: english
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 3
+  - action: utter_menu_3
+
+- story: service 3(kpi definitions)_ge
+  steps:
+  - intent: welcome_message_ge
+  - slot_was_set:
+    - language: german
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 3
+  - action: utter_menu_3
+
+- story: service 3(kpi definitions)
+  steps:
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 3
+  - action: utter_menu_3
+
+# - story: service 4(E-mobility FAQs) see add_faqs
+
+- story: service 5(add new kpi)_en
+  steps:
+  - intent: welcome_message_en
+  - slot_was_set:
+    - language: english
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 5
+  - action: new_kpi_form
+  - active_loop: new_kpi_form
+  - slot_was_set:
+    - kpi_name: "Chargers per square kilometer"
+  - slot_was_set:
+    - kpi_definition: "number of chargingpoints / area"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: action_new_kpi_confirm
+  - intent: affirm
+  - action: action_save_kpi_name_lookup
+  - action: action_define_kpi_finished
+  - action: action_continue_options
+
+- story: service 5(add new kpi)_ge
+  steps:
+  - intent: welcome_message_ge
+  - slot_was_set:
+    - language: german
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 5
+  - action: new_kpi_form
+  - active_loop: new_kpi_form
+  - slot_was_set:
+    - kpi_name: "Chargers per square kilometer"
+  - slot_was_set:
+    - kpi_definition: "number of chargingpoints / area"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: action_new_kpi_confirm
+  - intent: affirm
+  - action: action_save_kpi_name_lookup
+  - action: action_define_kpi_finished
+  - action: action_continue_options
+
+- story: service 5(add new kpi)
+  steps:
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 5
+  - action: new_kpi_form
+  - active_loop: new_kpi_form
+  - slot_was_set:
+    - kpi_name: "Chargers per square kilometer"
+  - slot_was_set:
+    - kpi_definition: "number of chargingpoints / area"
+  - slot_was_set:
+    - requested_slot: null 
+  - active_loop: null
+  - action: action_new_kpi_confirm
+  - intent: affirm
+  - action: action_save_kpi_name_lookup
+  - action: action_define_kpi_finished
+  - action: action_continue_options
+
+# - story: service 6(add knowledge)  see add_knowledge
+
+- story: service 7(add FAQs)_en  
+  steps:
+  - intent: welcome_message_en
+  - slot_was_set:
+    - language: english
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 7
+
+- story: service 7(add FAQs)_ge  
+  steps:
+  - intent: welcome_message_ge
+  - slot_was_set:
+    - language: german
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 7
+
+- story: service 8(Help)_en
+  steps:
+  - intent: welcome_message_en
+  - slot_was_set:
+    - language: english
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 8
+  - action: utter_help
+
+- story: service 8(Help)_ge
+  steps:
+  - intent: welcome_message_ge
+  - slot_was_set:
+    - language: german
+  - action: utter_welcome
+  - action: utter_main_menu
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 8
+  - action: utter_help
+
+- story: service 8(Help)
+  steps:
+  - intent: choose_service
+  - action: action_service_mapping
+  - slot_was_set:
+    - service: 8
+  - action: utter_help

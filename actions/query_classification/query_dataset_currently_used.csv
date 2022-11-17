@@ -1,0 +1,172 @@
+﻿Query;Label
+Did the number of charging points in berlin increased by more than 10 % from 2020 to 2021?;1
+Was the new charging points in Hessen from 2018 to 2021 higher than 200?;1
+Did hamburg have increased number of charging stations for more than 500 from May 2020 to June 2021?;1
+Are number of chargingpoints of Munich higher than 1500 now?;1
+Do Berlin have more than 800 locations last month?;1
+Do Freiburg have more chargepoints than Hamburg?;1
+Is Brandenburg with more chargingpoints than Sachsen?;1
+Was chargingpoints_per_1000_cars of Berlin over 100? ;1
+Was the locations in Hannover increased by 5% last year?;1
+Did the increase of chargers in Hamburg in 2021 larger than 2020?;1
+Is the increased percentage_of_target in Germany in 2019 more than 1%?;1
+Do number of chargepoint in Bayern less than that of Badenwüttemburg?;1
+Berlin is the county with highest number of chargingpoints?;1
+Does Bayern have the highest number of fast chargingpoints among all states in germany?;1
+Is it true that Hamburg has more chargers than Berlin?;1
+Will Hamburg have more chargingpoints than Berlin in 2 months?;1
+Will the increase of chargingpoints in Rheinland-Pfalz more than in Schleswig-Holstein next month?;1
+Are the sum of locations in Hamburg and Dresden larger than it in Berlin and Munich?;1
+Is number of fast chargingpoints in Berlin higher than normal chargingpoints?;1
+Did the number of charging points in berlin increased by more than 10 % from 2020 to 2021?;1
+Was the new charging points in Hessen from 2018 to 2021 higher than 200?;1
+Did hamburg have increased number of charging stations for more than 500 from May 2020 to June 2021?;1
+Are number of chargingpoints of Munich higher than 1500 now?;1
+Do Berlin have more than 800 locations last month?;1
+Do Freiburg have more chargepoints than Hamburg?;1
+Is Brandenburg with more chargingpoints than Sachsen?;1
+Was chargingpoints_per_1000_cars of Berlin over 100? ;1
+Was the locations in Hannover increased by 5% last year?;1
+Did the increase of chargers in Hamburg in 2021 larger than 2020?;1
+Is the increased percentage_of_target in Germany in 2019 more than 1%?;1
+Do number of chargepoint in Bayern less than that of Badenwüttemburg?;1
+Is Berlin the county with highest number of chargingpoints last month?;1
+Does Saarland have the highest number of fast chargingpoints among all states?;1
+Is it true that Hamburg has more charging locations than Berlin?;1
+Will Hamburg have more chargingpoints than Berlin in 2 months?;1
+Will the increase of chargingpoints in Rheinland-Pfalz next month more than in Schleswig-Holstein?;1
+Are the number of locations in Hamburg and Dresden larger than it in Berlin and Munich?;1
+Is number of fast chargingpoints in Berlin higher than normal chargingpoints?;1
+Will Hamburg have more chargingstations in the future than Berlin?;1
+Was Bayern the state with the most charging stations now?;1
+Is Berlin going to have more than 10000 charging stations in 2 years?;1
+Do Berlin have more increased number of chargers than Sachsen?;1
+Does Dresden have more charging stations than Leipzig at end of 2021?;1
+Was the new number of locations in Berlin last year better than 1000?;1
+Does the difference of chargers in Niedersachsen and sachsen larger than 1000?;1
+Is Munich the top1 county regarding num of charging points?;1
+Did Bayern have more new charging stations than any other state last year?;1
+Did Hessen have more increased fast chargers than slow ones last year?;1
+Which provider is currently the strongest in hesse?;0
+What is the largest operatorsof charging stations in Germany? ;0
+Inside Niedersachsen, which operator operates the most charging stations?;0
+Give me the provider with largest number of charging stations in Berlin. ;0
+what is the name of the strongest charging station operator in Hamburg?;0
+which operator has the least number of chargers in Berlin?;0
+show the weakest operator in the market in Germany.;0
+How does the ownership structure of the charging points Look like?;0
+what kind of operators are there in Sachsen?;0
+the operator distribution in Berlin.;0
+which operator has the most fast charging stations in Germany?;0
+tell me the operator that provides the highest number of fast charging stations in Germany;0
+the provider that provides the most number of fast chargingstations in Hamburg;0
+what is the biggest operators in Berlin?;0
+which provider has the biggest market share throughout Germany?;0
+In Brandenburg, which operator operates the most?;0
+what is the operator name which has the largest market share?;0
+Which operator dominates in Saarland?;0
+Return the name of operator that provides the most chargestations?;0
+I want to know the strongest operator in Bremen.;0
+What providers are there in the market in Germany?;0
+I live in Munich, could you tell me the top 1 provide here;0
+How does the charging station market look like in Thüringer?;0
+Give a list of operators in Niedersachsen.;0
+Which providers are in Dresden?;0
+Some top providers which dominate the charging station market in Hamburg.;0
+The no1 provider in Germany;0
+all the operators in Dresden.;0
+What's the largest number of locations of a county in Thüringen in beginning of 2021?;0
+The highest number of station of a county in May 2021;0
+the county that has the most locations at end of 2020.;0
+Give me the least number of chargingpoints_per_1000_carsof a county in May 2021;0
+In Sept 2021, give me the state which has minimum number of chargingstations.;0
+The federal state with the maximum number of chargingstations in 2017.08.;0
+the state that has the largest Cars_per_charging_point last month.;0
+the state that has the least Charging_points in June 2020.;0
+Until last month, what's the highest Chargepoints per cars among all federal states?;0
+return the state that had minimum number of Charging_points per car in Jul 2018.;0
+Which state has the largest Chargepoints/cars now?;0
+Which federal state has the lowest cars per chargingpoint?;0
+Return the state which has the highest percentage_of_target now.;0
+Which county had the highest increase of charging points in the last year? ;0
+Give a desc order of number of chargingpoints of federal state in June 2021.;0
+Give a ascending order of number of charging_points in each federal state in January 2021.;0
+Give number of cars/chargepoints in each federal state in twelfth month 2021 by descending order.;0
+tell me number of Charging point of all states now.;0
+please return charging_stations group by state.;0
+I want to know number of chargestations in each of the federal state.;0
+so for each federal state, show the number of locations at the moment.;0
+Order locations for each state descending.;0
+number of locations group by federal state.;0
+For each state, the number of cars_per_charging_points in April2020.;0
+Give descending order of chargingpoints_per_cars in all states next month.;0
+what is the overview of increase of charging stations in each federal state in 2022.;0
+what is the increase of locations in each federal state from January 2022 to March 2022.;0
+the increased chargingpoints of each state between 2020 and 2022.;0
+show the new number of charging_stations of each state in year 2021?;0
+return all counties which have less than 3% percentage_of_target at the beginning of 2021. ;0
+Give me all county that have larger than 1000 Charging_stations in January 2022.;0
+Give me all counties that have Charging_points above average in last month.;0
+show all states that have smaller than 600 Charging_points in Feb 2022.;0
+show all states that have below 600 cars per chargingpoint in March 2022.;0
+show all state that have below average 600 stations in Jan 2020.;0
+Give all states have Charging_stations above average in next month.;0
+Which of the states have number of chargepoints per cars in Feb 2022 below average?;0
+The states with number of charge_stations below average in Mar 2021.;0
+all states that have less than 900 next month.;0
+Give me all states that have Charging_points under average in the second month of 2022.;0
+all states whose number of Charging_points between 400 and 600 in the second month of 2022.;0
+all federal states with Percentage_of_target more than 10% last month.;0
+Return federal states which have between 299 and 309 locations on the moment.;0
+show all states that have below average locations in Feb 2022.;0
+show all states that have Percent_of_target between 8 and 10% in October 2021.;0
+which counties have more than 20 new charging stations in 2021;0
+which county in Niedersachsen has less than 2% of locations from June 2020 to June 2022?;0
+Return the top3 states that has the most locations in October 2019.;0
+Return the bottom 3 states that has the most locations in April 2021.;0
+Give me 5 counties in Brandenburg on top in the second month of 2018.;0
+Return the Below three countys that has the most charging_station  in May 2019.;0
+The top5 states with the highest Percentage_of_target in the beginning of 2018.;0
+what are the 5 states that have the most new Charging_stations from 2020 to 2022?;0
+Which county has the highest number of fast chargers?;0
+which federal state has the most number of fast chargestations?;0
+County that has the lowest number of fast chargingstations;0
+Show federal state which has the most normal charging stations;0
+What's the cars_per_chargingpoints in Berlin at the beginning of 2020?;0
+Tell me how many locations are there in July 2021?;0
+What's the number of point in Berlin?;0
+What's the total number of locations in Germany in May 2018?;0
+What's the number of locations in Sachsen in May 2021;0
+I want to know chargingpoints_per_cars in Hamburg next month?;0
+I want to know cars/chargingpoint of Hamburg next month?;0
+How many chargingstations are there in Kassel now?;0
+In end of 2020, how many chargingstations does Dresden have?;0
+In Nov 2021, how many Charging_stations are there in Berlin?;0
+Percentage of target in Leipzig.;0
+Show the average number of locations of a county in Nordrhein-Westfalen in May 2021;0
+What's the mean number of locations of a federal state now;0
+The avg number of charging stations of all federal states.;0
+What is the average number of stations of all federal states last month.;0
+I want to know average number of chargingpoints of a county in Bayern in Sept 2021;0
+What is the average locations number the first month of 2020?;0
+The average number of chargestations last month in Sachsen-Anhalt.;0
+What is the Percentage_of_target of Niedersachsen the end of 2019.;0
+How much has Berlin achieved until the beginning of 2020 in its Percentage_of_target?;0
+How much Percentage of target has Berlin achieved by the end of 2021 in its target?;0
+Show the avg chargepoints_per_1000_cars for all states now.;0
+Return cars per chargingpoints for Coburg last month.;0
+what is the value of number of stations in Berlin in Jan 2020.;0
+At end of 2020, the average number of Percentage_of_target of all states.;0
+The average number of Charging_stations of all states At end of 2020.;0
+How many new charging points were build in Hessen, Niedersachsen and Sachsen between march 2019 and november 2021? ;0
+How high is the average expansion of charging points per federal state per year?;0
+How large is the average expansion of charging stations per county per year?;0
+what is the average increase of charging stations per county each year?;0
+how many chargingstations in Berlin are fast ones?;0
+how many fast chargers does Sachsen have in total?;0
+how many normal charge stations are there in Germany?;0
+I want to know number of slow charging_stations in MECKLENBURG-VORPOMMERN.;0
+How many fast charging stations can be found in Dresden?;0
+what is the number of fast chargers in München?;0
+What's the number of chargingpoints in Berlin by the end of 2019?;0
+what is the average number of fast charge_stations?;0

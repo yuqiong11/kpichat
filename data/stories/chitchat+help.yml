@@ -1,0 +1,14 @@
+version: "3.1"
+
+stories:
+- story: chitchat
+  steps:
+  - intent: chitchat
+  - action: utter_chitchat
+  - action: action_restart
+
+- story: faq
+  steps:
+  - intent: faq
+  - action: utter_faq
+  - action: action_restart

@@ -1,0 +1,305 @@
+version: "3.1"
+
+rules:
+
+- rule: chitchat
+  steps:
+  - intent: chitchat
+  - action: utter_chitchat
+  - action: action_restart
+
+- rule: welcome
+  steps:
+  - intent: welcome_message
+  - action: utter_welcome
+  - action: utter_main_menu
+
+- rule: main menu
+  steps:
+  - intent: main_menu
+  - action: action_restart
+  - action: utter_main_menu
+
+
+
+
+# - rule: custom slot mapping
+#   steps:
+#   - or:
+#     - intent: agg_query
+#     - intent: group_sort_query
+#     - intent: limit_query
+#     - intent: filter_query
+#   - action: action_custom_slot_mapping
+
+# - rule: menu 1
+#   steps:
+#   - intent: kpi_query
+#   - action: utter_kpi_query
+
+# - rule: menu 2
+#   steps:
+#   - intent: kpi_definition
+#   - action: kpi_definition_form
+
+
+
+- rule: faq
+  steps:
+  - intent: faq
+  - action: utter_faq
+  - action: action_restart
+
+- rule: reset
+  steps:
+  - intent: reset
+  - action: action_restart
+  - action: action_slot_check
+
+- rule: check_slot_input
+  steps:
+  - intent: check_slot_input
+  - action: action_slot_check  
+
+# - rule: coref
+#   steps:
+#   - intent: co_reference
+#   - action: action_set_stored
+#   - action: kpi_form
+#   - active_loop: kpi_form
+#   - slot_was_set:
+#     - place: "Berlin"
+#   - slot_was_set:
+#     - DATE: "2021"
+#   - slot_was_set:
+#     - kpi: "locations"
+#   - slot_was_set:
+#     - requested_slot: null 
+#   - active_loop: null
+#   - action: action_query_confirm
+
+# - rule: deny
+#   steps:
+#   - intent: deny
+#   - action: utter_ask_for_clarification
+
+- rule: change_slot
+  steps:
+  - intent: change_slot
+  - action: action_query_confirm
+
+- rule: Activate kpi form
+  steps:
+  - action: kpi_form
+  - active_loop: kpi_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - DATE: "2021"
+  - slot_was_set:
+    - kpi: "locations"
+  - slot_was_set:
+    - requested_slot: null 
+
+- rule: Submit kpi form
+  condition:
+  - active_loop: kpi_form
+  steps:
+  - action: kpi_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  wait_for_user_input: false
+
+
+- rule: Activate new kpi form
+  steps:
+  - action: new_kpi_form
+  - active_loop: new_kpi_form
+  # - slot_was_set:
+  #   - kpi_name: "Chargers per square kilometer"
+  # - slot_was_set:
+  #   - kpi_definition: "number of chargingpoints / area"
+  # - slot_was_set:
+  #   - requested_slot: null 
+
+- rule: Submit new kpi form
+  condition:
+  - active_loop: new_kpi_form
+  steps:
+  - action: new_kpi_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  wait_for_user_input: false
+
+
+- rule: Activate charger type form
+  steps:
+  - action: charger_type_form
+  - active_loop: charger_type_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - charger_type: "normal"
+  - slot_was_set:
+    - requested_slot: null 
+
+- rule: Submit charger type form
+  condition:
+  - active_loop: charger_type_form
+  steps:
+  - action: charger_type_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  wait_for_user_input: false
+
+- rule: Activate charger operator form
+  steps:
+  - action: charger_operator_form
+  - active_loop: charger_operator_form
+  - slot_was_set:
+    - place: "Berlin"
+  - slot_was_set:
+    - operator: "allego"
+  - slot_was_set:
+    - requested_slot: null 
+
+- rule: Submit charger operator form
+  condition:
+  - active_loop: charger_operator_form
+  steps:
+  - action: charger_operator_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  wait_for_user_input: false
+
+- rule: Activate add faqs form
+  steps:
+  - action: add_faqs_form
+  - active_loop: add_faqs_form
+  - slot_was_set:
+    - faqs_q: "Berlin"
+  - slot_was_set:
+    - faqs_a: "awesome"
+  - slot_was_set:
+    - requested_slot: null 
+
+- rule: Submit add faqs form
+  condition:
+  - active_loop: add_faqs_form
+  steps:
+  - action: add_faqs_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  wait_for_user_input: false
+
+# - rule: Activate args form
+#   steps:
+#   - intent: start_define_kpi
+#   - action: new_kpi_form
+#   - active_loop: new_kpi_form
+#   # - slot_was_set:
+#   #   - kpi_name: "Chargers per square kilometer"
+#   # - slot_was_set:
+#   #   - kpi_definition: "number of chargingpoints / area"
+#   # - slot_was_set:
+#   #   - requested_slot: null 
+
+# - rule: Submit args form
+#   condition:
+#   - active_loop: new_kpi_form
+#   steps:
+#   - action: new_kpi_form
+#   - active_loop: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   wait_for_user_input: false
+
+# - rule: Activate quiz
+#   steps:
+#   - intent: quiz
+#   - action: action_check_quiz
+#   - action: quiz_form
+#   - active_loop: quiz_form
+#   - slot_was_set:
+#     - quiz_1: "Berlin"
+#   - slot_was_set:
+#     - requested_slot: null 
+
+# - rule: Submit quiz form
+#   condition:
+#   - active_loop: quiz_form
+#   steps:
+#   - action: quiz_form
+#   - active_loop: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   wait_for_user_input: false
+
+- rule: Activate nearby search form
+  steps:
+  - action: nearby_search_form
+  - active_loop: nearby_search_form
+  - slot_was_set:
+    - address: "Kirchstr. 28, Berlin"
+  - slot_was_set:
+    - radius: 1000
+  - slot_was_set:
+    - requested_slot: null 
+
+- rule: Submit nearby search form
+  condition:
+  - active_loop: nearby_search_form
+  steps:
+  - action: nearby_search_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  wait_for_user_input: false
+
+- rule: Activate nearest search form
+  steps:
+  - action: nearest_search_form
+  - active_loop: nearest_search_form
+  - slot_was_set:
+    - address: "Kirchstr. 28, Berlin"
+  - slot_was_set:
+    - requested_slot: null 
+
+- rule: Submit nearest search form
+  condition:
+  - active_loop: nearest_search_form
+  steps:
+  - action: nearest_search_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  wait_for_user_input: false
+
+- rule: out-of-scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+  - action: action_reset_slots
+  - action: utter_main_menu
+
+# - rule: Ask the user to rephrase whenever they send a message with low NLU confidence
+#   steps:
+#   - intent: nlu_fallback
+#   - action: utter_please_rephrase
+
+# - rule: Implementation of the Two-Stage-Fallback
+#   steps:
+#   - intent: nlu_fallback
+#   - action: action_two_stage_fallback
+#   - active_loop: action_two_stage_fallback
+  # - action: utter_main_menu
+
+# - rule: Implementation of the fallback
+#   steps:
+#   - intent: nlu_fallback
+#   - action: action_disambiguate
