@@ -5,8 +5,8 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 
-# This is a simple example for a custom action which utters "Hello World!"
-
+from ast import operator
+from concurrent.futures.process import _ExceptionWithTraceback
 from typing import Any, Text, Dict, List, Optional
 from numpy import result_type
 
@@ -33,16 +33,30 @@ from bson import BSON
 from bson.objectid import ObjectId
 from nearby_search import NearbySearch
 
-# import transformers
-# from transformers import BertForSequenceClassification, BertTokenizer
-# from query_classification.q_type_classification import predict
-
 from rapidfuzz import process, fuzz
 from rapidfuzz.string_metric import levenshtein, normalized_levenshtein, jaro_winkler_similarity
 
 REQUESTED_SLOT = "requested_slot"
 PATH = "./actions/Query_classification/bert_model"
 SORRY_MESSAGE = "I'm very sorry but something went wrong😵‍💫​ Our team will take care of this issue soon🔧 Thanks for your patience!"
+
+# ----------------------------------------
+# set language
+# ----------------------------------------
+# class SetLanguage(Action):
+#     def name(self) -> Text:
+#         return "action_set_language"
+
+#     def run(
+#         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+#     ) -> List[EventType]:
+#         welcome_intent = tracker.latest_message['intent'].get('name')
+#         if welcome_intent == "welcome_message_en":
+#             return [SlotSet("language", "english")]
+#         elif welcome_intent == "welcome_message_ge":
+#             return [SlotSet("language", "german")]
+#         else: 
+#             return [SlotSet("language", "english")]
 
 # ----------------------------------------
 # service mapping
@@ -58,7 +72,7 @@ class ServiceMapping(Action):
 
         # user chooses by number
         user_input = tracker.latest_message['text']
-        if user_input in ('0','1','2','3','4','5','6','7','8', '9'):
+        if user_input in ('0','1','2','3','4','5','6','7','8'):
             if user_input == '0':
                 return [SlotSet("service", 0)]
             elif user_input == '1':
@@ -77,8 +91,6 @@ class ServiceMapping(Action):
                 return [SlotSet("service", 7)]
             elif user_input == '8':
                 return [SlotSet("service", 8)]
-            elif user_input == '9':
-                return[SlotSet("service", 9)]
 
         # user chooses by inputting the query
         user_intent = tracker.latest_message['intent'].get('name')
@@ -92,8 +104,7 @@ class ServiceMapping(Action):
             return [SlotSet("service", 6)]
         elif user_intent == "main_menu":
             return [SlotSet("service", 0)]
-        elif user_intent == "choose_language":
-            return [SlotSet("service", 9)]
+
         
         return []
 # ----------------------------------------
@@ -108,7 +119,7 @@ class ValidateKpiForm(FormValidationAction):
     @staticmethod
     def places_db() -> List[Text]:
         """Database of supported places"""
-        with open('/app/actions/lookup/GPE_Germany.txt', 'r', encoding='utf8') as f:
+        with open('./lookup/GPE_Germany.txt', 'r', encoding='utf8') as f:
             data = f.read()
             places = data.split('\n')
 
@@ -130,17 +141,26 @@ class ValidateKpiForm(FormValidationAction):
             else:
                 # validation failed, set this slot to None so that the
                 # user will be asked for the slot again
-                dispatcher.utter_message(text="Oops, this place was not found. Please enter a vaild place name by using its official name in German. The place should be a federal state(e.g. Baden-Württemberg) or county(e.g. Dresden) within Germany. Or you can enter general name like 'county' or 'federal state' or 'Germany'.")
+                if tracker.get_slot("language") == "english":
+                    dispatcher.utter_message(text="Oops, this place was not found. Please enter a vaild place name by using its official name in German. The place should be a federal state(e.g. Baden-Württemberg) or county(e.g. Dresden) within Germany. Or you can enter general name like 'county' or 'federal state' or 'Germany'.")
+                elif tracker.get_slot("language") == "german":
+                    dispatcher.utter_message(text="Oops, dieser Ort wurde nicht gefunden. Bitte geben Sie einen gültigen Ortsnamen ein, indem Sie den offiziellen Namen in Deutsch verwenden. Der Ort sollte ein Bundesland (z.B. Baden-Württemberg) oder ein Landkreis (z.B. Dresden) innerhalb Deutschlands sein. Sie können auch einen allgemeinen Namen wie 'Landkreis' oder 'Bundesland' oder 'Deutschland' eingeben.")
                 return {"place": None}
         else:
             if slot_value[0] in self.places_db():
                 if slot_value[1] in self.places_db():                    
                      return {"place": slot_value}
                 else:
-                    dispatcher.utter_message(text="Oops, this place was not found. Please enter a vaild place name by using its official name in German. The place should be a federal state(e.g. Baden-Württemberg) or county(e.g. Dresden) within Germany. Or you can enter general name like 'county' or 'federal state' or 'Germany'.")
+                    if tracker.get_slot("language") == "english":
+                        dispatcher.utter_message(text="Oops, this place was not found. Please enter a vaild place name by using its official name in German. The place should be a federal state(e.g. Baden-Württemberg) or county(e.g. Dresden) within Germany. Or you can enter general name like 'county' or 'federal state' or 'Germany'.")
+                    elif tracker.get_slot("language") == "german":
+                        dispatcher.utter_message(text="Oops, dieser Ort wurde nicht gefunden. Bitte geben Sie einen gültigen Ortsnamen ein, indem Sie den offiziellen Namen in Deutsch verwenden. Der Ort sollte ein Bundesland (z.B. Baden-Württemberg) oder ein Landkreis (z.B. Dresden) innerhalb Deutschlands sein. Sie können auch einen allgemeinen Namen wie 'Landkreis' oder 'Bundesland' oder 'Deutschland' eingeben.")                        
                     return {"place": None}                    
             else:
-                dispatcher.utter_message(text="Oops, this place was not found. Please enter a vaild place name by using its official name in German. The place should be a federal state(e.g. Baden-Württemberg) or county(e.g. Dresden) within Germany. Or you can enter general name like 'county' or 'federal state' or 'Germany'.")
+                if tracker.get_slot("language") == "english":                    
+                    dispatcher.utter_message(text="Oops, this place was not found. Please enter a vaild place name by using its official name in German. The place should be a federal state(e.g. Baden-Württemberg) or county(e.g. Dresden) within Germany. Or you can enter general name like 'county' or 'federal state' or 'Germany'.")
+                elif tracker.get_slot("language") == "german":
+                    dispatcher.utter_message(text="Oops, dieser Ort wurde nicht gefunden. Bitte geben Sie einen gültigen Ortsnamen ein, indem Sie den offiziellen Namen in Deutsch verwenden. Der Ort sollte ein Bundesland (z.B. Baden-Württemberg) oder ein Landkreis (z.B. Dresden) innerhalb Deutschlands sein. Sie können auch einen allgemeinen Namen wie 'Landkreis' oder 'Bundesland' oder 'Deutschland' eingeben.")
                 return {"place": None}
 
     def validate_DATE(
@@ -337,6 +357,7 @@ class ActionSlotCheck(Action):
 
         return []
 
+
 class ActionChangeSlot(Action):
 
     def name(self) -> Text:
@@ -347,7 +368,6 @@ class ActionChangeSlot(Action):
         text = tracker.latest_message['text']
         slot_name, _, slot_value = text.partition(':')
         return [SlotSet(slot_name, slot_value[1:])]
-
 
 class ActionQueryConfirm(Action): 
 
@@ -418,22 +438,24 @@ class ActionKPIList(Action):
         """
         dispatcher.utter_message(text="Predefined KPIs:  \n Locations  \n Charging_stations  \n Charging_points  \n Cars_per_charging_point  \n Charging_points_per_1,000_cars  \n Percentage_of_target  \n fast Charging_stations  \n normal Charging_stations  \n Charging_station_operators")
 
-        with open('/app/actions/lookup/New_KPI.txt', 'r', encoding='utf8') as f:
+        with open('./lookup/New_KPI.txt', 'r', encoding='utf8') as f:
             data = f.read()
             new_kpi_list = data.split('\n')
         
         if new_kpi_list is None:
-            my_str = "(empty)"
+            kpi_str = "(empty)"
 
         else:
-            my_str = "Userdefined KPIs:  \n "
+            kpi_str = "Userdefined KPIs:  \n "
             for kpi in new_kpi_list:
-                my_str += f"{kpi}  \n "
+                kpi_str += f"{kpi}  \n "
 
-        dispatcher.utter_message(text=my_str)        
-        hints = "You can start asking me your query. Follow the examples below if you don't know how to ask properly:  \n For predefined KPI:  \n 1.What is the number of charging\_points in Berlin in July 2022?  \n 2.Which county had the highest Percentage\_of\_target in March 2021?  \n 3.What is the increased value of Cars\_per\_charging\_point in Bayern from 01.2022 to 05.2022?  \n For userdefined KPI:  \n What is charging_points_per_person in Germany in August 2022?  \n There are many more queries available. Explore and find them out😄 \n To let the chatbot understand you better, add '\_' between words for KPI names." 
+        dispatcher.utter_message(text=kpi_str)   
+
+        hints = "You can start asking me your query. Follow the examples below if you don't know how to ask properly:  \n For predefined KPI:  \n 1.What is the number of charging\_points in Berlin in July 2022?  \n 2.Which county had the highest Percentage\_of\_target in March 2021?  \n 3.What is the increased value of Cars\_per\_charging\_point in Bayern from 01.2022 to 05.2022?  \n For userdefined KPI:  \n What is charging_points_per_person in Germany in August 2022?  \n There are many more queries available. Explore and find them out😄 \n To let the chatbot understand you better, add '\_' between words for KPI names."     
         dispatcher.utter_message(text=hints)  
         return []
+
 
 class ActionExecuteAggQuery(Action):
    def name(self) -> Text:
@@ -624,8 +646,8 @@ class ActionContinueAggQuery(Action):
         DATE = tracker.get_slot("DATE")
         kpi_definition_not_form = tracker.get_slot("kpi_definition_not_form")
         args_dict = tracker.get_slot("args_dict")
-        #  methods from class ResolveKPIDefinition  
-        try:   
+        #  methods from class ResolveKPIDefinition 
+        try:    
             resolve_kpi = ResolveKPIDefinition()
             result = resolve_kpi.arithmetic(kpi_definition_not_form, args_dict)
             dispatcher.utter_message(text=f"The {kpi} in {place[0]} in {DATE[0]} is {round(result) if round(result) >=1 else 'less than 1'}")
@@ -647,15 +669,12 @@ class ActionChargerTypeQuery(Action):
         min = tracker.get_slot("min")
         avg = tracker.get_slot("avg")
         q_type = tracker.get_slot("q_type") 
-
         try:
             make_query = Querymethods()
             translator = QueryTranslator()
 
             q = translator.charger_type_query(place, charger_type, max=max, min=min, avg=avg)
             print("q ", q)
-
-
 
             if len(q) == 1:
                 results_1 = make_query.execute_sqlquery(q[0])
@@ -686,7 +705,7 @@ class ActionChargerTypeQuery(Action):
             print("action_execute_charger_type_query:",e)
             dispatcher.utter_message(text=SORRY_MESSAGE)
         return []
-        
+
 class ActionChargerOperatorQuery(Action):
 
     def name(self) -> Text:
@@ -699,7 +718,7 @@ class ActionChargerOperatorQuery(Action):
         max = tracker.get_slot("max")
         min = tracker.get_slot("min")
         q_type = tracker.get_slot("q_type") 
-        try: 
+        try:
             make_query = Querymethods()
             translator = QueryTranslator()
 
@@ -717,6 +736,8 @@ class ActionChargerOperatorQuery(Action):
             text = ""
             if q_type == "ask-provider":
                 if max or min:
+                    print('687',results_1)
+                    print('688',results_2)
                     text = f"The {'strongest' if max else 'weakest'} operator in {place[0]} is {results_1[0]} with {results_1[1]} ({100*round(results_1[1]/results_2[0], 2)}% of the total in Germany)" 
                 else:
                     length_results = len(results_1)
@@ -728,8 +749,8 @@ class ActionChargerOperatorQuery(Action):
                         text = f"There are {len(results_1)} operators in {place[0]}:  \n"
                         for result in results_1:
                             text += f"{result[0]}, {round(result[1])}({100*round(result[1]/results_2[0][0], 2)}%)  \n"                
-
-                    text += "*The number shows the number of charging stations each operator owns, in brackets is the percentage of it to the total in Germany."                   
+                        
+                    text += "*The number shows the number of charging stations each operator owns, in brackets is the percentage of it to the total in Germany."
                     dispatcher.utter_message(text=text)
             else:           
                 for result in results_1:
@@ -764,7 +785,7 @@ class ActionExecuteGroupSortQuery(Action):
         min = tracker.get_slot("min")
         q_type = tracker.get_slot("q_type") 
         increase = tracker.get_slot("increase")
-        q_type = tracker.get_slot("q_type") 
+
         try:
             translator = QueryTranslator()
             make_query = Querymethods()
@@ -934,57 +955,56 @@ class ActionExecuteLimitQuery(Action):
         min = tracker.get_slot("min")
         increase = tracker.get_slot("increase")
         q_type = tracker.get_slot("q_type") 
-        try:
-            translator = QueryTranslator()
-            make_query = Querymethods()
-            if len(DATE) == 1:
-                is_prediction = translator.kpi_is_prediction(DATE[0], False)
-            else:
-                is_prediction = False
+        # try:
+        translator = QueryTranslator()
+        make_query = Querymethods()
+        if len(DATE) == 1:
+            is_prediction = translator.kpi_is_prediction(DATE[0], False)
+        else:
+            is_prediction = False
 
-            # in case the intent 'agg' was wrongly classified as 'limit
-            if not CARDINAL:
-                CARDINAL = [1]
+        # in case the intent 'agg' was wrongly classified as 'limit
+        if not CARDINAL:
+            CARDINAL = [1]
 
-            q = translator.limit_query(kpi, place, DATE, CARDINAL, top, bottom, increase, max, min)
-            print('limit: ', q)
+        q = translator.limit_query(kpi, place, DATE, CARDINAL, top, bottom, increase, max, min)
+        print('limit: ', q)
 
-            results = make_query.execute_sqlquery(q[0])
+        results = make_query.execute_sqlquery(q[0])
 
-            if q_type == "ask-place":
-                res =""
-                if results:
-                    for result in results:
-                        print('actions.py line 885: ', result)
-                        res += f"{result[1]}, {round(result[0]) if kpi in ('Locations', 'Charging_stations', 'Charging_points') else round(result[0],1)}{'%' if kpi == 'Percentage_of_target' else ''}  \n"
+        if q_type == "ask-place":
+            res =""
+            if results:
+                for result in results:
+                    print('actions.py line 885: ', result)
+                    res += f"{result[1]}, {round(result[0]) if kpi in ('Locations', 'Charging_stations', 'Charging_points') else round(result[0],1)}{'%' if kpi == 'Percentage_of_target' else ''}  \n"
 
-                    dispatcher.utter_message(text=res)
-                    if is_prediction:
-                        dispatcher.utter_message(text="Please be aware that the source data usually lags and the latest available month is May 2022, so this is a prediction based on past values.")
-
-                else:
-                    dispatcher.utter_message(text="No results found for your query.")
-
+                dispatcher.utter_message(text=res)
                 if is_prediction:
                     dispatcher.utter_message(text="Please be aware that the source data usually lags and the latest available month is May 2022, so this is a prediction based on past values.")
+
             else:
-                res =""
-                if results:
-                    for result in results:
-                        res += f"{result[1]}, {round(result[0]) if kpi in ('Locations', 'Charging_stations', 'Charging_points') else round(result[0],1)}{'%' if kpi == 'Percentage_of_target' else ''}  \n"
+                dispatcher.utter_message(text="No results found for your query.")
 
-                    dispatcher.utter_message(text=res)
-                    if is_prediction:
-                        dispatcher.utter_message(text="Please be aware that the source data usually lags and the latest available month is May 2022, so this is a prediction based on past values.")
+        else:
+            res =""
+            if results:
+                for result in results:
+                    res += f"{result[1]}, {round(result[0]) if kpi in ('Locations', 'Charging_stations', 'Charging_points') else round(result[0],1)}{'%' if kpi == 'Percentage_of_target' else ''}  \n"
 
-                else:
-                    dispatcher.utter_message(text="No results found for your query.")
-
+                dispatcher.utter_message(text=res)
                 if is_prediction:
-                    dispatcher.utter_message(text="Please be aware that the source data usually lags and the latest available month is May 2022, so this is a prediction based on past values.")            
-        except Exception as e:
-            print("action_execute_limit_query:",e)
-            dispatcher.utter_message(text=SORRY_MESSAGE)
+                    dispatcher.utter_message(text="Please be aware that the source data usually lags and the latest available month is May 2022, so this is a prediction based on past values.")
+
+            else:
+                dispatcher.utter_message(text="No results found for your query.")
+
+    
+        # except Exception as e:
+        #     print("action_execute_limit_query:",e)
+        #     print("q:", q)
+        #     print("results:",results)
+        #     dispatcher.utter_message(text=SORRY_MESSAGE)
         return []
 
 # --------------------------------------------
@@ -1181,7 +1201,7 @@ class ActionSaveNameLookup(Action):
         # new_kpi_list = new_kpi_list.append(kpi_name)
 
         # write it into the file
-        with open('/app/actions/lookup/New_KPI.txt', 'a') as f:
+        with open('./lookup/New_KPI.txt', 'a') as f:
             f.write(str(kpi_name)+'\n')
 
 class ActionNewKPIConfirm(Action): 
@@ -1231,7 +1251,7 @@ class ActionCheckPredefinedAndUserdefined(Action):
     
     def run(self, dispatcher, tracker, domain):
         kpi = tracker.get_slot("kpi")
-        with open('/app/actions/lookup/New_KPI.txt', 'r', encoding='utf8') as f:
+        with open('./lookup/New_KPI.txt', 'r', encoding='utf8') as f:
             data = f.read()
             new_kpi_list = data.split('\n')
 
@@ -1392,7 +1412,7 @@ class ActionQuizFinished(Action):
             if quiz_1 != "skip":
                 # remove
                 make_query = Querymethods()
-                make_query.remove_docu("Questionbase", quiz_question["_id"])
+                make_query.remove_docu("Questionbase", ObjectId(quiz_question["_id"]['$oid']))
                 entries_to_be_added = []
                 params_to_be_added = []
                 # add
@@ -1441,7 +1461,7 @@ class ActionAskAnotherQuiz(Action):
 # ------------------------------------------------------
 # Below are the actions of nearby search and nearest search
 # ------------------------------------------------------
-class AskForAddress(Action):
+class AskForSlotAction(Action):
     def name(self) -> Text:
         return "action_ask_address"
 
@@ -1451,7 +1471,7 @@ class AskForAddress(Action):
         dispatcher.utter_message(text=f"What is the address of center of the search area?")
         return []
 
-class AskForRadius(Action):
+class AskForSlotAction(Action):
     def name(self) -> Text:
         return "action_ask_radius"
 
@@ -1500,31 +1520,31 @@ class ActionResetRadius(Action):
     ) -> List[EventType]:
         return [SlotSet("radius", None)]
 
-class ActionNearestSearch(Action):
-    '''
-    perform a nearest search
-    '''
+# class ActionNearestSearch(Action):
+#     '''
+#     perform a nearest search
+#     '''
 
-    def name(self) -> Text:
-        return "action_nearest_search"
+#     def name(self) -> Text:
+#         return "action_nearest_search"
 
-    def run(self, dispatcher, tracker, domain):
-        dispatcher.utter_message(text="Your query is in process...This might take a few seconds.")
-        address = tracker.latest_message['address']
-        radius_list = [500, 1000, 3000, 5000]
-        try:
-            for radius in radius_list:
-                my_search = NearbySearch(6000, address)
-                found_nodes, num_found_nodes = my_search.radius_search(radius)
-                if found_nodes:
-                    dispatcher.utter_message(text=f"The nearest charging station is {found_nodes[0]}, which is {found_nodes[1]} meters away.")
-                    break
-            if not found_nodes:
-                dispatcher.utter_message(text="There are no charging stations found within radius of 5 km.")
-        except:
-            dispatcher.utter_message(text=f"Sorry, an issue occurred. Please try again later.")
+#     def run(self, dispatcher, tracker, domain):
+#         dispatcher.utter_message(text="Your query is in process...This might take a few seconds.")
+#         address = tracker.latest_message['address']
+#         radius_list = [500, 1000, 3000, 5000]
+#         try:
+#             for radius in radius_list:
+#                 my_search = NearbySearch(6000, address)
+#                 found_nodes, num_found_nodes = my_search.radius_search(radius)
+#                 if found_nodes:
+#                     dispatcher.utter_message(text=f"The nearest charging station is {found_nodes[0]}, which is {found_nodes[1]} meters away.")
+#                     break
+#             if not found_nodes:
+#                 dispatcher.utter_message(text="There are no charging stations found within radius of 5 km.")
+#         except:
+#             dispatcher.utter_message(text=f"Sorry, an issue occurred. Please try again later.")
 
-        return []
+#         return []
 
 # ------------------------------------------------------
 # Below are the actions for custom slot mapping(not used now)
@@ -1558,7 +1578,7 @@ class ActionCustomSlotMapping(Action):
 # ------------------------------------------------------
 # Below are the actions for 'add faqs'
 # ------------------------------------------------------        
-class AskForFaqsQ(Action):
+class AskForSlotAction(Action):
     def name(self) -> Text:
         return "action_ask_faqs_q"
 
@@ -1568,7 +1588,7 @@ class AskForFaqsQ(Action):
         dispatcher.utter_message(text=f"What is the question you want to add to the FAQs?")
         return []
 
-class AskForFaqsA(Action): 
+class AskForSlotAction(Action): 
 
     def name(self) -> Text:
         return "action_ask_faqs_a"
@@ -1693,7 +1713,6 @@ class ActionDisambiguate(Action):
         ])        
 
         return []
-
 
 # ------------------------------------------------------
 # Custom restart
