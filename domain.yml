@@ -368,6 +368,385 @@ forms:
     required_slots:
       - address
       - radius
+  nearest_search_form:version: "3.1"
+
+intents:
+  - chitchat:
+      is_retrieval_intent: true
+  - affirm
+  - deny
+  - agg_query
+  - group_sort_query
+  - filter_query
+  - limit_query
+  - out_of_scope
+  - faq:
+      is_retrieval_intent: true
+  - request_kpi_form
+  - reset
+  - check_slot_input
+  - co_reference
+  - change_slot
+  - welcome_message
+  - start_define_kpi
+  - quiz
+  - nearby_search
+  - nearest_search
+  - coreference_radius
+  - coreference_address
+  - choose_service
+  - charger_type
+  - charger_operator
+  - main_menu
+  - continue
+  - date
+  - skip
+  - welcome_message_en
+  - welcome_message_ge
+entities:
+- place:
+    influence_conversation: false
+- kpi:
+    influence_conversation: false
+- DATE:
+    influence_conversation: false
+- max:
+    influence_conversation: false
+- min:
+    influence_conversation: false
+- avg:
+    influence_conversation: false
+- desc:
+    influence_conversation: false
+- asc:
+    influence_conversation: false
+- le:
+    influence_conversation: false
+- ge:
+    influence_conversation: false
+- bet:
+    influence_conversation: false
+- CARDINAL:
+    influence_conversation: false
+- top:
+    influence_conversation: false
+- bottom:
+    influence_conversation: false
+- kpi_name:
+    influence_conversation: false
+- kpi_definition:
+    influence_conversation: false
+- address:
+    influence_conversation: false
+- radius:
+    influence_conversation: false
+- charger_type:
+    influence_conversation: false
+- operator:
+    influence_conversation: false
+- increase:
+    influence_conversation: false
+- language:
+    influence_conversation: false
+
+slots:
+  place:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: place
+  kpi:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: kpi
+  DATE:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: DATE
+  charger_type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: charger_type
+  operator:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: operator 
+  max:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: max
+  min:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: min
+  avg:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: avg
+  desc:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: desc
+  asc:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: asc
+  le:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: le
+  ge:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: ge
+  bet:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: bet
+  CARDINAL:
+    type: list
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: CARDINAL
+  top:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: top
+  bottom:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: bottom
+  increase:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: increase
+  mapped_time: 
+    type: text
+    mappings:
+    - type: custom
+  stored_slots:
+    type: any
+    mappings:
+    - type: custom
+  kpi_name:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: new_kpi_form
+        requested_slot: kpi_name
+  kpi_definition:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: new_kpi_form
+        requested_slot: kpi_definition
+  kpi_definition_not_form:
+    type: text
+    mappings:
+    - type: custom
+  predefined:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+  userdefined:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+  args_to_be_asked:
+    type: list
+    influence_conversation: true
+    mappings:
+    - type: custom
+      # conditions:
+      # - active_loop: missing_info_form
+      #   requested_slot: missing_info
+  args_dict:
+    type: any
+    mappings:
+    - type: custom
+  arg_1:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: args_form
+        requested_slot: arg_1
+  arg_2:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: args_form
+        requested_slot: arg_2
+  arg_3:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: args_form
+        requested_slot: arg_3
+  has_skip:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+  has_skip_quiz:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+  quiz_1:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: quiz_form
+        requested_slot: quiz_1
+  quiz_question:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: custom
+  faqs_q:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: add_faqs_form
+        requested_slot: faqs_q  
+  faqs_a:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: add_faqs_form
+        requested_slot: faqs_a  
+  address:
+    type: text
+    mappings:
+    - type: from_text
+      # intent: coreference_address
+      conditions:
+      - active_loop: nearby_search_form
+        requested_slot: address
+      # - active_loop: nearest_search_form
+      #   requested_slot: address
+  radius:
+    type: text
+    mappings:
+    - type: from_text
+      # intent: coreference_radius
+      conditions:
+      - active_loop: nearby_search_form
+        requested_slot: radius
+  service:
+    type: categorical
+    values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    influence_conversation: true
+    mappings:
+    - type: custom
+  q_type:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
+  self_learning:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: custom
+  language:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: language
+
+
+forms:
+  kpi_form:
+    # ignored_intents: 
+    # - chitchat
+    # - faq
+    # - nlu_fallback
+    required_slots:
+      - place
+      - kpi
+      - DATE
+  charger_type_form:
+    required_slots:
+      - place
+      - charger_type
+  charger_operator_form:
+    required_slots:
+      - place
+      - operator
+
+  new_kpi_form:
+    # ignored_intents: 
+    # - chitchat
+    # - faq
+    # - nlu_fallback
+    required_slots:
+      - kpi_name
+      - kpi_definition
+  args_form:
+    required_slots:
+      - arg_1
+  quiz_form:
+    required_slots:
+      - quiz_1
+  nearby_search_form:
+    required_slots:
+      - address
+      - radius
   nearest_search_form:
     required_slots:
       - address
@@ -379,37 +758,6 @@ forms:
 responses:
   utter_ask_place:
   - text: "Which place are you interested in? You can enter name of a federal state/city or simply 'county' or 'federal state'."
-
-  # utter_ask_kpi:
-  # - text: "Which KPI are you interested in? Choose one from the predefined KPIs or userdefined KPIs or a new KPI you like. Please also enter the kpi again even if it was already included in the query."
-  #   buttons:
-  #   - title: "Location"
-  #     payload: '/inform{{"kpi":"Locations"}}'
-  #   - title: "Charging station"
-  #     payload: '/inform{{"kpi":"Charging stations"}}'
-  #   - title: "Charging point"
-  #     payload: '/inform{{"kpi":"Charging points"}}'
-
-  # utter_ask_DATE:
-  # - text: "What time are you interested? Please choose a timestamp only between January 2017 and January 2023."
-
-  # utter_ask_address:
-  # - text: "What is the address of center of the search area?"
-
-  # utter_ask_radius:
-  # - text: "How many meters should the search area's radius be?"
-
-  # utter_ask_faqs_q:
-  # - text: "What is the question?"
-
-  # utter_ask_faqs_a:
-  # - text: "What is the answer?"
-
-  # utter_ask_kpi_name:
-  # - text: "What is the name of the new KPI? The name should be short and concise, add '_' between words, e.g. charging_points_per_square_meter."
-
-  # utter_ask_kpi_definition:
-  # - text: "What is the definition of the new KPI? The definiton is a mathmatical formular how this KPI should be calculated, e.g. @charging_points/@population. If there is no calculation needed, just write the KPI as its definition, e.g. @electric_cars. Please always add '@' in front of each argument."
 
   utter_kpi_query:
   - text: "What's your query?"
@@ -471,10 +819,28 @@ responses:
   - text: "Percentage_of_target: achieved share of charging points in relation to the required minimum number of charging points for 2030."
 
   utter_welcome:
-  - text: "Hi, it's E-Mobility chatbot here👋 Let me help you with E-Mobility questions😃"
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Hallo, hier ist der E-Mobility Chatbot👋 Ich helfe dir bei Fragen zur E-Mobilität😃"
+    - text: "Hi, it's E-Mobility chatbot here👋 Let me help you with E-Mobility questions😃"
 
   utter_main_menu:
-  - text: "Here is the main menu. You can choose a service by typing the number. Type 0 to return to the main menu.  \n
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Hier ist das Hauptmenü. Sie können einen Dienst auswählen, indem Sie die Nummer eintippen. Geben Sie 0 ein, um zum Hauptmenü zurückzukehren.  \n
+          1. KPI-Abfrage \n
+          2. Umkreissuche \n
+          3. KPI-Definitionen \n
+          4. FAQs zur E-Mobilität \n
+          5. Einen neuen KPI hinzufügen \n
+          6. Wissen hinzufügen \n
+          7. FAQs hinzufügen \n
+          8. Hilfe"
+    - text: "Here is the main menu. You can choose a service by typing the number. Type 0 to return to the main menu.  \n
           1. KPI query  \n
           2. Nearby Search  \n
           3. KPI definitions  \n
@@ -511,7 +877,6 @@ responses:
   utter_thanks_quiz:
   - text: "Thank you!😀"
 
-actions:
 actions:
   - utter_ask_place
   - utter_ask_DATE
@@ -551,7 +916,6 @@ actions:
   - action_not_found_userdefined
   - action_quiz_finished
   - action_nearby_search
-  - action_nearest_search
   - action_service_mapping
   - action_no_quiz
   - action_check_quiz
@@ -574,3 +938,4 @@ actions:
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
