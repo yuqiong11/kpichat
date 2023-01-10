@@ -163,8 +163,8 @@ ENV PYTHONPATH="$PYTHONPATH:/app/actions"
 ```
 3. create docker images
 ```
-Docker build -t emobility-actions
-Docker build -t emobility-chatbot
+Docker build -t emobility-actions .
+Docker build -t emobility-chatbot .
 ```
 4. create docker-compose.yml 
 ```
