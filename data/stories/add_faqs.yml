@@ -20,8 +20,9 @@ stories:
   - action: action_add_faqs_finished
   - action: action_continue_options
   - intent: main_menu
-  - action: action_restart
   - action: utter_main_menu
+  - action: action_restart
+
 
 - story: 1 faq + 3x continue
   steps:
@@ -80,5 +81,5 @@ stories:
   - action: action_add_faqs_finished
   - action: action_continue_options
   - intent: main_menu
-  - action: action_restart
   - action: utter_main_menu
+  - action: action_restart

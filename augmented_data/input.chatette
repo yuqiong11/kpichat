@@ -1,0 +1,70 @@
+
+%[agg_query](50)
+   ~[&beginning] the number of @[kpis123] in ~[&place]?
+   ~[&beginning] @[kpis456] in ~[&place]?
+%[greeting](2)
+   hello
+   hi
+   Hi!
+
+~[beginning]
+   What is 
+   How is 
+   Tell me
+   Show me
+   Show
+   Return
+   Give me
+
+@[&kpis123] 
+   location
+   locations
+   chargingpoint
+   charging points
+   chargingpoints
+   chargepoint
+   chargepoints
+   charging_point
+   charging_points
+   chargingstation
+   charging stations
+   chargingstations
+   chargestation
+   chargestations
+   charging_station
+   charging_stations
+
+@[&kpis456]
+   cars_per_chargingpoints
+   cars_per_chargingpoint
+   car_per_chargingpoints
+   car_per_chargingpoint
+   cars per chargingpoints
+   cars per chargingpoint
+   car per chargingpoints
+   car per chargingpoint
+   chargingpoints_per_cars
+   chargingpoints_per_1000cars
+   chargingpoints_per_1000_cars
+   chargingpoints_per_car
+   chargingpoints_per_1000car
+   chargingpoints_per_1000_car
+   percentage_of_target
+   percentageoftarget
+   percentage of target
+   percent_of_target
+   percentoftarget
+   percent of target
+
+~[place]
+   Berlin
+   Hamburg 
+   München
+   Germany
+   Baden-Württemberg
+   Bayern
+   Brandenburg
+   Bremen
+   Mecklenburg-Vorpommern
+   Saarland
+   Thüringen

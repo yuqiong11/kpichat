@@ -58,9 +58,8 @@ stories:
   - action: action_nearby_search
   - action: action_continue_options
   - intent: main_menu
-  - action: action_restart
   - action: utter_main_menu
-
+  - action: action_restart
 
 - story: nearby search + main menu
   steps:
@@ -80,9 +79,8 @@ stories:
   - action: action_nearby_search
   - action: action_continue_options
   - intent: main_menu
-  - action: action_restart
   - action: utter_main_menu
-
+  - action: action_restart
 
 # - story: nearby search coreference
 #   steps:

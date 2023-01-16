@@ -165,5 +165,58 @@ predict using BERT
 # print(datetime.date.today().month)
 
 
-import sys
-print(sys.path)
+# import sys
+# print(sys.path)
+
+
+# s = "A:01 What is the date of the election ?"
+# s = "kpi_name: charging_points_per_population"
+# before,sep,after = s.partition(':') # could be, eg, a ':' instead
+# print(before)
+# print(after[1:])
+
+
+# # Construction 1
+# from spacy.tokenizer import Tokenizer
+# from spacy.lang.en import English
+# nlp = English()
+# # Create a blank Tokenizer with just the English vocab
+# tokenizer = Tokenizer(nlp.vocab)
+
+# # Construction 2
+# # from spacy.lang.en import English
+# # nlp = English()
+# # # Create a Tokenizer with the default settings for English
+# # # including punctuation rules and exceptions
+# # tokenizer = nlp.tokenizer
+# text = "how many chargingpoints per square meter are there in Baden-Württemberg"
+# tokens = tokenizer(text)
+# print(tokens)
+
+
+# Construction 1
+# from spacy.tokenizer import Tokenizer
+# from spacy.lang.en import English
+# nlp = English()
+
+# Creating a blank Tokenizer with just the English vocab
+# tokenizer = Tokenizer(nlp.vocab)
+# tokens = tokenizer("all federal states with Percentage_of_target more than 10% last month.")
+# print("Blank tokenizer",end=" : ")
+# for token in tokens:
+#     print(token,end=', ')
+ 
+# Construction 2
+# from spacy.lang.en import English
+# nlp = English()
+
+# Creating a Tokenizer with the default settings for English
+# tokenizer = nlp.tokenizer
+# tokens = tokenizer("all federal states with Percentage_of_target more than 10% last month.")
+# print("\nDefault tokenizer",end=' : ')
+# for token in tokens:
+#     print(token,end=', ')
+a=1
+text = '%' if True else ''
+my_text = f"{a}"+str(round(2.3,1))+text
+print(my_text)

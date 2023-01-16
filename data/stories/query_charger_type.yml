@@ -25,6 +25,7 @@ stories:
     - requested_slot: null 
   - active_loop: null
   - action: utter_query_received
+  - action: action_query_confirm
   - intent: affirm
   - action: action_check_predefined_and_userdefined
   - slot_was_set:
@@ -60,6 +61,7 @@ stories:
     - requested_slot: null 
   - active_loop: null
   - action: utter_query_received
+  - action: action_query_confirm
   - intent: affirm
   - action: action_check_predefined_and_userdefined
   - slot_was_set:

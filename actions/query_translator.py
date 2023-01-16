@@ -129,10 +129,10 @@ class QueryTranslator(CheckTime):
             if place[0].lower() in ("germany","deutschland"):
                 selected_template.append(templates['template45'])
             elif place[0] in STATE_LIST:
-                if kpi in ("Cars_per_charging_point", "Charging_points_per_1,000_cars", "Percentage_of_target"):
+                if kpi in ("Cars_per_charging_point", "Charging_points_per_1000_cars", "Percentage_of_target"):
                     if kpi == "Cars_per_charging_point":
                         selected_template.append(templates['template42'])
-                    elif kpi == "Charging_points_per_1,000_cars":
+                    elif kpi == "Charging_points_per_1000_cars":
                         selected_template.append(templates['template36'])
                     elif kpi == "Percentage_of_target":
                         selected_template.append(templates['template39'])
@@ -142,7 +142,7 @@ class QueryTranslator(CheckTime):
             elif max and "state" in place[0].lower():
                 if kpi == "Cars_per_charging_point":
                     selected_template.append(templates['template43'])
-                elif kpi == "Charging_points_per_1,000_cars":
+                elif kpi == "Charging_points_per_1000_cars":
                     selected_template.append(templates['template37'])
                 elif kpi == "Percentage_of_target":
                     selected_template.append(templates['template40'])
@@ -153,7 +153,7 @@ class QueryTranslator(CheckTime):
             elif min and "state" in place[0].lower():
                 if kpi == "Cars_per_charging_point":
                     selected_template.append(templates['template44'])
-                elif kpi == "Charging_points_per_1,000_cars":
+                elif kpi == "Charging_points_per_1000_cars":
                     selected_template.append(templates['template38'])
                 elif kpi == "Percentage_of_target":
                     selected_template.append(templates['template41'])
@@ -185,7 +185,7 @@ class QueryTranslator(CheckTime):
         else:
             # template 1-24
             # queries not about increase
-            if kpi in ("Cars_per_charging_point", "Charging_points_per_1,000_cars", "Percentage_of_target") and "state" in place[0].lower():
+            if kpi in ("Cars_per_charging_point", "Charging_points_per_1000_cars", "Percentage_of_target") and "state" in place[0].lower():
                 if kpi == "Cars_per_charging_point":
                     if avg:
                         selected_template.append(templates['template20'])
@@ -195,7 +195,7 @@ class QueryTranslator(CheckTime):
                         selected_template.append(templates['template18'])
                     else:
                         selected_template.append(templates['template14'])
-                elif kpi == "Charging_points_per_1,000_cars":
+                elif kpi == "Charging_points_per_1000_cars":
                     if avg:
                         selected_template.append(templates['template19'])
                     elif max:
@@ -272,13 +272,14 @@ class QueryTranslator(CheckTime):
         # max/min fast/normal chargers in berlin/sachsen
         # avg of fast/normal chargers of a county of sachsen/ a county/ a state
 
-        # charger type mapping
-        c_type = self.charger_type_mapping(charger_type)
         # place
         if len(place) == 1:
             place_1 = None
         if len(place) == 2:
             place_1 = place[1]
+        # charger type mapping
+        c_type = self.charger_type_mapping(charger_type)
+
         '''
             'template1': f"fast/normal in germany",
             'template2': f"fast/normal in berlin",
@@ -304,8 +305,8 @@ class QueryTranslator(CheckTime):
             'template8': f"SELECT COUNT(*)/COUNT(DISTINCT(landkreis)) FROM \"E-Mobility\".emo_bna_source WHERE art_der_ladeeinrichtung=\'{c_type}\';",
             'template9': f"SELECT COUNT(*)/COUNT(DISTINCT(bundesland)) FROM \"E-Mobility\".emo_bna_source WHERE art_der_ladeeinrichtung=\'{c_type}\';",
             'template10': f"SELECT AVG(count) FROM (SELECT COUNT(*) FROM \"E-Mobility\".emo_bna_source WHERE art_der_ladeeinrichtung=\'{c_type}\' AND bundesland = \'{place[0]}\' GROUP BY landkreis) AS t;",
-            'template11': f"SELECT COUNT(*), landkreis FROM \"E-Mobility\".emo_bna_source WHERE art_der_ladeeinrichtung=\'{c_type}\' AND bundesland = \'{place_1}\' GROUP BY landkreis ORDER BY count DESC LIMIT 1;",
-            'template12': f"SELECT COUNT(*), landkreis FROM \"E-Mobility\".emo_bna_source WHERE art_der_ladeeinrichtung=\'{c_type}\' AND bundesland = \'{place_1}\' GROUP BY landkreis ORDER BY count ASC LIMIT 1;"
+            'template11': f"SELECT COUNT(*), landkreis FROM \"E-Mobility\".emo_bna_source WHERE art_der_ladeeinrichtung=\'{c_type}\' AND bundesland = \'{place[1]}\' GROUP BY landkreis ORDER BY count DESC LIMIT 1;",
+            'template12': f"SELECT COUNT(*), landkreis FROM \"E-Mobility\".emo_bna_source WHERE art_der_ladeeinrichtung=\'{c_type}\' AND bundesland = \'{place[1]}\' GROUP BY landkreis ORDER BY count ASC LIMIT 1;"
         }
         # in case there are more than 1 template returned
         # e.g. if percentage of a kpi needs to be shown in the response
@@ -503,7 +504,7 @@ class QueryTranslator(CheckTime):
                     selected_template.append(templates['template5'])
                 elif asc:
                     selected_template.append(templates['template6'])
-        elif kpi == "Charging_points_per_1,000_cars":
+        elif kpi == "Charging_points_per_1000_cars":
             if increase:
                 if desc is None and asc is None:
                     selected_template.append(templates['template14'])
@@ -640,8 +641,8 @@ class QueryTranslator(CheckTime):
             'template35': f"SELECT * FROM (SELECT t1.state, t1.kpi - t2.kpi AS difference FROM (SELECT SUM(traffic)/SUM(no_total_chargepoints) AS kpi, state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end if mapped_time_end else ''} GROUP BY state) t1 left join (SELECT SUM(traffic)/SUM(no_total_chargepoints) AS kpi, state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} GROUP BY state) t2 on t1.state = t2.state) AS t3 WHERE difference {symbol} {number_0} ORDER BY difference;",
             'template36': f"SELECT * FROM (SELECT t1.county, t1.kpi - t2.kpi AS difference FROM (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end if mapped_time_end else ''} AND state=\'{place[0]}\') t1 left join (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place[0]}\') t2 on t1.county = t2.county) AS t3 WHERE difference > {number_0} AND difference < {number_1} ORDER BY difference DESC;",
             'template37': f"SELECT * FROM (SELECT t1.county, t1.kpi - t2.kpi AS difference FROM (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end if mapped_time_end else ''} AND state=\'{place[0]}\') t1 left join (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place[0]}\') t2 on t1.county = t2.county) AS t3 WHERE difference {symbol} {number_0} ORDER BY difference DESC;",
-            'template38': f"SELECT county, {kpi_value} FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place_1}\' AND {kpi_value} > {number_0} AND {kpi_value} < {number_1};",
-            'template39': f"SELECT county, {kpi_value} FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place_1}\' AND {kpi_value} {symbol} {number_0};",
+            'template38': f"SELECT county, {kpi_value} FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place[1]}\' AND {kpi_value} > {number_0} AND {kpi_value} < {number_1};",
+            'template39': f"SELECT county, {kpi_value} FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place[1]}\' AND {kpi_value} {symbol} {number_0};",
             'template40': f"SELECT * FROM (SELECT t1.state, 100*(t1.kpi - t2.kpi)/t2.kpi AS difference FROM (SELECT SUM({kpi_value}) AS kpi, state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end if mapped_time_end else ''} GROUP BY state) t1 left join (SELECT SUM({kpi_value}) AS kpi, state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} GROUP BY state) t2 on t1.state = t2.state) AS t3 WHERE difference {symbol} {number_0} ORDER BY difference DESC;",
             'template41': f"SELECT * FROM (SELECT t1.state, 100*(t1.kpi - t2.kpi)/t2.kpi AS difference FROM (SELECT SUM({kpi_value}) AS kpi, state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end if mapped_time_end else ''} GROUP BY state) t1 left join (SELECT SUM({kpi_value}) AS kpi, state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} GROUP BY state) t2 on t1.state = t2.state) AS t3 WHERE difference > {number_0} AND difference < {number_1} ORDER BY difference DESC;",
             'template42': f"SELECT * FROM (SELECT t1.county, 100*(t1.kpi - t2.kpi)/t2.kpi AS difference FROM (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end if mapped_time_end else ''} AND state=\'{place[0]}\') t1 left join (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place[0]}\') t2 on t1.county = t2.county) AS t3 WHERE difference > {number_0} AND difference < {number_1} ORDER BY difference DESC;",
@@ -667,7 +668,7 @@ class QueryTranslator(CheckTime):
             elif place[0] in STATE_LIST:
                 if kpi in ("Locations", "Charging_stations", "Charging_points"):
                     selected_template.append(templates['template21'])
-                elif kpi == "Charging_points_per_1,000_cars":
+                elif kpi == "Charging_points_per_1000_cars":
                     selected_template.append(templates['template25'])
                 elif kpi == "Percentage_of_target":
                     selected_template.append(templates['template26'])
@@ -685,7 +686,7 @@ class QueryTranslator(CheckTime):
                             selected_template.append(templates['template41'])
                         else:
                             selected_template.append(templates['template28'])
-                elif kpi == "Charging_points_per_1,000_cars":
+                elif kpi == "Charging_points_per_1000_cars":
                     if ge or le:
                         selected_template.append(templates['template33'])
                     elif bet:
@@ -734,7 +735,7 @@ class QueryTranslator(CheckTime):
                         selected_template.append(templates['template16'])
                     elif le or ge:                
                         selected_template.append(templates['template15'])
-                elif kpi == "Charging_points_per_1,000_cars":
+                elif kpi == "Charging_points_per_1000_cars":
                     if ge == "above average" or ge == "over average" or ge == "more than average":
                         selected_template.append(templates['template13'])
                     elif le == "below average" or le == "under average":
@@ -820,11 +821,11 @@ class QueryTranslator(CheckTime):
             'template19': f"SELECT t1.kpi - t2.kpi AS difference, t1.county FROM (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end}) t1 left join (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start}) t2 on t1.county = t2.county ORDER BY difference DESC LIMIT {CARDINAL};",
             'template20': f"SELECT t1.kpi - t2.kpi AS difference, t1.county FROM (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end}) t1 left join (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start}) t2 on t1.county = t2.county ORDER BY difference ASC LIMIT {CARDINAL};",
 
-            'template21': f"SELECT t1.kpi - t2.kpi AS difference, t1.county FROM (SELECT {kpi_value} AS kpi, county, state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end} AND state=\'{place[0]}\') t1 left join (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place[0]}\') t2 on t1.county = t2.county ORDER BY difference DESC LIMIT {CARDINAL};",
-            'template22': f"SELECT t1.kpi - t2.kpi AS difference, t1.county FROM (SELECT {kpi_value} AS kpi, county, state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end} AND state=\'{place[0]}\') t1 left join (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place[0]}\') t2 on t1.county = t2.county ORDER BY difference ASC LIMIT {CARDINAL};",
+            'template21': f"SELECT t1.kpi - t2.kpi AS difference, t1.county FROM (SELECT {kpi_value} AS kpi, county, state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end} AND state=\'{place}\') t1 left join (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place[0]}\') t2 on t1.county = t2.county ORDER BY difference DESC LIMIT {CARDINAL};",
+            'template22': f"SELECT t1.kpi - t2.kpi AS difference, t1.county FROM (SELECT {kpi_value} AS kpi, county, state FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_end} AND state=\'{place}\') t1 left join (SELECT {kpi_value} AS kpi, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place[0]}\') t2 on t1.county = t2.county ORDER BY difference ASC LIMIT {CARDINAL};",
 
-            'template23': f"SELECT {kpi_value}, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place_1}\' ORDER BY {kpi_value} DESC Limit {CARDINAL};",
-            'template24': f"SELECT {kpi_value}, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place_1}\' ORDER BY {kpi_value} ASC Limit {CARDINAL};",
+            'template23': f"SELECT {kpi_value}, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place[1]}\' ORDER BY {kpi_value} DESC Limit {CARDINAL};",
+            'template24': f"SELECT {kpi_value}, county FROM \"E-Mobility\".emo_historical WHERE month={mapped_time_start} AND state=\'{place[1]}\' ORDER BY {kpi_value} ASC Limit {CARDINAL};",
 
         }
 
@@ -855,7 +856,7 @@ class QueryTranslator(CheckTime):
                         selected_template.append(templates['template16'])
                     else:
                         selected_template.append(templates['template15'])  
-                elif kpi == "Charging_points_per_1,000_cars":
+                elif kpi == "Charging_points_per_1000_cars":
                     if top and max:
                         selected_template.append(templates['template11'])
                     elif (bottom and max) or (top and min) or bottom or min:
@@ -901,7 +902,8 @@ class QueryTranslator(CheckTime):
                         selected_template.append(templates['template6'])
                     else:
                         selected_template.append(templates['template5'])   
-                elif kpi == "Charging_points_per_1,000_cars":
+                elif kpi == "Charging_points_per_1000_cars":
+                    print('check')
                     if top and max:
                         selected_template.append(templates['template7'])
                     elif (bottom and max) or (top and min) or bottom or min:

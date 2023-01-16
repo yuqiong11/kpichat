@@ -9,9 +9,10 @@ stories:
     - service: 0
   - action: utter_main_menu
 
+
 - story: service 1(kpi query)_en
   steps:
-  - intent: welcome_message_en
+  - intent: welcome_message
   - slot_was_set:
     - language: english
   - action: utter_welcome
@@ -25,7 +26,7 @@ stories:
 
 - story: service 1(kpi query)_ge
   steps:
-  - intent: welcome_message_ge
+  - intent: welcome_message
   - slot_was_set:
     - language: german
   - action: utter_welcome
@@ -49,7 +50,7 @@ stories:
 
 - story: service 2(nearby search)_en
   steps:
-  - intent: welcome_message_en
+  - intent: welcome_message
   - slot_was_set:
     - language: english
   - action: utter_welcome
@@ -72,7 +73,7 @@ stories:
 
 - story: service 2(nearby search)_ge
   steps:
-  - intent: welcome_message_ge
+  - intent: welcome_message
   - slot_was_set:
     - language: german
   - action: utter_welcome
@@ -113,7 +114,7 @@ stories:
 
 - story: service 3(kpi definitions)_en
   steps:
-  - intent: welcome_message_en
+  - intent: welcome_message
   - slot_was_set:
     - language: english
   - action: utter_welcome
@@ -123,10 +124,14 @@ stories:
   - slot_was_set:
     - service: 3
   - action: utter_menu_3
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
 
 - story: service 3(kpi definitions)_ge
   steps:
-  - intent: welcome_message_ge
+  - intent: welcome_message
   - slot_was_set:
     - language: german
   - action: utter_welcome
@@ -136,6 +141,10 @@ stories:
   - slot_was_set:
     - service: 3
   - action: utter_menu_3
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
 
 - story: service 3(kpi definitions)
   steps:
@@ -144,12 +153,16 @@ stories:
   - slot_was_set:
     - service: 3
   - action: utter_menu_3
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
 
 # - story: service 4(E-mobility FAQs) see add_faqs
 
-- story: service 5(add new kpi)_en
+- story: service 5(add new kpi)
   steps:
-  - intent: welcome_message_en
+  - intent: welcome_message
   - slot_was_set:
     - language: english
   - action: utter_welcome
@@ -175,7 +188,7 @@ stories:
 
 - story: service 5(add new kpi)_ge
   steps:
-  - intent: welcome_message_ge
+  - intent: welcome_message
   - slot_was_set:
     - language: german
   - action: utter_welcome
@@ -224,7 +237,7 @@ stories:
 
 - story: service 7(add FAQs)_en  
   steps:
-  - intent: welcome_message_en
+  - intent: welcome_message
   - slot_was_set:
     - language: english
   - action: utter_welcome
@@ -236,7 +249,7 @@ stories:
 
 - story: service 7(add FAQs)_ge  
   steps:
-  - intent: welcome_message_ge
+  - intent: welcome_message
   - slot_was_set:
     - language: german
   - action: utter_welcome
@@ -248,7 +261,7 @@ stories:
 
 - story: service 8(Help)_en
   steps:
-  - intent: welcome_message_en
+  - intent: welcome_message
   - slot_was_set:
     - language: english
   - action: utter_welcome
@@ -258,10 +271,14 @@ stories:
   - slot_was_set:
     - service: 8
   - action: utter_help
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
 
 - story: service 8(Help)_ge
   steps:
-  - intent: welcome_message_ge
+  - intent: welcome_message
   - slot_was_set:
     - language: german
   - action: utter_welcome
@@ -271,6 +288,10 @@ stories:
   - slot_was_set:
     - service: 8
   - action: utter_help
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart
 
 - story: service 8(Help)
   steps:
@@ -279,3 +300,7 @@ stories:
   - slot_was_set:
     - service: 8
   - action: utter_help
+  - action: action_continue_options
+  - intent: main_menu
+  - action: utter_main_menu
+  - action: action_restart

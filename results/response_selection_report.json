@@ -1,0 +1,95 @@
+{
+  "faq/car_per_chargingpoints_info": {
+    "precision": 0.25,
+    "recall": 0.3333333333333333,
+    "f1-score": 0.28571428571428575,
+    "support": 3,
+    "confused_with": {
+      "faq/chargingpoints_per_car_info": 2
+    }
+  },
+  "chitchat/goodbye": {
+    "precision": 0.7142857142857143,
+    "recall": 1.0,
+    "f1-score": 0.8333333333333333,
+    "support": 10,
+    "confused_with": {}
+  },
+  "faq/chargingpoints_per_car_info": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 3,
+    "confused_with": {
+      "faq/car_per_chargingpoints_info": 3
+    }
+  },
+  "faq/service": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2,
+    "confused_with": {
+      "faq/locations_info": 1,
+      "faq/chargingpoints_per_car_info": 1
+    }
+  },
+  "chitchat/greet": {
+    "precision": 1.0,
+    "recall": 0.6923076923076923,
+    "f1-score": 0.8181818181818181,
+    "support": 13,
+    "confused_with": {
+      "chitchat/goodbye": 4
+    }
+  },
+  "faq/chargingpoints_info": {
+    "precision": 1.0,
+    "recall": 0.75,
+    "f1-score": 0.8571428571428571,
+    "support": 4,
+    "confused_with": {
+      "faq/chargingpoints_per_car_info": 1
+    }
+  },
+  "faq/locations_info": {
+    "precision": 0.75,
+    "recall": 1.0,
+    "f1-score": 0.8571428571428571,
+    "support": 3,
+    "confused_with": {}
+  },
+  "faq/percentage_target_info": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 3,
+    "confused_with": {}
+  },
+  "faq/chargingstations_info": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 4,
+    "confused_with": {}
+  },
+  "accuracy": 0.7333333333333333,
+  "macro avg": {
+    "precision": 0.6349206349206349,
+    "recall": 0.6417378917378918,
+    "f1-score": 0.6279461279461279,
+    "support": 45
+  },
+  "weighted avg": {
+    "precision": 0.7587301587301586,
+    "recall": 0.7333333333333333,
+    "f1-score": 0.7294853294853294,
+    "support": 45
+  },
+  "micro avg": {
+    "precision": 0.7333333333333333,
+    "recall": 0.7333333333333333,
+    "f1-score": 0.7333333333333333,
+    "support": 45
+  }
+}

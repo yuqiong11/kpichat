@@ -64,5 +64,5 @@ stories:
   - action: action_execute_agg_query
   - action: action_continue_options
   - intent: main_menu
-  - action: action_restart
   - action: utter_main_menu
+  - action: action_restart

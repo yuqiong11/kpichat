@@ -1,0 +1,98 @@
+[
+  {
+    "text": "good evening",
+    "intent_response_key_target": "chitchat/greet",
+    "intent_response_key_prediction": {
+      "name": "chitchat/goodbye",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "definition of Charging_points per car",
+    "intent_response_key_target": "faq/chargingpoints_per_car_info",
+    "intent_response_key_prediction": {
+      "name": "faq/car_per_chargingpoints_info",
+      "confidence": 0.3773576617240906
+    }
+  },
+  {
+    "text": "hi",
+    "intent_response_key_target": "chitchat/greet",
+    "intent_response_key_prediction": {
+      "name": "chitchat/goodbye",
+      "confidence": 0.910787045955658
+    }
+  },
+  {
+    "text": "what does Charging_points per car mean?",
+    "intent_response_key_target": "faq/chargingpoints_per_car_info",
+    "intent_response_key_prediction": {
+      "name": "faq/car_per_chargingpoints_info",
+      "confidence": 0.9515829086303711
+    }
+  },
+  {
+    "text": "good afternoon",
+    "intent_response_key_target": "chitchat/greet",
+    "intent_response_key_prediction": {
+      "name": "chitchat/goodbye",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "help",
+    "intent_response_key_target": "faq/service",
+    "intent_response_key_prediction": {
+      "name": "faq/locations_info",
+      "confidence": 0.19725434482097626
+    }
+  },
+  {
+    "text": "Charging_points per car",
+    "intent_response_key_target": "faq/chargingpoints_per_car_info",
+    "intent_response_key_prediction": {
+      "name": "faq/car_per_chargingpoints_info",
+      "confidence": 0.9095749855041504
+    }
+  },
+  {
+    "text": "what can you do?",
+    "intent_response_key_target": "faq/service",
+    "intent_response_key_prediction": {
+      "name": "faq/chargingpoints_per_car_info",
+      "confidence": 0.3258313536643982
+    }
+  },
+  {
+    "text": "what does Charging_points mean?",
+    "intent_response_key_target": "faq/chargingpoints_info",
+    "intent_response_key_prediction": {
+      "name": "faq/chargingpoints_per_car_info",
+      "confidence": 0.43558213114738464
+    }
+  },
+  {
+    "text": "what does car per Charging_points mean?",
+    "intent_response_key_target": "faq/car_per_chargingpoints_info",
+    "intent_response_key_prediction": {
+      "name": "faq/chargingpoints_per_car_info",
+      "confidence": 0.9729534387588501
+    }
+  },
+  {
+    "text": "let's go",
+    "intent_response_key_target": "chitchat/greet",
+    "intent_response_key_prediction": {
+      "name": "chitchat/goodbye",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "car per Charging_points",
+    "intent_response_key_target": "faq/car_per_chargingpoints_info",
+    "intent_response_key_prediction": {
+      "name": "faq/chargingpoints_per_car_info",
+      "confidence": 0.889060914516449
+    }
+  }
+]

@@ -1,8 +1,8 @@
 version: "3.1"
 
 intents:
-  - chitchat:
-      is_retrieval_intent: true
+  - goodbye
+  - greet
   - affirm
   - deny
   - agg_query
@@ -10,8 +10,6 @@ intents:
   - filter_query
   - limit_query
   - out_of_scope
-  - faq:
-      is_retrieval_intent: true
   - request_kpi_form
   - reset
   - check_slot_input
@@ -31,6 +29,7 @@ intents:
   - continue
   - date
   - skip
+
 entities:
 - place:
     influence_conversation: false
@@ -385,98 +384,118 @@ forms:
 
 responses:
   utter_ask_place:
-  - text: "Which place are you interested in? You can enter name of a federal state/city or simply 'county' or 'federal state'."
-
-  # utter_ask_kpi:
-  # - text: "Which KPI are you interested in? Choose one from the predefined KPIs or userdefined KPIs or a new KPI you like. Please also enter the kpi again even if it was already included in the query."
-  #   buttons:
-  #   - title: "Location"
-  #     payload: '/inform{{"kpi":"Locations"}}'
-  #   - title: "Charging station"
-  #     payload: '/inform{{"kpi":"Charging stations"}}'
-  #   - title: "Charging point"
-  #     payload: '/inform{{"kpi":"Charging points"}}'
-
-  # utter_ask_DATE:
-  # - text: "What time are you interested? Please choose a timestamp only between January 2017 and January 2023."
-
-  # utter_ask_address:
-  # - text: "What is the address of center of the search area?"
-
-  # utter_ask_radius:
-  # - text: "How many meters should the search area's radius be?"
-
-  # utter_ask_faqs_q:
-  # - text: "What is the question?"
-
-  # utter_ask_faqs_a:
-  # - text: "What is the answer?"
-
-  # utter_ask_kpi_name:
-  # - text: "What is the name of the new KPI? The name should be short and concise, add '_' between words, e.g. charging_points_per_square_meter."
-
-  # utter_ask_kpi_definition:
-  # - text: "What is the definition of the new KPI? The definiton is a mathmatical formular how this KPI should be calculated, e.g. @charging_points/@population. If there is no calculation needed, just write the KPI as its definition, e.g. @electric_cars. Please always add '@' in front of each argument."
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Welcher Ort interessiert Sie? Sie können den Namen eines Bundeslandes/einer Stadt oder einfach „Kreis“ oder „Bundesland“ eingeben."
+    - text: "Which place are you interested in? You can enter name of a federal state/city or simply 'county' or 'federal state'."
 
   utter_kpi_query:
-  - text: "What's your query?"
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Was ist Ihre Anfrage?"
+    - text: "What's your query?"
 
   utter_query_received:
-  - text: "Ok, query received. Please confirm the following."
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Ok, Anfrage erhalten. Bitte bestätigen Sie Folgendes."
+    - text: "Ok, query received. Please confirm the following."
 
   utter_not_found_kpi:
-  - text: "Sorry, I did not find information about this KPI in knowledgebase. Do you want to define it as a new KPI?"
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Tut mir leid, ich habe keine Informationen zu diesem KPI in der Wissensdatenbank gefunden. Möchten Sie es als neuen KPI definieren?"
+    - text: "Sorry, I did not find information about this KPI in knowledgebase. Do you want to define it as a new KPI?"
 
   utter_not_found_statistics:
-  - text: "Sorry, there is missing knowledge. Can you help me with it?"
-
-  # utter_query_confirm:
-  # - text: "the place is {place}, kpi is {kpi}, time is {time}"
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Entschuldigung, es fehlt Wissen. Kannst du mir dabei helfen?"
+    - text: "Sorry, there is missing knowledge. Can you help me with it?"
 
   utter_query_completed:
-  - text: "Query now in process..."
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Anfrage läuft gerade..."
+    - text: "Query now in process..."
 
   utter_ask_for_clarification:
-  - text: "Please correct the false part using the format '[name]: xxx', e.g. if you want to change place, you can type 'place: Berlin'."
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Bitte korrigieren Sie den falschen Teil im Format '[Name]: xxx', z.B. Wenn Sie den Ort wechseln möchten, können Sie „Ort: Berlin“ eingeben."
+    - text: "Please correct the false part using the format '[name]: xxx', e.g. if you want to change place, you can type 'place: Berlin'."
 
-  # utter_knowledge_stored:
-  # - text: "Thank you! The knowledge is now in the knowledgebase."
 
   utter_out_of_scope:
-  - text: "Oops, I am stumped..."
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Ups, ich bin ratlos..."
+    - text: "Oops, I am stumped..."
 
   utter_ask_rephrase:
-  - text: "Sorry, could you rephrase that?"
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Entschuldigung, könnten Sie das umformulieren?"
+    - text: "Sorry, could you rephrase that?"
 
   utter_default:
-  - text: "I’m sorry, I can’t help you. You can type 0 to go back to the main menu and start asking again."
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Es tut mir leid, ich kann Ihnen nicht helfen. Sie können 0 eingeben, um zum Hauptmenü zurückzukehren und erneut zu fragen."
+    - text: "I'm sorry, I can't help you. You can type 0 to go back to the main menu and start asking again."
   
   utter_sorry:
-  - text: "What else can I help you?"
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Was kann ich Ihnen sonst noch helfen?"
+    - text: "What else can I help you?"
 
-  utter_chitchat/greet:
-  - text: "hi"
-  - text: "hello"
-  utter_chitchat/goodbye:
-  - text: "goodbye"
-  - text: "bye"
+  utter_greet:
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "hallo"
+    - text: "hi"
+    - text: "hello"
 
-  utter_faq/service:
-  - text: "KPIs that are available: Locations, Charging_stations, Charging_points, Charging_points_per_1,000_cars, Cars_per_charging_point, Percentage_of_target.\nYou can type the KPI name for the KPI description or start directly asking me questions regarding the KPI within Germany."
-  utter_faq/locations_info:
-  - text: "Locations: number of charging infrastructure places."
-  utter_faq/chargingstations_info:
-  - text: "Charging_stations: number of charging stations. A charging station, also called an EV charger or electric vehicle supply equipment (EVSE), is a piece of equipment that supplies electrical power for charging plug-in electric vehicles (including hybrids, neighborhood electric vehicles, trucks, buses, and others). A charging station can have one or more charging points." 
-  utter_faq/chargingpoints_info:
-  - text: "Charging_points: number of charging points. A charging point is an interface with which either only one electric vehicle can be charged or only one battery of an electric vehicle can be exchanged at the same time.
-"
-  utter_faq/chargingpoints_per_car_info:
-  - text: "Charging_points_per_1,000_cars: number of charging points per 1,000 registered passenger cars."
-  utter_faq/car_per_chargingpoints_info:
-  - text: "Cars_per_charging_point: number of registered passenger cars per charging point."
-  utter_faq/percentage_target_info:
-  - text: "Percentage_of_target: achieved share of charging points in relation to the required minimum number of charging points for 2030."
+  utter_goodbye:
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Tschüssi!"
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Aufwiedersehen!"
+    - text: "goodbye!"
+    - text: "bye!"
 
+  
   utter_welcome:
     - condition:
       - type: slot
@@ -489,15 +508,15 @@ responses:
     - condition:
       - type: slot
         name: language
-        value: english
+        value: german
       text: "Hier ist das Hauptmenü. Sie können einen Dienst auswählen, indem Sie die Nummer eintippen. Geben Sie 0 ein, um zum Hauptmenü zurückzukehren.  \n
-          1. KPI-Abfrage \n
-          2. Umkreissuche \n
-          3. KPI-Definitionen \n
-          4. FAQs zur E-Mobilität \n
-          5. Einen neuen KPI hinzufügen \n
-          6. Wissen hinzufügen \n
-          7. FAQs hinzufügen \n
+          1. KPI-Abfrage  \n
+          2. Umkreissuche  \n
+          3. KPI-Definitionen  \n
+          4. FAQs zur E-Mobilität  \n
+          5. Einen neuen KPI hinzufügen  \n
+          6. Wissen hinzufügen  \n
+          7. FAQs hinzufügen  \n
           8. Hilfe"
     - text: "Here is the main menu. You can choose a service by typing the number. Type 0 to return to the main menu.  \n
           1. KPI query  \n
@@ -510,31 +529,65 @@ responses:
           8. Help"
 
   utter_menu_3:
-  - text: "Definitions of KPIs:  \n
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Definitionen von KPIs:  \n
+            'Standorte': Anzahl der Ladeinfrastrukturplätze.  \n
+            'Ladesäulen': Anzahl der Ladestationen.  \n
+            'Ladepunkte': Anzahl der Ladepunkte.  \n
+            'Ladepunkte_pro_1.000_Pkw': Anzahl der Ladepunkte pro 1.000 zugelassene Pkw.  \n
+            'Pkw_pro_Ladepunkt': Anzahl der zugelassenen Pkw pro Ladepunkt.  \n
+            'Zielerreichung': erreichter Ladepunktanteil bezogen auf die geforderte Mindestzahl an Ladepunkten für 2030.  \n
+            'Schnellladestationen': Anzahl der Schnellladestationen.  \n
+            'Normalladestationen': Anzahl der normalen Ladestationen.  \n
+            'Ladestationsbetreiber': Namen von Ladestationsbetreibern.  \n
+            "
+    - text: "Definitions of KPIs:  \n
            'Locations': number of charging infrastructure places.  \n
-           'Charging_stations': number of charging stations. A charging station, also called an EV charger or electric vehicle supply equipment (EVSE), is a piece of equipment that supplies electrical power for charging plug-in electric vehicles (including hybrids, neighborhood electric vehicles, trucks, buses, and others). A charging station can have one or more charging points.'  \n
-           'Charging_points': number of charging points. A charging point is an interface with which either only one electric vehicle can be charged or only one battery of an electric vehicle can be exchanged at the same time.  \n
+           'Charging_stations': number of charging stations. A charging station can have one or more charging points.'  \n
+           'Charging_points': number of charging points.  \n
            'Charging_points_per_1,000_cars': number of charging points per 1,000 registered passenger cars.  \n
            'Cars_per_charging_point': number of registered passenger cars per charging point.  \n
            'Percentage_of_target': achieved share of charging points in relation to the required minimum number of charging points for 2030.  \n
            'Fast_charging_stations': number of fast charging stations.  \n
-           'Normal_charging_stations': number of normal charging stations(slower than fast ones).  \n
+           'Normal_charging_stations': number of normal charging stations.  \n
            'Charging_station_operators': names of charging station operators.  \n
            "
   utter_help:
-  - text: "See the details of each service below:  \n
-           1.'KPI query': Query the KPI value. The place should be a federal state or county of Germany. The time should be a month within 01.2017-05.2023.  \n
-           2.'Nearby Search': Find charging stations within a radius around a given place.  \n
-           3.'KPI definitions': The definitions of the available KPIs.  \n
-           4.'E-Mobility FAQs': Introduce facts about emobility in the form of FAQs  \n
-           5.'Add a new KPI': Define a new KPI and add it to the knowledge base.  \n
-           6.'Add knowledge': Answer E-Mobility KPI-related questions.  \n
-           7.'Add FAQs': Add new FAQ pairs to the knowledge base  \n
-           8.'Help': Details of all the services  \n
-           0.'Main menu': Back to main menu"
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Sehen Sie sich die Details der einzelnen Dienste unten an:  \n
+            1.'KPI-Abfrage': Abfrage des KPI-Werts.  \n
+            2.'Nahsuche': Ladestationen in einem Umkreis um einen bestimmten Ort.  \n
+            3.'KPI-Definitionen': Die Definitionen der verfügbaren KPIs.  \n
+            4.'FAQs zur E-Mobilität': Stellen Sie Fakten zur E-Mobilität in Form von FAQs vor  \n
+            5.'Neuen KPI hinzufügen': Fügen Sie einen neuen KPI der Wissensdatenbank hinzu.  \n
+            6.'Wissen hinzufügen': Beantworten Sie Fragen zu E-Mobility KPIs.  \n
+            7.'Häufig gestellte Fragen hinzufügen': Fügen Sie neue FAQ-Paare der Wissensdatenbank hinzu.  \n
+            8.'Hilfe': Details aller Dienste.  \n
+            0.'Hauptmenü': Zurück zum Hauptmenü."
+    - text: "See the details of each service below:  \n
+            1.'KPI query': Query the KPI value.  \n
+            2.'Nearby Search': Find charging stations within a radius around a given place.  \n
+            3.'KPI definitions': The definitions of the available KPIs.  \n
+            4.'E-Mobility FAQs': Introduce facts about emobility in the form of FAQs  \n
+            5.'Add a new KPI': Add a new KPI to the knowledge base.  \n
+            6.'Add knowledge': Answer E-Mobility KPI-related questions.  \n
+            7.'Add FAQs': Add new FAQ pairs to the knowledge base.  \n
+            8.'Help': Details of all the services.  \n
+            0.'Main menu': Back to main menu."
 
   utter_thanks_quiz:
-  - text: "Thank you!😀"
+    - condition:
+      - type: slot
+        name: language
+        value: german
+      text: "Dankeschön!😀"
+    - text: "Thank you!😀"
 
 actions:
   - utter_ask_place
@@ -559,7 +612,6 @@ actions:
   - validate_kpi_form
   - action_check_coref
   - action_store_slots
-  - action_reset_slots
   - action_reset_slots_except_stored
   - action_set_stored
   - action_two_stage_fallback
@@ -575,7 +627,6 @@ actions:
   - action_not_found_userdefined
   - action_quiz_finished
   - action_nearby_search
-  - action_nearest_search
   - action_service_mapping
   - action_no_quiz
   - action_check_quiz
@@ -594,6 +645,8 @@ actions:
   - validate_args_form
   - action_restart
   - action_change_slot
+  - action_set_en
+  - action_set_ger
 
 session_config:
   session_expiration_time: 60

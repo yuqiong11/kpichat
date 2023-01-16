@@ -2,8 +2,6 @@ import psycopg2
 import pymongo
 from bson.json_util import dumps
 import json
-from bson import BSON
-from bson.objectid import ObjectId
 
 class Querymethods():
     def __init__(self):
@@ -11,29 +9,30 @@ class Querymethods():
 
     def set_postgresql_connect(self):
         '''
-        connect postgresql.
-
-        container port is default to 5432
+        try to connect postgresql, if error occurs, print it
         '''
-        local_conn_str = "host=81.169.137.234 dbname=workbench user=david.reyer password=start_david"
-        docker_conn_str = "host=192.168.1.100 dbname=workbench user=david.reyer password=start_david"
-
-        conn = psycopg2.connect(docker_conn_str)
+        try:
+            conn = psycopg2.connect("host=81.169.137.234 dbname=workbench user=david.reyer password=start_david")
+        except Exception as e:
+            print(e)
 
         return conn
 
     def set_mongodb_connect(self):
         '''
-        connect mongodb
+        try to connect mongodb, if error occurs, print it
         '''
+        try:
+            client = pymongo.MongoClient("localhost", 27017)
 
-        client = pymongo.MongoClient("192.168.1.100", 27017)
+        except Exception as e:
+            print(e)
 
         return client
 
     def execute_sqlquery(self, query):
         '''
-        execute query in postgresql
+        try to execute query in postgresql
         '''
         conn = self.set_postgresql_connect()
         cur = conn.cursor()
@@ -44,7 +43,7 @@ class Querymethods():
 
     def find_value(self, db_collection, field, value, filter_field):
         '''
-        find the value for the requested field
+        try to find the value for the requested field
         '''
 
         client = self.set_mongodb_connect()
@@ -52,13 +51,16 @@ class Querymethods():
         collection = db[db_collection]
 
         if collection:
-            result = collection.find_one({field: value}, {filter_field: 1})
-            return result
+            try:
+                result = collection.find_one({field: value}, {filter_field: 1})
+                return result
 
+            except Exception as e:
+                print(e)
 
     def insert_docu(self, db_collection, data):
         '''
-        insert many documents at once
+        try to insert many documents at once
 
         data should be in the form:
 
@@ -71,8 +73,11 @@ class Querymethods():
         db = client["emobility"]
         collection = db[db_collection]
         if collection:
-            result = collection.insert_many(data)
+            try:
+                result = collection.insert_many(data)
 
+            except Exception as e:
+                print(e)
 
     def random_access(self, db_collection, num=1):
         '''
@@ -83,44 +88,45 @@ class Querymethods():
         collection = db[db_collection]
         if collection:
             results = collection.aggregate([{ "$sample": { "size": num } }])
-            
+            print('line 91', results)
             for result in results:
                 result = json.loads(dumps(result))
+                print('line 94', result)
                 result['_id'] = result['_id']['$oid']
-
                 return result
+
 
     def remove_docu(self, db_collection, docu_id):
         '''
-        access one random document from collction
+        try to access one random document from collction
         '''
         client = self.set_mongodb_connect()
         db = client["emobility"]
         collection = db[db_collection]
-
         if collection:
-            result = collection.delete_one({"_id": ObjectId(docu_id)})
-
-
+            try:
+                result = collection.delete_one({"_id": docu_id})
+                print("remove", result)
+            except Exception as e:
+                print(e)
 
     def update_value(self, db_collection, field_1, field_2, old_value, new_value):
         '''
-        update the value in a list given the field
+        try to update the value in a list given the field
         '''
         client = self.set_mongodb_connect()
         db = client["emobility"]
         collection = db[db_collection]
         if collection:
-            result = collection.update({field_1:old_value},{"$push":{field_2:new_value}})
-
-    # @staticmethod 
-    # def get_docu_id(docu):
-    #     # util function for 'action_quiz_finished'
-    #     return ObjectId(docu["_id"]['$oid'])
+            try:
+                result = collection.update({field_1:old_value},{"$push":{field_2:new_value}})
+            except Exception as e:
+                print(e)
         
-# make_query = Querymethods()
+make_query = Querymethods()
 # data = [
 #     {"name": "Ram", "entries": [["26", "Hyderabad"]]},
 #     {"name": "Rahim", "entries": [["27", "Bangalore"]]}
 # ]
 # make_query.insert_docu("test",data)
+# print(make_query.random_access("Questionbase"))

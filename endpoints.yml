@@ -10,8 +10,11 @@
 # Server which runs your custom actions.
 # https://rasa.com/docs/rasa/custom-actions
 
+# action_endpoint:
+#  url: "http://action-server:5055/webhook"
+
 action_endpoint:
- url: "http://action-server:5055/webhook"
+ url: "http://localhost:6666/webhook"
 
 # Tracker store which is used to store the conversations.
 # By default the conversations are stored in memory.
@@ -25,23 +28,12 @@ action_endpoint:
 #    password: <password used for authentication>
 #    use_ssl: <whether or not the communication is encrypted, default false>
 
-tracker_store:
-   type: mongod
-   url: mongodb://192.168.1.100:27017
-   db: emobility
-  #  username: <username used for authentication>
-  #  password: <password used for authentication>
-
-# tracker_store:
-#     type: SQL
-#     dialect: "postgresql"  # the dialect used to interact with the db
-#     url: "postgresql://192.168.1.100:5432"  # (optional) host of the sql db, e.g. "localhost"
-#     db: "chatbot_logs"  # path to your db
-#     username: "sysuser@workbench" # username used for authentication
-#     password: "4HfluKP57cbLtqerO23C" # password used for authentication
-#     login_db: "workbench"
-    # query: # optional dictionary to be added as a query string to the connection URL
-    #   driver: psycopg2
+#tracker_store:
+#    type: mongod
+#    url: <url to your mongo instance, e.g. mongodb://localhost:27017>
+#    db: <name of the db within your mongo instance, e.g. rasa>
+#    username: <username used for authentication>
+#    password: <password used for authentication>
 
 # Event broker which all conversation events should be streamed to.
 # https://rasa.com/docs/rasa/event-brokers

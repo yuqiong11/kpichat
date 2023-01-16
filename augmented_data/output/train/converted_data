@@ -1,0 +1,58 @@
+version: "3.1"
+nlu:
+- intent: agg_query
+  examples: |
+    - Give me [Percentage of target]{"entity": "kpis456", "value": "percentage of target"} in Dresden?
+    - Give me the number of [Charging_stations]{"entity": "kpis123", "value": "charging_stations"} in Mecklenburg-Vorpommern?
+    - Give me the number of [locations](kpis123) in Sachsen-Anhalt?
+    - How is the number of [chargingstations](kpis123) in Germany?
+    - Return the number of [Location]{"entity": "kpis123", "value": "location"} in münchen?
+    - Return the number of [Location]{"entity": "kpis123", "value": "location"} in nordrhein-Westfalen?
+    - Return the number of [chargingpoint](kpis123) in Mecklenburg-Vorpommern?
+    - Show [Percentageoftarget]{"entity": "kpis456", "value": "percentageoftarget"} in Rheinland-Pfalz?
+    - Show me [cars per chargingpoints](kpis456) in germany?
+    - Show me the number of [Charging_points]{"entity": "kpis123", "value": "charging_points"} in Niedersachsen?
+    - Show me the number of [Charging_stations]{"entity": "kpis123", "value": "charging_stations"} in germany?
+    - Show me the number of [Chargingpoint]{"entity": "kpis123", "value": "chargingpoint"} in schleswig-Holstein?
+    - Show the number of [locations](kpis123) in saarland?
+    - Tell me the number of [Chargingstations]{"entity": "kpis123", "value": "chargingstations"} in Mecklenburg-Vorpommern?
+    - What is [Chargingpoints_per_car]{"entity": "kpis456", "value": "chargingpoints_per_car"} in sachsen-Anhalt?
+    - What is [chargingpoints_per_cars](kpis456) in Schleswig-Holstein?
+    - What is the number of [Charging_points]{"entity": "kpis123", "value": "charging_points"} in Mecklenburg-Vorpommern?
+    - What is the number of [Chargingpoint]{"entity": "kpis123", "value": "chargingpoint"} in Baden-Württemberg?
+    - What is the number of [Chargingpoint]{"entity": "kpis123", "value": "chargingpoint"} in Germany?
+    - give me [Car_per_chargingpoints]{"entity": "kpis456", "value": "car_per_chargingpoints"} in nordrhein-Westfalen?
+    - give me the number of [Chargestations]{"entity": "kpis123", "value": "chargestations"} in bremen?
+    - give me the number of [Locations]{"entity": "kpis123", "value": "locations"} in baden-Württemberg?
+    - give me the number of [chargestations](kpis123) in Rheinland-Pfalz?
+    - give me the number of [chargingstation](kpis123) in nordrhein-Westfalen?
+    - how is [cars per chargingpoints](kpis456) in brandenburg?
+    - how is [chargingpoints_per_car](kpis456) in schleswig-Holstein?
+    - return [Percentageoftarget]{"entity": "kpis456", "value": "percentageoftarget"} in Hessen?
+    - return [Percentageoftarget]{"entity": "kpis456", "value": "percentageoftarget"} in baden-Württemberg?
+    - return the number of [chargepoint](kpis123) in Nordrhein-Westfalen?
+    - return the number of [charging_station](kpis123) in sachsen?
+    - return the number of [chargingstation](kpis123) in brandenburg?
+    - show [Cars per chargingpoints]{"entity": "kpis456", "value": "cars per chargingpoints"} in Germany?
+    - show me the number of [Charging_stations]{"entity": "kpis123", "value": "charging_stations"} in Thüringen?
+    - show me the number of [chargestation](kpis123) in nordrhein-Westfalen?
+    - show [percent_of_target](kpis456) in Berlin?
+    - show the number of [Charging_point]{"entity": "kpis123", "value": "charging_point"} in nordrhein-Westfalen?
+    - show the number of [chargestations](kpis123) in Rheinland-Pfalz?
+    - show the number of [charging points](kpis123) in schleswig-Holstein?
+    - tell me [Car_per_chargingpoints]{"entity": "kpis456", "value": "car_per_chargingpoints"} in Brandenburg?
+    - tell me [Cars_per_chargingpoints]{"entity": "kpis456", "value": "cars_per_chargingpoints"} in Bremen?
+    - tell me the number of [Chargestation]{"entity": "kpis123", "value": "chargestation"} in münchen?
+    - tell me the number of [Chargingpoint]{"entity": "kpis123", "value": "chargingpoint"} in berlin?
+    - tell me the number of [chargingstations](kpis123) in Saarland?
+    - tell me the number of [location](kpis123) in niedersachsen?
+    - what is [Percent of target]{"entity": "kpis456", "value": "percent of target"} in Dresden?
+    - what is [cars_per_chargingpoint](kpis456) in Brandenburg?
+    - what is [chargingpoints_per_1000_car](kpis456) in niedersachsen?
+    - what is [percentageoftarget](kpis456) in sachsen?
+    - what is the number of [Charging points]{"entity": "kpis123", "value": "charging points"} in Niedersachsen?
+    - what is the number of [charging_points](kpis123) in Dresden?
+- intent: greeting
+  examples: |
+    - Hi!
+    - hello

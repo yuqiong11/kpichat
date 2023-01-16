@@ -1,0 +1,619 @@
+{
+  "rasa_nlu_data": {
+    "common_examples": [
+      {
+        "entities": [
+          {
+            "end": 28,
+            "entity": "kpis456",
+            "start": 8,
+            "value": "percentage of target"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Give me Percentage of target in Dresden?"
+      },
+      {
+        "entities": [
+          {
+            "end": 39,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "charging_stations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Give me the number of Charging_stations in Mecklenburg-Vorpommern?"
+      },
+      {
+        "entities": [
+          {
+            "end": 31,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "locations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Give me the number of locations in Sachsen-Anhalt?"
+      },
+      {
+        "entities": [
+          {
+            "end": 37,
+            "entity": "kpis123",
+            "start": 21,
+            "value": "chargingstations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "How is the number of chargingstations in Germany?"
+      },
+      {
+        "entities": [
+          {
+            "end": 29,
+            "entity": "kpis123",
+            "start": 21,
+            "value": "location"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Return the number of Location in münchen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 29,
+            "entity": "kpis123",
+            "start": 21,
+            "value": "location"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Return the number of Location in nordrhein-Westfalen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 34,
+            "entity": "kpis123",
+            "start": 21,
+            "value": "chargingpoint"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Return the number of chargingpoint in Mecklenburg-Vorpommern?"
+      },
+      {
+        "entities": [
+          {
+            "end": 23,
+            "entity": "kpis456",
+            "start": 5,
+            "value": "percentageoftarget"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Show Percentageoftarget in Rheinland-Pfalz?"
+      },
+      {
+        "entities": [
+          {
+            "end": 31,
+            "entity": "kpis456",
+            "start": 8,
+            "value": "cars per chargingpoints"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Show me cars per chargingpoints in germany?"
+      },
+      {
+        "entities": [
+          {
+            "end": 37,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "charging_points"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Show me the number of Charging_points in Niedersachsen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 39,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "charging_stations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Show me the number of Charging_stations in germany?"
+      },
+      {
+        "entities": [
+          {
+            "end": 35,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "chargingpoint"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Show me the number of Chargingpoint in schleswig-Holstein?"
+      },
+      {
+        "entities": [
+          {
+            "end": 28,
+            "entity": "kpis123",
+            "start": 19,
+            "value": "locations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Show the number of locations in saarland?"
+      },
+      {
+        "entities": [
+          {
+            "end": 38,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "chargingstations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "Tell me the number of Chargingstations in Mecklenburg-Vorpommern?"
+      },
+      {
+        "entities": [
+          {
+            "end": 30,
+            "entity": "kpis456",
+            "start": 8,
+            "value": "chargingpoints_per_car"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "What is Chargingpoints_per_car in sachsen-Anhalt?"
+      },
+      {
+        "entities": [
+          {
+            "end": 31,
+            "entity": "kpis456",
+            "start": 8,
+            "value": "chargingpoints_per_cars"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "What is chargingpoints_per_cars in Schleswig-Holstein?"
+      },
+      {
+        "entities": [
+          {
+            "end": 37,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "charging_points"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "What is the number of Charging_points in Mecklenburg-Vorpommern?"
+      },
+      {
+        "entities": [
+          {
+            "end": 35,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "chargingpoint"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "What is the number of Chargingpoint in Baden-Württemberg?"
+      },
+      {
+        "entities": [
+          {
+            "end": 35,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "chargingpoint"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "What is the number of Chargingpoint in Germany?"
+      },
+      {
+        "entities": [
+          {
+            "end": 30,
+            "entity": "kpis456",
+            "start": 8,
+            "value": "car_per_chargingpoints"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "give me Car_per_chargingpoints in nordrhein-Westfalen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 36,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "chargestations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "give me the number of Chargestations in bremen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 31,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "locations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "give me the number of Locations in baden-Württemberg?"
+      },
+      {
+        "entities": [
+          {
+            "end": 36,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "chargestations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "give me the number of chargestations in Rheinland-Pfalz?"
+      },
+      {
+        "entities": [
+          {
+            "end": 37,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "chargingstation"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "give me the number of chargingstation in nordrhein-Westfalen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 30,
+            "entity": "kpis456",
+            "start": 7,
+            "value": "cars per chargingpoints"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "how is cars per chargingpoints in brandenburg?"
+      },
+      {
+        "entities": [
+          {
+            "end": 29,
+            "entity": "kpis456",
+            "start": 7,
+            "value": "chargingpoints_per_car"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "how is chargingpoints_per_car in schleswig-Holstein?"
+      },
+      {
+        "entities": [
+          {
+            "end": 25,
+            "entity": "kpis456",
+            "start": 7,
+            "value": "percentageoftarget"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "return Percentageoftarget in Hessen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 25,
+            "entity": "kpis456",
+            "start": 7,
+            "value": "percentageoftarget"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "return Percentageoftarget in baden-Württemberg?"
+      },
+      {
+        "entities": [
+          {
+            "end": 32,
+            "entity": "kpis123",
+            "start": 21,
+            "value": "chargepoint"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "return the number of chargepoint in Nordrhein-Westfalen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 37,
+            "entity": "kpis123",
+            "start": 21,
+            "value": "charging_station"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "return the number of charging_station in sachsen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 36,
+            "entity": "kpis123",
+            "start": 21,
+            "value": "chargingstation"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "return the number of chargingstation in brandenburg?"
+      },
+      {
+        "entities": [
+          {
+            "end": 28,
+            "entity": "kpis456",
+            "start": 5,
+            "value": "cars per chargingpoints"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "show Cars per chargingpoints in Germany?"
+      },
+      {
+        "entities": [
+          {
+            "end": 39,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "charging_stations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "show me the number of Charging_stations in Thüringen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 35,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "chargestation"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "show me the number of chargestation in nordrhein-Westfalen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 22,
+            "entity": "kpis456",
+            "start": 5,
+            "value": "percent_of_target"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "show percent_of_target in Berlin?"
+      },
+      {
+        "entities": [
+          {
+            "end": 33,
+            "entity": "kpis123",
+            "start": 19,
+            "value": "charging_point"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "show the number of Charging_point in nordrhein-Westfalen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 33,
+            "entity": "kpis123",
+            "start": 19,
+            "value": "chargestations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "show the number of chargestations in Rheinland-Pfalz?"
+      },
+      {
+        "entities": [
+          {
+            "end": 34,
+            "entity": "kpis123",
+            "start": 19,
+            "value": "charging points"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "show the number of charging points in schleswig-Holstein?"
+      },
+      {
+        "entities": [
+          {
+            "end": 30,
+            "entity": "kpis456",
+            "start": 8,
+            "value": "car_per_chargingpoints"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "tell me Car_per_chargingpoints in Brandenburg?"
+      },
+      {
+        "entities": [
+          {
+            "end": 31,
+            "entity": "kpis456",
+            "start": 8,
+            "value": "cars_per_chargingpoints"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "tell me Cars_per_chargingpoints in Bremen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 35,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "chargestation"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "tell me the number of Chargestation in münchen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 35,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "chargingpoint"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "tell me the number of Chargingpoint in berlin?"
+      },
+      {
+        "entities": [
+          {
+            "end": 38,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "chargingstations"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "tell me the number of chargingstations in Saarland?"
+      },
+      {
+        "entities": [
+          {
+            "end": 30,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "location"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "tell me the number of location in niedersachsen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 25,
+            "entity": "kpis456",
+            "start": 8,
+            "value": "percent of target"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "what is Percent of target in Dresden?"
+      },
+      {
+        "entities": [
+          {
+            "end": 30,
+            "entity": "kpis456",
+            "start": 8,
+            "value": "cars_per_chargingpoint"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "what is cars_per_chargingpoint in Brandenburg?"
+      },
+      {
+        "entities": [
+          {
+            "end": 35,
+            "entity": "kpis456",
+            "start": 8,
+            "value": "chargingpoints_per_1000_car"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "what is chargingpoints_per_1000_car in niedersachsen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 26,
+            "entity": "kpis456",
+            "start": 8,
+            "value": "percentageoftarget"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "what is percentageoftarget in sachsen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 37,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "charging points"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "what is the number of Charging points in Niedersachsen?"
+      },
+      {
+        "entities": [
+          {
+            "end": 37,
+            "entity": "kpis123",
+            "start": 22,
+            "value": "charging_points"
+          }
+        ],
+        "intent": "agg_query",
+        "text": "what is the number of charging_points in Dresden?"
+      },
+      {
+        "entities": [],
+        "intent": "greeting",
+        "text": "Hi!"
+      },
+      {
+        "entities": [],
+        "intent": "greeting",
+        "text": "hello"
+      }
+    ],
+    "entity_synonyms": [],
+    "lookup_tables": [],
+    "regex_features": []
+  }
+}

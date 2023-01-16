@@ -85,34 +85,34 @@ nlu:
     - which state has the [most](max) [Charging_stations]{"entity": "kpi", "value": "Charging_stations"} in [June 2021](DATE)?
     - which county has [least](min) [Cars_per_charging_point]{"entity": "kpi", "value": "Cars_per_charging_point"} in [May 2022](DATE)?
     - which federal state has the [least](min) [Charging_stations]{"entity": "kpi", "value": "Charging_stations"} in [2021.08](DATE)?
-    - Was ist die Anzahl der [Ladestationen] {"entity": "kpi", "value": "Charging_stations"} in Berlin bis [ende 2019] in Berlin?
-    - Was ist die Anazhl der [Autos pro Ladepunkt]{"entity": "kpi", "value": "Cars_per_charging_point"} [heute](DATE) in Hamburg?
+    - Was ist die Anzahl der [Ladestation]{"entity": "kpi", "value": "Charging_stations"} in Berlin bis [ende 2019] in Berlin?
+    - Was ist die Anazhl der [Pkw pro Ladepunkt]{"entity": "kpi", "value": "Cars_per_charging_point"} [heute](DATE) in Hamburg?
     - Sag mir wie viele [Standorte]{"entity": "kpi", "value": "Locations"} es im [Juli 2022](DATE) giebt.
     - Wie hoch ist die Gesammtzahl der [Standorte]{"entity": "kpi", "value": "Locations"} in Deutschland im [Mai 2021](DATE)
     - Wie hoch ist [heute](DATE) die Zahl der [Ladepunkte]{"entity": "kpi", "value": "Charging_points"} in Bremen?
     - Ich möchte die Gesamtzahl der [Ladepunkte]{"entity": "kpi", "value": "Charging_points"} in Hamburg im [achten Monat von 2021](DATE) wissen.
-    - Ich möchte die Anzahl an [Autos/Ladepunkte]{"entity": "kpi", "value": "Cars_per_charging_point"} in Hamburg im [nächsten Monat](DATE) wissen.
+    - Ich möchte die Anzahl an [Pkw_pro_Ladepunkte]{"entity": "kpi", "value": "Cars_per_charging_point"} in Hamburg im [nächsten Monat](DATE) wissen.
     - Wie viele [Ladestationen]{"entity": "kpi", "value": "Charging_stations"} giebt es in [jetzt](DATE) in Kassel?
     - Wie viele [Standorte]{"entity": "kpi", "value": "Locations"} giebt es [derzeit](DATE) in Bremen?
     - Im [November 2019] gab es wie viele [Ladestationen]{"entity": "kpi", "value": "Charging_stations"} in Deutschland?
     - Am [ende von 2022] giebt es wie viele [Ladepunkte]{"entity": "kpi", "value": "Charging_points"} in Bayern?
-    - [Bedarfserfüllung]{"entity": "kpi", "value": "Percentage_of_target"} in Brandenburg im [Februar 2018](DATE).
-    - Wie hoch ist die [Bedarfserfüllung]{"entity": "kpi", "value": "Percentage_of_target"} in Frankfurt am Main im Jahr [2022](DATE)
-    - Wie viel vom [Bedarf]{"entity": "kpi", "value": "Percentage_of_target"} ist [derzeit](DATE) in Deutschland vorhanden?
+    - [Zielerreichung]{"entity": "kpi", "value": "Percentage_of_target"} in Brandenburg im [Februar 2018](DATE).
+    - Wie hoch ist die [Zielerreichung]{"entity": "kpi", "value": "Percentage_of_target"} in Frankfurt am Main im Jahr [2022](DATE)
+    - Wie viel vom [Zielerreichung]{"entity": "kpi", "value": "Percentage_of_target"} ist [derzeit](DATE) in Deutschland vorhanden?
     - Was ist die [größte](max) anzahl an [Standorten]{"entity": "kpi", "value": "Locations"} in einem Landkreis in Thüringen im [Dezember 2017]?
     - Was ist die [kleinste](min) anzahl an [Ladepunkten]{"entity": "kpi", "value": "Charging_points"} in einem Landkreis im [nächsten Monat](DATE)?
     - Zeig mir das Bundesland mit den [meissten](max) [Standorten]{"entity": "kpi", "value": "Locations"} im [letzten Monat](DATE).
     - Die [wenigsten](min) [Ladestationen]{"entity": "kpi", "value": "Charging_stations"} in einem Landkreis im Jahr [2019](DATE).
     - Der Landkreis mit der [höchsten](max) Anzahl an [Ladepunkten]{"entity": "kpi", "value": "Charging_points"} im [Januar 2021].
-    - Das Bundesland das [heute](DATE) die [höchste](max) [Bedarfsdeckung]{"entity": "kpi", "value": "Percentage_of_target"} hat.
-    - Der Landkreis der [leztztes Jahr](DATE) die [höchste](max) [Bedarfsdeckung]{"entity": "kpi", "value": "Percentage_of_target"} hatte.
-    - Bundesland mit den [meissten](max) [Autos pro Ladestation]{"entity": "kpi", "value": "Cars_per_charging_point"} im Jahr [2021].
-    - Landkreis der [zur zeit](DATE) die [niedrigste](min) Anzahl an [Autos pro Ladestation]{"entity": "kpi", "value": "Cars_per_charging_point"} hat.
+    - Das Bundesland das [heute](DATE) die [höchste](max) [Zielerreichung]{"entity": "kpi", "value": "Percentage_of_target"} hat.
+    - Der Landkreis der [leztztes Jahr](DATE) die [höchste](max) [Zielerreichung]{"entity": "kpi", "value": "Percentage_of_target"} hatte.
+    - Bundesland mit den [meissten](max) [Pkw_pro_Ladepunkt]{"entity": "kpi", "value": "Cars_per_charging_point"} im Jahr [2021].
+    - Landkreis der [zur zeit](DATE) die [niedrigste](min) Anzahl an [Pkw_pro_Ladepunkt]{"entity": "kpi", "value": "Cars_per_charging_point"} hat.
     - Welches der Bundesländer beinhaltet die [höchste](max) Anzahl an [Ladepunkten]{"entity": "kpi", "value": "Charging_points"} im [Oktober 2021]?
     - Welcher Landkreis hat die [geringste](min) Anzahl an [Ladestationen]{"entity": "kpi", "value": "Charging_stations"} in [2022](DATE)?
-    - In welchem Bundesland ist die [niedrigste](min) Anzahl an [Autos pro ladestation]{"entity": "kpi", "value": "Cars_per_charging_point"} im [nächsten Monat]?
-    - In welchem Landkreis befinden sich die [wenigsten](min) [Ladestationen pro 1000 Autos]{"entity": "kpi", "value": "Charging_points_per_1,000_cars"} im Jahr[2019]?
-    - Welche [Bedarfsdeckung]{"entity": "kpi", "value": "Percentage_of_target"} hat Hamburg bis zum [Juli 2019] erreicht?
+    - In welchem Bundesland ist die [niedrigste](min) Anzahl an [Pkw_pro_Ladepunkt]{"entity": "kpi", "value": "Cars_per_charging_point"} im [nächsten Monat]?
+    - In welchem Landkreis befinden sich die [wenigsten](min) [Ladestationen_pro_1000_pkw]{"entity": "kpi", "value": "Charging_points_per_1,000_cars"} im Jahr[2019]?
+    - Welche [Zielerreichung]{"entity": "kpi", "value": "Percentage_of_target"} hat Hamburg bis zum [Juli 2019] erreicht?
 
 
 - intent: group_sort_query
@@ -542,14 +542,14 @@ nlu:
     - Überprüfe die Info
     - Überprüfe die Einträge
 
-- intent: welcome_message_en
-  examples: |
-    - Hi, it' the E-Mobility chatbot here👋 Let me help you with E-Mobility questions😊
+# - intent: welcome_message_en
+#   examples: |
+#     - Hi, it' the E-Mobility chatbot here👋 Let me help you with E-Mobility questions😊
 
 
-- intent: welcome_message_ge
-  examples: |
-    - Hallo, hier ist der E-Mobility Chatbot👋 Ich helfe dir bei Fragen zur E-Mobilität😊
+# - intent: welcome_message_ge
+#   examples: |
+#     - Hallo, hier ist der E-Mobility Chatbot👋 Ich helfe dir bei Fragen zur E-Mobilität😊
 
 - intent: quiz
   examples: |
@@ -559,7 +559,7 @@ nlu:
     - Ich würde gerne ein Quiz machem
     - Starte ein Quiz
 
-- intent: chitchat/greet
+- intent: greet
   examples: |
     - hey
     - hello
@@ -580,7 +580,7 @@ nlu:
     - Guten Abend
     - Servus
 
-- intent: chitchat/goodbye
+- intent: goodbye
   examples: |
     - cu
     - good by
@@ -598,52 +598,6 @@ nlu:
     - Tschüss
     - Bis dann
 
-- intent: faq/service
-  examples: |
-    - help
-    - what can you do?
-    - Hilfe
-    - Was kannst du?
-    - Welche Funktionen hast du?
-    - Welche Funktionen hat dieser Chatbot?
-
-- intent: faq/locations_info
-  examples: |
-    - what does locations mean?
-    - definition of locations
-    - locations
-
-- intent: faq/chargingstations_info
-  examples: |
-    - what does Charging_stations mean?
-    - definition of chargingstations
-    - chargingstations
-    - Charging_stations
-
-- intent: faq/chargingpoints_info
-  examples: |
-    - what does Charging_points mean?
-    - definition of chargingpoints
-    - chargingpoints
-    - Charging_points
-
-- intent: faq/chargingpoints_per_car_info
-  examples: |
-    - what does Charging_points per car mean?
-    - definition of Charging_points per car
-    - Charging_points per car
-
-- intent: faq/car_per_chargingpoints_info
-  examples: |
-    - what does car per Charging_points mean?
-    - definition of car per Charging_points.
-    - car per Charging_points
-
-- intent: faq/percentage_target_info
-  examples: |
-    - what does Percentage_of_target mean?
-    - definition of Percentage_of_target.
-    - Percentage_of_target
 
 - intent: out_of_scope
   examples: |
@@ -703,13 +657,13 @@ nlu:
     - überspringen.
     - 'überspringen'
 
-- intent: choose_language
-  examples: |
-    - english
-    - german
-    - English
-    - German
-    - Englisch
-    - Deutsch
-    - englisch
-    - deutsch
+# - intent: choose_language
+#   examples: |
+#     - english
+#     - german
+#     - English
+#     - German
+#     - Englisch
+#     - Deutsch
+#     - englisch
+#     - deutsch
