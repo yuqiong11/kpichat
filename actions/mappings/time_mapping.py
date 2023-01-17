@@ -14,8 +14,8 @@ class CheckTime:
     def time_out_of_range(time):
         return time > '202301' or time < '201701'
 
-    def kpi_is_prediction(self, time, special_period_expression):
-        return self.time_mapping(time, special_period_expression) > '202205'
+    # def kpi_is_prediction(self, time, special_period_expression):
+    #     return self.time_mapping(time, special_period_expression) >= '202205'
 
     def convert_time(self,old_time, special_period_expression):
         '''
