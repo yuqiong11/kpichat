@@ -1,12 +1,4 @@
 charging_points_per_square_meter
-charging_points_per_inhabitant
-price_of_charging
-charging_points_per_location
-charging_stations_per_location
-percentage_of_fast_charging_stations
-Top_five_charging_station_operators_in_Germany
-stations_per_provider
-provider_per_state
-
-omer_pfungstadt
-None
+charging_station_per_capita
+charging_points_per_electric_cars
+charging_points_per_capita

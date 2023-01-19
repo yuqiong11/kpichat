@@ -1,0 +1,11 @@
+{
+  "rule_only_slots": [],
+  "rule_only_loops": [
+    "charger_operator_form",
+    "nearby_search_form",
+    "add_faqs_form",
+    "new_kpi_form",
+    "charger_type_form",
+    "kpi_form"
+  ]
+}

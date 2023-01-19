@@ -112,55 +112,154 @@ stories:
   - action: action_nearby_search
   - action: action_continue_options
 
-- story: service 3(kpi definitions)_en
-  steps:
-  - intent: welcome_message
-  - slot_was_set:
-    - language: english
-  - action: utter_welcome
-  - action: utter_main_menu
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 3
-  - action: utter_menu_3
-  - action: action_continue_options
-  - intent: main_menu
-  - action: utter_main_menu
-  - action: action_restart
+# - story: service 3(kpi definitions)_en
+#   steps:
+#   - intent: welcome_message
+#   - slot_was_set:
+#     - language: english
+#   - action: utter_welcome
+#   - action: utter_main_menu
+#   - intent: choose_service
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 3
+#   - action: utter_menu_3
+#   - action: action_continue_options
+#   - intent: main_menu
+#   - action: utter_main_menu
+#   - action: action_restart
 
-- story: service 3(kpi definitions)_ge
-  steps:
-  - intent: welcome_message
-  - slot_was_set:
-    - language: german
-  - action: utter_welcome
-  - action: utter_main_menu
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 3
-  - action: utter_menu_3
-  - action: action_continue_options
-  - intent: main_menu
-  - action: utter_main_menu
-  - action: action_restart
+# - story: service 3(kpi definitions)_ge
+#   steps:
+#   - intent: welcome_message
+#   - slot_was_set:
+#     - language: german
+#   - action: utter_welcome
+#   - action: utter_main_menu
+#   - intent: choose_service
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 3
+#   - action: utter_menu_3
+#   - action: action_continue_options
+#   - intent: main_menu
+#   - action: utter_main_menu
+#   - action: action_restart
 
-- story: service 3(kpi definitions)
-  steps:
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 3
-  - action: utter_menu_3
-  - action: action_continue_options
-  - intent: main_menu
-  - action: utter_main_menu
-  - action: action_restart
+# - story: service 3(kpi definitions)
+#   steps:
+#   - intent: choose_service
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 3
+#   - action: utter_menu_3
+#   - action: action_continue_options
+#   - intent: main_menu
+#   - action: utter_main_menu
+#   - action: action_restart
 
 # - story: service 4(E-mobility FAQs) see add_faqs
 
-- story: service 5(add new kpi)
+# - story: service 5(add new kpi)
+#   steps:
+#   - intent: welcome_message
+#   - slot_was_set:
+#     - language: english
+#   - action: utter_welcome
+#   - action: utter_main_menu
+#   - intent: choose_service
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 5
+#   - action: new_kpi_form
+#   - active_loop: new_kpi_form
+#   - slot_was_set:
+#     - kpi_name: "Chargers per square kilometer"
+#   - slot_was_set:
+#     - kpi_definition: "number of chargingpoints / area"
+#   - slot_was_set:
+#     - requested_slot: null 
+#   - active_loop: null
+#   - action: action_new_kpi_confirm
+#   - intent: affirm
+#   - action: action_save_kpi_name_lookup
+#   - action: action_define_kpi_finished
+#   - action: action_continue_options
+
+# - story: service 5(add new kpi)_ge
+#   steps:
+#   - intent: welcome_message
+#   - slot_was_set:
+#     - language: german
+#   - action: utter_welcome
+#   - action: utter_main_menu
+#   - intent: choose_service
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 5
+#   - action: new_kpi_form
+#   - active_loop: new_kpi_form
+#   - slot_was_set:
+#     - kpi_name: "Chargers per square kilometer"
+#   - slot_was_set:
+#     - kpi_definition: "number of chargingpoints / area"
+#   - slot_was_set:
+#     - requested_slot: null 
+#   - active_loop: null
+#   - action: action_new_kpi_confirm
+#   - intent: affirm
+#   - action: action_save_kpi_name_lookup
+#   - action: action_define_kpi_finished
+#   - action: action_continue_options
+
+# - story: service 5(add new kpi)
+#   steps:
+#   - intent: choose_service
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 5
+#   - action: new_kpi_form
+#   - active_loop: new_kpi_form
+#   - slot_was_set:
+#     - kpi_name: "Chargers per square kilometer"
+#   - slot_was_set:
+#     - kpi_definition: "number of chargingpoints / area"
+#   - slot_was_set:
+#     - requested_slot: null 
+#   - active_loop: null
+#   - action: action_new_kpi_confirm
+#   - intent: affirm
+#   - action: action_save_kpi_name_lookup
+#   - action: action_define_kpi_finished
+#   - action: action_continue_options
+
+# # - story: service 6(add knowledge)  see add_knowledge
+
+# - story: service 7(add FAQs)_en  
+#   steps:
+#   - intent: welcome_message
+#   - slot_was_set:
+#     - language: english
+#   - action: utter_welcome
+#   - action: utter_main_menu
+#   - intent: choose_service
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 7
+
+# - story: service 7(add FAQs)_ge  
+#   steps:
+#   - intent: welcome_message
+#   - slot_was_set:
+#     - language: german
+#   - action: utter_welcome
+#   - action: utter_main_menu
+#   - intent: choose_service
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 7
+
+- story: service 4(Help)_en
   steps:
   - intent: welcome_message
   - slot_was_set:
@@ -170,113 +269,14 @@ stories:
   - intent: choose_service
   - action: action_service_mapping
   - slot_was_set:
-    - service: 5
-  - action: new_kpi_form
-  - active_loop: new_kpi_form
-  - slot_was_set:
-    - kpi_name: "Chargers per square kilometer"
-  - slot_was_set:
-    - kpi_definition: "number of chargingpoints / area"
-  - slot_was_set:
-    - requested_slot: null 
-  - active_loop: null
-  - action: action_new_kpi_confirm
-  - intent: affirm
-  - action: action_save_kpi_name_lookup
-  - action: action_define_kpi_finished
-  - action: action_continue_options
-
-- story: service 5(add new kpi)_ge
-  steps:
-  - intent: welcome_message
-  - slot_was_set:
-    - language: german
-  - action: utter_welcome
-  - action: utter_main_menu
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 5
-  - action: new_kpi_form
-  - active_loop: new_kpi_form
-  - slot_was_set:
-    - kpi_name: "Chargers per square kilometer"
-  - slot_was_set:
-    - kpi_definition: "number of chargingpoints / area"
-  - slot_was_set:
-    - requested_slot: null 
-  - active_loop: null
-  - action: action_new_kpi_confirm
-  - intent: affirm
-  - action: action_save_kpi_name_lookup
-  - action: action_define_kpi_finished
-  - action: action_continue_options
-
-- story: service 5(add new kpi)
-  steps:
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 5
-  - action: new_kpi_form
-  - active_loop: new_kpi_form
-  - slot_was_set:
-    - kpi_name: "Chargers per square kilometer"
-  - slot_was_set:
-    - kpi_definition: "number of chargingpoints / area"
-  - slot_was_set:
-    - requested_slot: null 
-  - active_loop: null
-  - action: action_new_kpi_confirm
-  - intent: affirm
-  - action: action_save_kpi_name_lookup
-  - action: action_define_kpi_finished
-  - action: action_continue_options
-
-# - story: service 6(add knowledge)  see add_knowledge
-
-- story: service 7(add FAQs)_en  
-  steps:
-  - intent: welcome_message
-  - slot_was_set:
-    - language: english
-  - action: utter_welcome
-  - action: utter_main_menu
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 7
-
-- story: service 7(add FAQs)_ge  
-  steps:
-  - intent: welcome_message
-  - slot_was_set:
-    - language: german
-  - action: utter_welcome
-  - action: utter_main_menu
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 7
-
-- story: service 8(Help)_en
-  steps:
-  - intent: welcome_message
-  - slot_was_set:
-    - language: english
-  - action: utter_welcome
-  - action: utter_main_menu
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 8
+    - service: 4
   - action: utter_help
   - action: action_continue_options
   - intent: main_menu
   - action: utter_main_menu
   - action: action_restart
 
-- story: service 8(Help)_ge
+- story: service 4(Help)_ge
   steps:
   - intent: welcome_message
   - slot_was_set:
@@ -286,19 +286,19 @@ stories:
   - intent: choose_service
   - action: action_service_mapping
   - slot_was_set:
-    - service: 8
+    - service: 4
   - action: utter_help
   - action: action_continue_options
   - intent: main_menu
   - action: utter_main_menu
   - action: action_restart
 
-- story: service 8(Help)
+- story: service 4(Help)
   steps:
   - intent: choose_service
   - action: action_service_mapping
   - slot_was_set:
-    - service: 8
+    - service: 4
   - action: utter_help
   - action: action_continue_options
   - intent: main_menu

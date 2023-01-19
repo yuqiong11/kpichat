@@ -32,33 +32,6 @@ rules:
   - intent: check_slot_input
   - action: action_slot_check  
 
-# - rule: coref
-#   steps:
-#   - intent: co_reference
-#   - action: action_set_stored
-#   - action: kpi_form
-#   - active_loop: kpi_form
-#   - slot_was_set:
-#     - place: "Berlin"
-#   - slot_was_set:
-#     - DATE: "2021"
-#   - slot_was_set:
-#     - kpi: "locations"
-#   - slot_was_set:
-#     - requested_slot: null 
-#   - active_loop: null
-#   - action: action_query_confirm
-
-# - rule: deny
-#   steps:
-#   - intent: deny
-#   - action: utter_ask_for_clarification
-
-# - rule: change_slot
-#   steps:
-#   - intent: change_slot
-#   - action: action_query_confirm
-
 - rule: Activate kpi form
   steps:
   - action: kpi_form
@@ -87,12 +60,7 @@ rules:
   steps:
   - action: new_kpi_form
   - active_loop: new_kpi_form
-  # - slot_was_set:
-  #   - kpi_name: "Chargers per square kilometer"
-  # - slot_was_set:
-  #   - kpi_definition: "number of chargingpoints / area"
-  # - slot_was_set:
-  #   - requested_slot: null 
+
 
 - rule: Submit new kpi form
   condition:
@@ -168,49 +136,6 @@ rules:
     - requested_slot: null
   wait_for_user_input: false
 
-# - rule: Activate args form
-#   steps:
-#   - intent: start_define_kpi
-#   - action: new_kpi_form
-#   - active_loop: new_kpi_form
-#   # - slot_was_set:
-#   #   - kpi_name: "Chargers per square kilometer"
-#   # - slot_was_set:
-#   #   - kpi_definition: "number of chargingpoints / area"
-#   # - slot_was_set:
-#   #   - requested_slot: null 
-
-# - rule: Submit args form
-#   condition:
-#   - active_loop: new_kpi_form
-#   steps:
-#   - action: new_kpi_form
-#   - active_loop: null
-#   - slot_was_set:
-#     - requested_slot: null
-#   wait_for_user_input: false
-
-# - rule: Activate quiz
-#   steps:
-#   - intent: quiz
-#   - action: action_check_quiz
-#   - action: quiz_form
-#   - active_loop: quiz_form
-#   - slot_was_set:
-#     - quiz_1: "Berlin"
-#   - slot_was_set:
-#     - requested_slot: null 
-
-# - rule: Submit quiz form
-#   condition:
-#   - active_loop: quiz_form
-#   steps:
-#   - action: quiz_form
-#   - active_loop: null
-#   - slot_was_set:
-#     - requested_slot: null
-#   wait_for_user_input: false
-
 - rule: Activate nearby search form
   steps:
   - action: nearby_search_form
@@ -232,44 +157,10 @@ rules:
     - requested_slot: null
   wait_for_user_input: false
 
-- rule: Activate nearest search form
-  steps:
-  - action: nearest_search_form
-  - active_loop: nearest_search_form
-  - slot_was_set:
-    - address: "Kirchstr. 28, Berlin"
-  - slot_was_set:
-    - requested_slot: null 
-
-- rule: Submit nearest search form
-  condition:
-  - active_loop: nearest_search_form
-  steps:
-  - action: nearest_search_form
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  wait_for_user_input: false
-
 - rule: out-of-scope
   steps:
   - intent: out_of_scope
   - action: utter_out_of_scope
   - action: utter_main_menu
   - action: action_restart
-# - rule: Ask the user to rephrase whenever they send a message with low NLU confidence
-#   steps:
-#   - intent: nlu_fallback
-#   - action: utter_please_rephrase
 
-# - rule: Implementation of the Two-Stage-Fallback
-#   steps:
-#   - intent: nlu_fallback
-#   - action: action_two_stage_fallback
-#   - active_loop: action_two_stage_fallback
-  # - action: utter_main_menu
-
-# - rule: Implementation of the fallback
-#   steps:
-#   - intent: nlu_fallback
-#   - action: action_disambiguate

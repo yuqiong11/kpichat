@@ -75,6 +75,8 @@ entities:
     influence_conversation: false
 - language:
     influence_conversation: false
+- identifier_faqs:
+    influence_conversation: false
 
 slots:
   place:
@@ -335,7 +337,12 @@ slots:
     mappings:
     - type: from_entity
       entity: language
-
+  identifier_faqs:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: identifier_faqs
 
 forms:
   kpi_form:
@@ -512,49 +519,41 @@ responses:
       text: "Hier ist das Hauptmenü. Sie können einen Dienst auswählen, indem Sie die Nummer eintippen. Geben Sie 0 ein, um zum Hauptmenü zurückzukehren.  \n
           1. KPI-Abfrage  \n
           2. Umkreissuche  \n
-          3. KPI-Definitionen  \n
-          4. FAQs zur E-Mobilität  \n
-          5. Einen neuen KPI hinzufügen  \n
-          6. Wissen hinzufügen  \n
-          7. FAQs hinzufügen  \n
-          8. Hilfe"
+          3. FAQs zur E-Mobilität  \n
+          4. Hilfe"
     - text: "Here is the main menu. You can choose a service by typing the number. Type 0 to return to the main menu.  \n
           1. KPI query  \n
           2. Nearby Search  \n
-          3. KPI definitions  \n
-          4. E-Mobility FAQs   \n
-          5. Add a new KPI  \n
-          6. Add knowledge  \n
-          7. Add FAQs  \n
-          8. Help"
+          3. E-Mobility FAQs  \n
+          4. Help"
 
-  utter_menu_3:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Definitionen von KPIs:  \n
-            'Standorte': Anzahl der Ladeinfrastrukturplätze.  \n
-            'Ladesäulen': Anzahl der Ladestationen.  \n
-            'Ladepunkte': Anzahl der Ladepunkte.  \n
-            'Ladepunkte_pro_1.000_Pkw': Anzahl der Ladepunkte pro 1.000 zugelassene Pkw.  \n
-            'Pkw_pro_Ladepunkt': Anzahl der zugelassenen Pkw pro Ladepunkt.  \n
-            'Zielerreichung': erreichter Ladepunktanteil bezogen auf die geforderte Mindestzahl an Ladepunkten für 2030.  \n
-            'Schnellladestationen': Anzahl der Schnellladestationen.  \n
-            'Normalladestationen': Anzahl der normalen Ladestationen.  \n
-            'Ladestationsbetreiber': Namen von Ladestationsbetreibern.  \n
-            "
-    - text: "Definitions of KPIs:  \n
-           'Locations': number of charging infrastructure places.  \n
-           'Charging_stations': number of charging stations. A charging station can have one or more charging points.'  \n
-           'Charging_points': number of charging points.  \n
-           'Charging_points_per_1,000_cars': number of charging points per 1,000 registered passenger cars.  \n
-           'Cars_per_charging_point': number of registered passenger cars per charging point.  \n
-           'Percentage_of_target': achieved share of charging points in relation to the required minimum number of charging points for 2030.  \n
-           'Fast_charging_stations': number of fast charging stations.  \n
-           'Normal_charging_stations': number of normal charging stations.  \n
-           'Charging_station_operators': names of charging station operators.  \n
-           "
+  # utter_menu_3:
+  #   - condition:
+  #     - type: slot
+  #       name: language
+  #       value: german
+  #     text: "Definitionen von KPIs:  \n
+  #           'Standorte': Anzahl der Ladeinfrastrukturplätze.  \n
+  #           'Ladesäulen': Anzahl der Ladestationen.  \n
+  #           'Ladepunkte': Anzahl der Ladepunkte.  \n
+  #           'Ladepunkte_pro_1.000_Pkw': Anzahl der Ladepunkte pro 1.000 zugelassene Pkw.  \n
+  #           'Pkw_pro_Ladepunkt': Anzahl der zugelassenen Pkw pro Ladepunkt.  \n
+  #           'Zielerreichung': erreichter Ladepunktanteil bezogen auf die geforderte Mindestzahl an Ladepunkten für 2030.  \n
+  #           'Schnellladestationen': Anzahl der Schnellladestationen.  \n
+  #           'Normalladestationen': Anzahl der normalen Ladestationen.  \n
+  #           'Ladestationsbetreiber': Namen von Ladestationsbetreibern.  \n
+  #           "
+  #   - text: "Definitions of KPIs:  \n
+  #          'Locations': number of charging infrastructure places.  \n
+  #          'Charging_stations': number of charging stations. A charging station can have one or more charging points.'  \n
+  #          'Charging_points': number of charging points.  \n
+  #          'Charging_points_per_1,000_cars': number of charging points per 1,000 registered passenger cars.  \n
+  #          'Cars_per_charging_point': number of registered passenger cars per charging point.  \n
+  #          'Percentage_of_target': achieved share of charging points in relation to the required minimum number of charging points for 2030.  \n
+  #          'Fast_charging_stations': number of fast charging stations.  \n
+  #          'Normal_charging_stations': number of normal charging stations.  \n
+  #          'Charging_station_operators': names of charging station operators.  \n
+  #          "
   utter_help:
     - condition:
       - type: slot
