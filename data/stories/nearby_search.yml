@@ -4,9 +4,9 @@ stories:
 - story: nearby search + 3x continue
   steps:
   - intent: nearby_search
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 2
+  # - action: action_service_mapping
+  # - slot_was_set:
+  #   - service: 2
   - action: nearby_search_form
   - active_loop: nearby_search_form
   - slot_was_set:
@@ -16,6 +16,7 @@ stories:
   - slot_was_set:
     - requested_slot: null
   - active_loop: null
+  - action: action_nearby_search_start
   - action: action_nearby_search
   - action: action_continue_options
   - intent: continue
@@ -61,12 +62,13 @@ stories:
   - action: utter_main_menu
   - action: action_restart
 
+
 - story: nearby search + main menu
   steps:
   - intent: nearby_search
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 2
+  # - action: action_service_mapping
+  # - slot_was_set:
+  #   - service: 2
   - action: nearby_search_form
   - active_loop: nearby_search_form
   - slot_was_set:
@@ -81,6 +83,7 @@ stories:
   - intent: main_menu
   - action: utter_main_menu
   - action: action_restart
+
 
 # - story: nearby search coreference
 #   steps:

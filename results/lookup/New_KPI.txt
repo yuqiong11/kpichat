@@ -1,0 +1,4 @@
+charging_points_per_square_meter
+charging_station_per_capita
+charging_points_per_electric_cars
+charging_points_per_capita

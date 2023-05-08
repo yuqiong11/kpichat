@@ -1,12 +1,12 @@
 # this script helps with mapping data structures from python to other structures in mongodb
 from time import time
-from db import Querymethods
+from backend.db import QueryMethods
 
 class MapDataFormat():
     '''
     The class for mapping
     '''
-    make_query = Querymethods()
+    make_query = QueryMethods()
 
     def __init__(self):
         self.params = []

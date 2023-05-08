@@ -1,0 +1,428 @@
+Germany
+Baden-Württemberg
+Bayern
+Berlin
+Brandenburg
+Bremen
+Hamburg
+Hessen
+Niedersachsen
+Mecklenburg-Vorpommern
+Nordrhein-Westfalen
+Rheinland-Pfalz
+Saarland
+Sachsen
+Sachsen-Anhalt
+Schleswig-Holstein
+Thüringen
+Gifhorn
+Ammerland
+Helmstedt
+Cochem-Zell
+Saarpfalz-Kreis
+Main-Taunus-Kreis
+Schweinfurt
+Karlsruhe
+Fürstenfeldbruck
+Coburg
+Emmendingen
+Jerichower Land
+Haßberge
+Göttingen
+Vorpommern-Greifswald
+Leipzig
+Hildburghausen
+Osnabrück
+Schwalm-Eder-Kreis
+Rostock
+Breisgau-Hochschwarzwald
+Kaiserslautern
+Amberg-Sulzbach
+Pfaffenhofen a.d. Ilm
+Waldeck-Frankenberg
+Nienburg (Weser)
+Sächsische Schweiz-Osterzgebirge
+Cloppenburg
+Offenbach
+Uelzen
+Groß-Gerau
+Esslingen
+Kusel
+Bayreuth
+Vulkaneifel
+Vorpommern-Greifswald
+Ebersberg
+Birkenfeld
+Neumarkt i.d. OPf.
+Weimarer Land
+Spree-Neiße
+Böblingen  
+Straubing-Bogen
+Zwickau
+Darmstadt-Dieburg
+Reutlingen
+München
+Neckar-Odenwald-Kreis
+Lindau (Bodensee)
+Bad Kissingen
+Rhein-Pfalz-Kreis
+Südliche Weinstraße
+Germersheim
+Nordwestmecklenburg
+Main-Spessart
+Dillingen a.d. Donau
+Rhein-Lahn-Kreis
+Roth
+Nordhausen
+Hannover
+Bad Kreuznach
+Sonneberg
+Freising
+Anhalt-Bitterfeld
+Havelland
+Sömmerda
+Mittelsachsen
+Main-Kinzig-Kreis
+Miesbach
+Donnersbergkreis
+Schwarzwald-Baar-Kreis
+Kelheim
+Bamberg
+Konstanz
+Holzminden
+Goslar
+Harburg
+Regen
+Vogelsbergkreis
+Sigmaringen
+Gotha
+Limburg-Weilburg
+Eifelkreis Bitburg-Prüm
+Saalekreis
+Unstrut-Hainich-Kreis
+Harz
+Unterallgäu
+Dachau
+Altenburger Land
+Neunkirchen
+Ostalbkreis
+Ansbach
+Altenkirchen (Westerwald)
+Tübingen
+Salzlandkreis
+Göppingen
+Enzkreis
+Vechta
+Kronach
+Hof
+Greiz
+Schwandorf
+Lüchow-Dannenberg
+Bautzen
+Prignitz
+Neuburg-Schrobenhausen
+Rems-Murr-Kreis
+Bodenseekreis
+Dingolfing-Landau
+Stade
+Waldshut
+Northeim
+Rheingau-Taunus-Kreis
+Ahrweiler
+Bad Dürkheim
+Rhein-Neckar-Kreis
+Barnim
+Bergstraße
+Oberallgäu
+Trier-Saarburg
+Lichtenfels
+Fulda      
+Ludwigsburg
+Görlitz
+Bad Tölz-Wolfratshausen
+Ostallgäu
+Hersfeld-Rotenburg
+Bernkastel-Wittlich
+Rhön-Grabfeld
+Schwäbisch Hall
+Biberach
+Oberhavel
+Augsburg
+Burgenlandkreis
+Potsdam-Mittelmark
+Erding
+Aichach-Friedberg
+Heilbronn
+Friesland
+Celle       
+Saale-Orla-Kreis
+Kulmbach
+Oder-Spree
+Odenwaldkreis
+Neustadt a.d. Waldnaab
+Tuttlingen
+Wartburgkreis
+Landshut
+Freyung-Grafenau
+Wittenberg
+Hildesheim
+Mansfeld-Südharz
+Wetteraukreis
+Saale-Holzland-Kreis
+Rotenburg (Wümme)
+Neuwied
+Regensburg
+Stendal
+Wesermarsch
+Osterholz
+Altmarkkreis Salzwedel
+Emsland
+Westerwaldkreis
+Cuxhaven
+Neu-Ulm
+Weilheim-Schongau
+Märkisch-Oderland
+Saarlouis
+Elbe-Elster
+Garmisch-Partenkirchen
+Main-Tauber-Kreis
+Oberspreewald-Lausitz
+Dahme-Spreewald
+Aschaffenburg
+Erlangen-Höchstadt
+Mayen-Koblenz
+Merzig-Wadern
+Hohenlohekreis
+Kyffhäuserkreis
+Rottal-Inn    
+St. Wendel     
+Oldenburg
+Saalfeld-Rudolstadt
+Hochtaunuskreis
+Ortenaukreis
+Lahn-Dill-Kreis
+Mecklenburgische Seenplatte
+Starnberg
+Ostprignitz-Ruppin
+Börde
+Lüneburg
+Mainz-Bingen
+Aurich
+Würzburg
+Weißenburg-Gunzenhausen
+Neustadt a.d. Aisch-Bad Windsheim
+Vorpommern-Rügen
+Mühldorf a. Inn
+Kassel
+Cham
+Diepholz
+Werra-Meißner-Kreis
+Regionalverband Saarbrücken
+Deggendorf
+Donau-Ries
+Zollernalbkreis
+Südwestpfalz
+Erzgebirgskreis
+Rottweil
+Ravensburg
+Eichsfeld
+Eichstätt
+Wittmund
+Rastatt
+Kitzingen
+Peine
+Alb-Donau-Kreis
+Wolfenbüttel
+Freudenstadt
+Miltenberg
+Schmalkalden-Meiningen
+Vogtlandkreis
+Leer
+Forchheim
+Altötting
+Verden    
+Rosenheim
+Grafschaft Bentheim
+Berchtesgadener Land
+Nordsachsen
+Alzey-Worms
+Ilm-Kreis
+Hameln-Pyrmont
+Günzburg
+Passau
+Wunsiedel i. Fichtelgebirge
+Ludwigslust-Parchim
+Lörrach
+Uckermark
+Schaumburg
+Heidekreis
+Traunstein
+Meißen
+Nürnberger Land
+Marburg-Biedenkopf
+Gießen
+Tirschenreuth
+Fürth
+Heidenheim
+Landsberg am Lech
+Teltow-Fläming
+Calw
+Rhein-Hunsrück-Kreis
+Stuttgart
+Mannheim
+Baden-Baden
+Heidelberg
+Heilbronn
+Freiburg im Breisgau
+Ulm
+Pforzheim
+Karlsruhe
+Berlin
+Koblenz
+Mainz
+Cottbus
+Bremen
+Erlangen
+Hamburg
+Schweinfurt
+Solingen
+Hagen
+Bayreuth
+Nürnberg
+Schwerin
+Oberhausen
+Wiesbaden
+Worms
+Amberg
+Landshut
+Salzgitter
+Speyer
+Frankfurt am Main
+Schwabach
+Remscheid
+Jena
+Neustadt an der Weinstraße
+Memmingen
+Augsburg 
+Braunschweig
+Essen
+Aschaffenburg
+Bottrop     
+Frankfurt (Oder)
+Offenbach am Main
+Würzburg
+Ingolstadt
+Kempten (Allgäu)
+Wolfsburg
+Krefeld
+Coburg
+Passau
+Kiel
+Hamm
+Darmstadt
+Rosenheim
+Bonn
+Dortmund
+Herne
+Fürth
+Leipzig
+Hof
+Gelsenkirchen
+Osnabrück
+Potsdam
+Bremerhaven
+München
+Rostock
+Münster
+Trier
+Bochum
+Mülheim an der Ruhr
+Delmenhorst
+Kaufbeuren
+Neumünster
+Gera
+Leverkusen
+Chemnitz
+Wilhelmshaven
+Flensburg
+Kassel
+Wuppertal
+Mönchengladbach
+Brandenburg an der Havel
+Landau in der Pfalz
+Düsseldorf
+Kaiserslautern
+Eisenach
+Zweibrücken
+Weiden i.d. OPf.
+Köln
+Dresden
+Bamberg
+Dessau-Roßlau
+Ludwigshafen am Rhein
+Magdeburg
+Regensburg
+Ansbach
+Pirmasens
+Emden
+Erfurt
+Weimar
+Duisburg
+Oldenburg (Oldb)
+Bielefeld
+Suhl
+Frankenthal (Pfalz)
+Lübeck
+Straubing
+Halle (Saale)
+Soest
+Rhein-Erft-Kreis
+Steinfurt
+Stormarn
+Gütersloh
+Heinsberg
+Minden-Lübbecke
+Dithmarschen
+Nordfriesland
+Herford
+Schleswig-Flensburg
+Siegen-Wittgenstein
+Märkischer Kreis
+Rendsburg-Eckernförde
+Städteregion Aachen
+Viersen
+Paderborn
+Recklinghausen
+Pinneberg
+Kleve
+Hochsauerlandkreis
+Mettmann
+Olpe
+Rhein-Kreis Neuss
+Euskirchen
+Wesel
+Höxter
+Plön
+Oberbergischer Kreis
+Ennepe-Ruhr-Kreis
+Ostholstein
+Rheinisch-Bergischer Kreis
+Borken
+Coesfeld
+Lippe
+Herzogtum Lauenburg
+Segeberg
+Düren
+Rhein-Sieg-Kreis
+Warendorf
+Unna
+Steinburg
+federal state
+federalstate
+federal states
+federalstates
+state
+states
+county
+counties
+countys

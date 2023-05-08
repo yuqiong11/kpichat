@@ -1,67 +1,38 @@
 version: "3.1"
 
 intents:
-  - goodbye
-  - greet
-  - affirm
-  - deny
-  - agg_query
-  - group_sort_query
-  - filter_query
-  - limit_query
-  - out_of_scope
-  - request_kpi_form
-  - reset
-  - check_slot_input
-  - co_reference
-  - change_slot
-  - welcome_message
-  - start_define_kpi
-  - quiz
-  - nearby_search
-  - nearest_search
+  - KPI_query
+  # - co_reference
   - coreference_radius
   - coreference_address
+  - change_slot
   - choose_service
-  - charger_type
-  - charger_operator
+  - nearby_search
   - main_menu
   - continue
-  - date
-  - skip
+  - affirm
+  - deny
+  - faqs
+  - greet
+  - goodbye
+  - out_of_scope
+  - welcome_message
+  - give_faqs
+  
+
 
 entities:
 - place:
     influence_conversation: false
 - kpi:
     influence_conversation: false
-- DATE:
+- time:
     influence_conversation: false
 - max:
     influence_conversation: false
 - min:
     influence_conversation: false
 - avg:
-    influence_conversation: false
-- desc:
-    influence_conversation: false
-- asc:
-    influence_conversation: false
-- le:
-    influence_conversation: false
-- ge:
-    influence_conversation: false
-- bet:
-    influence_conversation: false
-- CARDINAL:
-    influence_conversation: false
-- top:
-    influence_conversation: false
-- bottom:
-    influence_conversation: false
-- kpi_name:
-    influence_conversation: false
-- kpi_definition:
     influence_conversation: false
 - address:
     influence_conversation: false
@@ -73,10 +44,12 @@ entities:
     influence_conversation: false
 - increase:
     influence_conversation: false
-- language:
-    influence_conversation: false
 - identifier_faqs:
     influence_conversation: false
+- geo_level:
+    influence_conversation: false
+- service:
+    influence_conversation: true
 
 slots:
   place:
@@ -91,12 +64,12 @@ slots:
     mappings:
     - type: from_entity
       entity: kpi
-  DATE:
+  time:
     type: list
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: DATE
+      entity: time
   charger_type:
     type: text
     influence_conversation: false
@@ -127,54 +100,12 @@ slots:
     mappings:
     - type: from_entity
       entity: avg
-  desc:
+  geo_level:
     type: text
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: desc
-  asc:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: asc
-  le:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: le
-  ge:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: ge
-  bet:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: bet
-  CARDINAL:
-    type: list
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: CARDINAL
-  top:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: top
-  bottom:
-    type: text
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: bottom
+      entity: geo_level
   increase:
     type: text
     influence_conversation: false
@@ -187,89 +118,6 @@ slots:
     - type: custom
   stored_slots:
     type: any
-    mappings:
-    - type: custom
-  kpi_name:
-    type: text
-    mappings:
-    - type: from_text
-      conditions:
-      - active_loop: new_kpi_form
-        requested_slot: kpi_name
-  kpi_definition:
-    type: text
-    mappings:
-    - type: from_text
-      conditions:
-      - active_loop: new_kpi_form
-        requested_slot: kpi_definition
-  kpi_definition_not_form:
-    type: text
-    mappings:
-    - type: custom
-  predefined:
-    type: bool
-    influence_conversation: true
-    mappings:
-    - type: custom
-  userdefined:
-    type: bool
-    influence_conversation: true
-    mappings:
-    - type: custom
-  args_to_be_asked:
-    type: list
-    influence_conversation: true
-    mappings:
-    - type: custom
-      # conditions:
-      # - active_loop: missing_info_form
-      #   requested_slot: missing_info
-  args_dict:
-    type: any
-    mappings:
-    - type: custom
-  arg_1:
-    type: text
-    mappings:
-    - type: from_text
-      conditions:
-      - active_loop: args_form
-        requested_slot: arg_1
-  arg_2:
-    type: text
-    mappings:
-    - type: from_text
-      conditions:
-      - active_loop: args_form
-        requested_slot: arg_2
-  arg_3:
-    type: text
-    mappings:
-    - type: from_text
-      conditions:
-      - active_loop: args_form
-        requested_slot: arg_3
-  has_skip:
-    type: bool
-    influence_conversation: true
-    mappings:
-    - type: custom
-  has_skip_quiz:
-    type: bool
-    influence_conversation: true
-    mappings:
-    - type: custom
-  quiz_1:
-    type: text
-    mappings:
-    - type: from_text
-      conditions:
-      - active_loop: quiz_form
-        requested_slot: quiz_1
-  quiz_question:
-    type: text
-    influence_conversation: true
     mappings:
     - type: custom
   faqs_q:
@@ -314,76 +162,35 @@ slots:
       - 2
       - 3
       - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      - 9
     influence_conversation: true
     mappings:
-    - type: custom
+    - type: from_entity
+      entity: service
   q_type:
     type: text
     influence_conversation: false
     mappings:
     - type: custom
-  self_learning:
-    type: bool
-    influence_conversation: true
-    mappings:
-    - type: custom
-  language:
-    type: text
-    mappings:
-    - type: from_entity
-      entity: language
   identifier_faqs:
     type: bool
     influence_conversation: true
     mappings:
     - type: from_entity
       entity: identifier_faqs
-
+  query:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
 forms:
   kpi_form:
-    # ignored_intents: 
-    # - chitchat
-    # - faq
-    # - nlu_fallback
     required_slots:
-      - place
-      - kpi
-      - DATE
-  charger_type_form:
-    required_slots:
-      - place
-      - charger_type
-  charger_operator_form:
-    required_slots:
-      - place
-      - operator
-
-  new_kpi_form:
-    # ignored_intents: 
-    # - chitchat
-    # - faq
-    # - nlu_fallback
-    required_slots:
-      - kpi_name
-      - kpi_definition
-  args_form:
-    required_slots:
-      - arg_1
-  quiz_form:
-    required_slots:
-      - quiz_1
+      - time
+  
   nearby_search_form:
     required_slots:
       - address
       - radius
-  nearest_search_form:
-    required_slots:
-      - address
   add_faqs_form:
     required_slots:
       - faqs_q
@@ -391,261 +198,101 @@ forms:
 
 responses:
   utter_ask_place:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Welcher Ort interessiert Sie? Sie können den Namen eines Bundeslandes/einer Stadt oder einfach „Kreis“ oder „Bundesland“ eingeben."
     - text: "Which place are you interested in? You can enter name of a federal state/city or simply 'county' or 'federal state'."
 
+  utter_ask_time:
+    - text: "What time are you interested in? Please enter a month using the format 'January 2022'."
+
+  utter_ask_kpi:
+    - text: "Which KPI are you interested in? Please choose one from the KPI listed above."
+
   utter_kpi_query:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Was ist Ihre Anfrage?"
     - text: "What's your query?"
 
   utter_query_received:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Ok, Anfrage erhalten. Bitte bestätigen Sie Folgendes."
-    - text: "Ok, query received. Please confirm the following."
-
-  utter_not_found_kpi:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Tut mir leid, ich habe keine Informationen zu diesem KPI in der Wissensdatenbank gefunden. Möchten Sie es als neuen KPI definieren?"
-    - text: "Sorry, I did not find information about this KPI in knowledgebase. Do you want to define it as a new KPI?"
-
-  utter_not_found_statistics:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Entschuldigung, es fehlt Wissen. Kannst du mir dabei helfen?"
-    - text: "Sorry, there is missing knowledge. Can you help me with it?"
+    - text: "I received your query! Please confirm the following."
 
   utter_query_completed:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Anfrage läuft gerade..."
     - text: "Query now in process..."
 
   utter_ask_for_clarification:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Bitte korrigieren Sie den falschen Teil im Format '[Name]: xxx', z.B. Wenn Sie den Ort wechseln möchten, können Sie „Ort: Berlin“ eingeben."
     - text: "Please correct the false part using the format '[name]: xxx', e.g. if you want to change place, you can type 'place: Berlin'."
 
+  utter_faqs:
+    - text: "What do you want to know more about E-Mobility?"
 
   utter_out_of_scope:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Ups, ich bin ratlos..."
     - text: "Oops, I am stumped..."
 
   utter_ask_rephrase:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Entschuldigung, könnten Sie das umformulieren?"
     - text: "Sorry, could you rephrase that?"
 
   utter_default:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Es tut mir leid, ich kann Ihnen nicht helfen. Sie können 0 eingeben, um zum Hauptmenü zurückzukehren und erneut zu fragen."
     - text: "I'm sorry, I can't help you. You can type 0 to go back to the main menu and start asking again."
   
   utter_sorry:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Was kann ich Ihnen sonst noch helfen?"
     - text: "What else can I help you?"
 
   utter_greet:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "hallo"
-    - text: "hi"
     - text: "hello"
 
   utter_goodbye:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Tschüssi!"
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Aufwiedersehen!"
     - text: "goodbye!"
-    - text: "bye!"
 
-  
   utter_welcome:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Hallo, hier ist der E-Mobility Chatbot👋 Ich helfe dir bei Fragen zur E-Mobilität😃"
     - text: "Hi, it's E-Mobility chatbot here👋 Let me help you with E-Mobility questions😃"
 
   utter_main_menu:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Hier ist das Hauptmenü. Sie können einen Dienst auswählen, indem Sie die Nummer eintippen. Geben Sie 0 ein, um zum Hauptmenü zurückzukehren.  \n
-          1. KPI-Abfrage  \n
-          2. Umkreissuche  \n
-          3. FAQs zur E-Mobilität  \n
-          4. Hilfe"
-    - text: "Here is the main menu. You can choose a service by typing the number. Type 0 to return to the main menu.  \n
-          1. KPI query  \n
-          2. Nearby Search  \n
-          3. E-Mobility FAQs  \n
-          4. Help"
+    - text: "What do you want to do? 😃"
+      buttons:
+      - title: "KPI query"
+        payload: '/choose_service{{"service":1}}'
+      - title: "Nearby Search"
+        payload: '/choose_service{{"service":2}}'
+      - title: "E-Mobility FAQs"
+        payload: '/choose_service{{"service":3}}'
+      - title: "Help"
+        payload: '/choose_service{{"service":4}}'
 
-  # utter_menu_3:
-  #   - condition:
-  #     - type: slot
-  #       name: language
-  #       value: german
-  #     text: "Definitionen von KPIs:  \n
-  #           'Standorte': Anzahl der Ladeinfrastrukturplätze.  \n
-  #           'Ladesäulen': Anzahl der Ladestationen.  \n
-  #           'Ladepunkte': Anzahl der Ladepunkte.  \n
-  #           'Ladepunkte_pro_1.000_Pkw': Anzahl der Ladepunkte pro 1.000 zugelassene Pkw.  \n
-  #           'Pkw_pro_Ladepunkt': Anzahl der zugelassenen Pkw pro Ladepunkt.  \n
-  #           'Zielerreichung': erreichter Ladepunktanteil bezogen auf die geforderte Mindestzahl an Ladepunkten für 2030.  \n
-  #           'Schnellladestationen': Anzahl der Schnellladestationen.  \n
-  #           'Normalladestationen': Anzahl der normalen Ladestationen.  \n
-  #           'Ladestationsbetreiber': Namen von Ladestationsbetreibern.  \n
-  #           "
-  #   - text: "Definitions of KPIs:  \n
-  #          'Locations': number of charging infrastructure places.  \n
-  #          'Charging_stations': number of charging stations. A charging station can have one or more charging points.'  \n
-  #          'Charging_points': number of charging points.  \n
-  #          'Charging_points_per_1,000_cars': number of charging points per 1,000 registered passenger cars.  \n
-  #          'Cars_per_charging_point': number of registered passenger cars per charging point.  \n
-  #          'Percentage_of_target': achieved share of charging points in relation to the required minimum number of charging points for 2030.  \n
-  #          'Fast_charging_stations': number of fast charging stations.  \n
-  #          'Normal_charging_stations': number of normal charging stations.  \n
-  #          'Charging_station_operators': names of charging station operators.  \n
-  #          "
   utter_help:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Sehen Sie sich die Details der einzelnen Dienste unten an:  \n
-            1.'KPI-Abfrage': Abfrage des KPI-Werts.  \n
-            2.'Nahsuche': Ladestationen in einem Umkreis um einen bestimmten Ort.  \n
-            3.'KPI-Definitionen': Die Definitionen der verfügbaren KPIs.  \n
-            4.'FAQs zur E-Mobilität': Stellen Sie Fakten zur E-Mobilität in Form von FAQs vor  \n
-            5.'Neuen KPI hinzufügen': Fügen Sie einen neuen KPI der Wissensdatenbank hinzu.  \n
-            6.'Wissen hinzufügen': Beantworten Sie Fragen zu E-Mobility KPIs.  \n
-            7.'Häufig gestellte Fragen hinzufügen': Fügen Sie neue FAQ-Paare der Wissensdatenbank hinzu.  \n
-            8.'Hilfe': Details aller Dienste.  \n
-            0.'Hauptmenü': Zurück zum Hauptmenü."
     - text: "See the details of each service below:  \n
             1.'KPI query': Query the KPI value.  \n
-            2.'Nearby Search': Find charging stations within a radius around a given place.  \n
-            3.'KPI definitions': The definitions of the available KPIs.  \n
-            4.'E-Mobility FAQs': Introduce facts about emobility in the form of FAQs  \n
-            5.'Add a new KPI': Add a new KPI to the knowledge base.  \n
-            6.'Add knowledge': Answer E-Mobility KPI-related questions.  \n
-            7.'Add FAQs': Add new FAQ pairs to the knowledge base.  \n
-            8.'Help': Details of all the services.  \n
+            2.'Nearby Search': Find charging stations within a radius around a given place.  \n           
+            3.'E-Mobility FAQs': Introduce facts about emobility in the form of FAQs  \n
+            4.'Help': Details of all the services.  \n
             0.'Main menu': Back to main menu."
 
   utter_thanks_quiz:
-    - condition:
-      - type: slot
-        name: language
-        value: german
-      text: "Dankeschön!😀"
     - text: "Thank you!😀"
 
 actions:
   - utter_ask_place
-  - utter_ask_DATE
-  - action_ask_kpi
-  - action_ask_arg_1
-  - action_ask_arg_2
-  - action_ask_arg_3
-  - action_ask_quiz_1
+  - utter_ask_time
   - action_ask_address
   - action_ask_radius
   - action_ask_faqs_a
   - action_ask_faqs_q
-  - action_query_clarify
-  - action_query_confirm
-  - action_slot_check
-  - action_execute_agg_query
-  - action_execute_group_sort_query
-  - action_execute_filter_query
-  - action_execute_limit_query
-  - action_convert_date
+  - action_execute_kpi_query
   - validate_kpi_form
   - action_check_coref
   - action_store_slots
   - action_reset_slots_except_stored
   - action_set_stored
   - action_two_stage_fallback
-  - action_new_kpi_confirm
-  - action_define_kpi_finished
-  - action_save_kpi_name_lookup
-  - action_not_found_statistics
-  - action_map_args
-  - action_continue_agg_query
-  - action_store_questions
-  - action_check_skip
-  - action_store_knowledge
-  - action_not_found_userdefined
-  - action_quiz_finished
   - action_nearby_search
+  - action_nearby_search_start
   - action_service_mapping
-  - action_no_quiz
-  - action_check_quiz
-  - action_ask_another_quiz
   - action_kpi_list
   - action_custom_slot_mapping
-  - action_execute_charger_operator_query
-  - action_execute_charger_type_query
   - action_add_faqs_finished
   - action_give_faqs_finished
   - action_continue_options
-  - action_disambiguate
   - action_reset_slots_except_service
   - action_query_classification
-  - action_check_predefined_and_userdefined
-  - validate_args_form
-  - action_restart
   - action_change_slot
-  - action_set_en
-  - action_set_ger
+  - action_restart
+  - action_query_confirm
+
 
 session_config:
   session_expiration_time: 60

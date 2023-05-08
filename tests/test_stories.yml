@@ -159,7 +159,6 @@ stories:
   - action: utter_main_menu
   - action: action_restart
 
-
 - story: give 1 faq + add x2  + have + main_menu(origin)
   steps:
   - intent: choose_service
@@ -204,7 +203,6 @@ stories:
   - intent: main_menu
   - action: utter_main_menu
   - action: action_restart
-
 
 - story: give 1 faq + add  + have + add + main_menu(new)
   steps:
@@ -255,8 +253,6 @@ stories:
   - intent: main_menu
   - action: utter_main_menu
   - action: action_restart
-
-
 
 - story: give 1 faq + addx2  + havex2 + main_menu(new)
   steps:

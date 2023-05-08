@@ -6,7 +6,6 @@ rules:
   steps:
   - intent: greet
   - action: utter_greet
-  - action: action_restart
 
 - rule: welcome
   steps:
@@ -21,17 +20,6 @@ rules:
   - action: action_restart
 
 
-- rule: reset
-  steps:
-  - intent: reset
-  - action: action_restart
-  - action: action_slot_check
-
-- rule: check_slot_input
-  steps:
-  - intent: check_slot_input
-  - action: action_slot_check  
-
 - rule: Activate kpi form
   steps:
   - action: kpi_form
@@ -39,7 +27,7 @@ rules:
   - slot_was_set:
     - place: "Berlin"
   - slot_was_set:
-    - DATE: "2021"
+    - time: "2021"
   - slot_was_set:
     - kpi: "locations"
   - slot_was_set:
@@ -50,66 +38,6 @@ rules:
   - active_loop: kpi_form
   steps:
   - action: kpi_form
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  wait_for_user_input: false
-
-
-- rule: Activate new kpi form
-  steps:
-  - action: new_kpi_form
-  - active_loop: new_kpi_form
-
-
-- rule: Submit new kpi form
-  condition:
-  - active_loop: new_kpi_form
-  steps:
-  - action: new_kpi_form
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  wait_for_user_input: false
-
-
-- rule: Activate charger type form
-  steps:
-  - action: charger_type_form
-  - active_loop: charger_type_form
-  - slot_was_set:
-    - place: "Berlin"
-  - slot_was_set:
-    - charger_type: "normal"
-  - slot_was_set:
-    - requested_slot: null 
-
-- rule: Submit charger type form
-  condition:
-  - active_loop: charger_type_form
-  steps:
-  - action: charger_type_form
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  wait_for_user_input: false
-
-- rule: Activate charger operator form
-  steps:
-  - action: charger_operator_form
-  - active_loop: charger_operator_form
-  - slot_was_set:
-    - place: "Berlin"
-  - slot_was_set:
-    - operator: "allego"
-  - slot_was_set:
-    - requested_slot: null 
-
-- rule: Submit charger operator form
-  condition:
-  - active_loop: charger_operator_form
-  steps:
-  - action: charger_operator_form
   - active_loop: null
   - slot_was_set:
     - requested_slot: null

@@ -1,25 +1,35 @@
 import stat
 from rasa_sdk import Action, Tracker, FormValidationAction
 import datetime
-
+from backend.db import QueryMethods
 
 class CheckTime:
+
     def __init__(self):
         pass
 
-    def time_mapping(self, time, special_period_expression):
-        return self.convert_time(time, special_period_expression)
+    def time_mapping(self, time, special_period_expression, monthly_form):
+        return self.convert_time(time, special_period_expression, monthly_form)
 
     @staticmethod
-    def time_out_of_range(time):
-        return time > '202301' or time < '201701'
+    def time_out_of_range(time, has_prediction):
+        if has_prediction:
+            return time > '202312' or time < '201701'
+        else:
+            return time > '202212' or time < '201701'
 
-    # def kpi_is_prediction(self, time, special_period_expression):
-    #     return self.time_mapping(time, special_period_expression) >= '202205'
+    @staticmethod
+    def get_latest_timestamp():
+        sql_query = QueryMethods()
+        execute = 'SELECT TO_CHAR(update_timestamp, \'yyyy\'), TO_CHAR(update_timestamp, \'MM\') FROM \"E-Mobility\".emo_historical LIMIT 1'
+        results = sql_query.execute_sqlquery(execute)
+        latest_month = results[0][0] + results[0][1]
 
-    def convert_time(self,old_time, special_period_expression):
+        return latest_month
+
+    def convert_time(self,old_time, special_period_expression, monthly_form):
         '''
-        special period expression means period+len(DATE)==1, e.g. last year instead of from \n
+        special period expression means period and len(DATE)==1, e.g. last year instead of from \n
         01.2021 to 01.2022, where len(DATE) ==2 
         Convert user-expressed time format into a unified format
         input: str
@@ -51,6 +61,21 @@ class CheckTime:
         years = ['2023','2022', '2021', '2020', '2019', '2018', '2017']
         special_words_01 = ['beginning', 'first']
         special_words_02 = ['end', 'twelfth', 'last month of']
+
+        month_transfer = {
+            '01': '02',
+            '02': '03',
+            '03': '04',
+            '04': '05',
+            '05': '06',
+            '06': '07',
+            '07': '08',
+            '08': '09',
+            '09': '10',
+            '10': '11',
+            '11': '12',
+            '12': '01'
+        }
 
         # mapping
         if special_period_expression:
@@ -184,7 +209,12 @@ class CheckTime:
                         mapped_time_start, mapped_time_end = str(int(slot_year)-1)+'12', mapped_time
                     else:
                         # 202005-202004
-                        mapped_time_start, mapped_time_end = str(int(mapped_time)-1), mapped_time              
+                        mapped_time_start, mapped_time_end = str(int(mapped_time)-1), mapped_time  
+
+            if not monthly_form:
+                mapped_time_start = mapped_time_start[:4]+'-'+month_transfer[mapped_time_start[4:6]]+'-01'
+                mapped_time_end = mapped_time_end[:4]+'-'+month_transfer[mapped_time_end[4:6]]+'-01'   
+
             return mapped_time_start, mapped_time_end
         else:
             # timepoint        
@@ -280,10 +310,13 @@ class CheckTime:
 
                 mapped_time = slot_year+slot_month
 
+            if not monthly_form:
+                mapped_time = mapped_time[:4]+'-'+month_transfer[mapped_time[4:6]]+'-01'
+
             return mapped_time
 
 
 
 # test 
-time_checker = CheckTime()
-print(time_checker.convert_time('March 2021', False))
+# time_checker = CheckTime()
+# print(time_checker.convert_time('March 2021', False, True))

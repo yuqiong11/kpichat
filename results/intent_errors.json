@@ -1,234 +1,98 @@
 [
   {
-    "text": "Which county in Hessen have increased the number of charging points the most in 2021?",
-    "intent": "agg_query",
-    "intent_prediction": {
-      "name": "limit_query",
-      "confidence": 0.9858312606811523
-    }
-  },
-  {
-    "text": "which operator has the least number of chargepoints in Berlin?",
-    "intent": "charger_operator",
-    "intent_prediction": {
-      "name": "agg_query",
-      "confidence": 0.6746826767921448
-    }
-  },
-  {
-    "text": "y",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "chitchat",
-      "confidence": 0.5323712229728699
-    }
-  },
-  {
-    "text": "correct",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "deny",
-      "confidence": 0.31503838300704956
-    }
-  },
-  {
-    "text": "cu",
-    "intent": "chitchat",
-    "intent_prediction": {
-      "name": "faq",
-      "confidence": 0.3188052177429199
-    }
-  },
-  {
-    "text": "have a nice day",
-    "intent": "chitchat",
-    "intent_prediction": {
-      "name": "filter_query",
-      "confidence": 0.9865098595619202
-    }
-  },
-  {
-    "text": "Until last month, what's the highest Chargepoints per cars among all federal states?",
-    "intent": "agg_query",
-    "intent_prediction": {
-      "name": "filter_query",
-      "confidence": 0.9301083087921143
-    }
-  },
-  {
-    "text": "How many new charging points were build in Hessen, Niedersachsen and Sachsen between March 2019 and November 2021?",
-    "intent": "agg_query",
-    "intent_prediction": {
-      "name": "filter_query",
-      "confidence": 0.9991224408149719
-    }
-  },
-  {
-    "text": "what is the average increase of charging station per county each year?",
+    "text": "what is the increased num of locations in each county in Sachsen from 2019 to 2022.",
     "intent": "agg_query",
     "intent_prediction": {
       "name": "group_sort_query",
-      "confidence": 0.998997151851654
+      "confidence": 0.9730614423751831
     }
   },
   {
-    "text": "what is the increased num of locations in each county in Schleswig-Holstein from 2019 to 2022.",
-    "intent": "agg_query",
-    "intent_prediction": {
-      "name": "group_sort_query",
-      "confidence": 0.9996113181114197
-    }
-  },
-  {
-    "text": "states that have the most new Charging_stations in last two years?",
+    "text": "Der Landkreis mit der höchsten Anzahl an Ladepunkten im Januar 2021.",
     "intent": "agg_query",
     "intent_prediction": {
       "name": "limit_query",
-      "confidence": 0.9999855756759644
+      "confidence": 0.7443398237228394
     }
   },
   {
-    "text": "show all states the number of  Chargin_points in Feb 2021.",
-    "intent": "group_sort_query",
+    "text": "Welches der Bundesländer beinhaltet die höchste Anzahl an Ladepunkten im [Oktober 2021]?",
+    "intent": "agg_query",
     "intent_prediction": {
-      "name": "filter_query",
-      "confidence": 0.6250281929969788
+      "name": "limit_query",
+      "confidence": 0.8505306839942932
     }
   },
   {
-    "text": "return number of Location in all states at the end of 2021.",
-    "intent": "group_sort_query",
-    "intent_prediction": {
-      "name": "agg_query",
-      "confidence": 0.9931071400642395
-    }
-  },
-  {
-    "text": "Return the number of charging points in all federal states at the end of 2022.",
-    "intent": "group_sort_query",
-    "intent_prediction": {
-      "name": "agg_query",
-      "confidence": 0.8908953070640564
-    }
-  },
-  {
-    "text": "The states with number of charge_stations below average in Mar 2021.",
-    "intent": "filter_query",
-    "intent_prediction": {
-      "name": "agg_query",
-      "confidence": 0.7213494777679443
-    }
-  },
-  {
-    "text": "I want to know number of slow charging_stations in MECKLENBURG-VORPOMMERN.",
+    "text": "Was ist der durchschnitt der [normal] {\"entity\": \"charger_type\", \"value\": \"normal\"} Ladestationen in Bayern?",
     "intent": "charger_type",
     "intent_prediction": {
-      "name": "agg_query",
-      "confidence": 0.9999488592147827
+      "name": "co_reference",
+      "confidence": 0.6507919430732727
     }
   },
   {
-    "text": "yes",
+    "text": "1000",
+    "intent": "coreference_radius",
+    "intent_prediction": {
+      "name": "choose_service",
+      "confidence": 0.7957931160926819
+    }
+  },
+  {
+    "text": "Weiter",
+    "intent": "continue",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.4450969696044922
+    }
+  },
+  {
+    "text": "that sounds good",
     "intent": "affirm",
     "intent_prediction": {
-      "name": "chitchat",
-      "confidence": 0.6215823292732239
+      "name": "goodbye",
+      "confidence": 0.8446947932243347
     }
   },
   {
-    "text": "of course",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "chitchat",
-      "confidence": 0.2672111988067627
-    }
-  },
-  {
-    "text": "never",
+    "text": "Nein",
     "intent": "deny",
     "intent_prediction": {
-      "name": "chitchat",
-      "confidence": 0.3867606520652771
+      "name": "affirm",
+      "confidence": 0.29053446650505066
     }
   },
   {
-    "text": "hi",
-    "intent": "chitchat",
+    "text": "Auf keinen Fall",
+    "intent": "deny",
     "intent_prediction": {
-      "name": "deny",
-      "confidence": 0.5728638172149658
+      "name": "affirm",
+      "confidence": 0.9227783679962158
     }
   },
   {
-    "text": "At end of the 2020, the average number of Percentage_of_target of all states.",
-    "intent": "agg_query",
+    "text": "Auf Wiedersehen",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.42196208238601685
+    }
+  },
+  {
+    "text": "I want to buy a electric car",
+    "intent": "out_of_scope",
     "intent_prediction": {
       "name": "group_sort_query",
-      "confidence": 0.5611547231674194
+      "confidence": 0.24146772921085358
     }
   },
   {
-    "text": "The average number of Charge_stations of all states At end of 2022.",
-    "intent": "agg_query",
+    "text": "Wie siehts mit Tesla aus?",
+    "intent": "out_of_scope",
     "intent_prediction": {
-      "name": "group_sort_query",
-      "confidence": 0.998094379901886
-    }
-  },
-  {
-    "text": "Did the increase of number of charging points from 2020 to 2021 in Bayern exceed 55?",
-    "intent": "filter_query",
-    "intent_prediction": {
-      "name": "agg_query",
-      "confidence": 0.9999158382415771
-    }
-  },
-  {
-    "text": "Which three county in Hessen have increased the number of charging points the most in August 2021?",
-    "intent": "limit_query",
-    "intent_prediction": {
-      "name": "agg_query",
-      "confidence": 0.9999986886978149
-    }
-  },
-  {
-    "text": "show 7 federal states that are having maximum number of  charging_points in Mar 2021.",
-    "intent": "limit_query",
-    "intent_prediction": {
-      "name": "filter_query",
-      "confidence": 0.9964510202407837
-    }
-  },
-  {
-    "text": "how many normal charge stations are there in Germany?",
-    "intent": "charger_type",
-    "intent_prediction": {
-      "name": "agg_query",
-      "confidence": 0.9238943457603455
-    }
-  },
-  {
-    "text": "The county in Niedersachsen that has the largest amount of normal charging stations.",
-    "intent": "charger_type",
-    "intent_prediction": {
-      "name": "agg_query",
-      "confidence": 0.9749529361724854
-    }
-  },
-  {
-    "text": "what kind of suppliers are there in Sachsen?",
-    "intent": "charger_operator",
-    "intent_prediction": {
-      "name": "charger_type",
-      "confidence": 0.4801338016986847
-    }
-  },
-  {
-    "text": "help",
-    "intent": "faq",
-    "intent_prediction": {
-      "name": "chitchat",
-      "confidence": 0.9027215838432312
+      "name": "co_reference",
+      "confidence": 0.9795976281166077
     }
   },
   {
@@ -236,31 +100,383 @@
     "intent": "agg_query",
     "intent_prediction": {
       "name": "limit_query",
-      "confidence": 0.7579899430274963
+      "confidence": 0.39013996720314026
     }
   },
   {
-    "text": "The federal state with the maximum number of chargingstations in 2017.08.",
+    "text": "At end of 2020, the average number of Percentage_of_target of all states.",
     "intent": "agg_query",
     "intent_prediction": {
-      "name": "limit_query",
-      "confidence": 0.7938547730445862
+      "name": "group_sort_query",
+      "confidence": 0.5443653464317322
     }
   },
   {
-    "text": "Return the state which has the highest percentage_of_target now.",
-    "intent": "agg_query",
+    "text": "what are the 4 states that have highest number of increased Charging_points in last month ?",
+    "intent": "limit_query",
     "intent_prediction": {
-      "name": "limit_query",
-      "confidence": 0.9173690676689148
+      "name": "agg_query",
+      "confidence": 0.5991702675819397
     }
   },
   {
-    "text": "Which state in Germany had the highest increase in the number of charging stations from 2015 to 2022?",
+    "text": "der Landkreis 3, dessen Anzahl von Ladepunkten im Mai 2021 unten steht.",
+    "intent": "limit_query",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.9735510945320129
+    }
+  },
+  {
+    "text": "I want to know number of slow charging_stations in MECKLENBURG-VORPOMMERN.",
+    "intent": "charger_type",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.9746540784835815
+    }
+  },
+  {
+    "text": "which county in Sachsen has the minimum number of fast charging stations?",
+    "intent": "charger_type",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.8581923842430115
+    }
+  },
+  {
+    "text": "How does the ownership structure of the charging points Look like?",
+    "intent": "charger_operator",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.18906182050704956
+    }
+  },
+  {
+    "text": "800",
+    "intent": "coreference_radius",
+    "intent_prediction": {
+      "name": "choose_service",
+      "confidence": 0.7025532722473145
+    }
+  },
+  {
+    "text": "y",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.4140310287475586
+    }
+  },
+  {
+    "text": "not really",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "main_menu",
+      "confidence": 0.2011166512966156
+    }
+  },
+  {
+    "text": "good by",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.5589684247970581
+    }
+  },
+  {
+    "text": "goodbye",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.4993513822555542
+    }
+  },
+  {
+    "text": "Ich möchte ein E-Auto kaufen",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "reset",
+      "confidence": 0.16724614799022675
+    }
+  },
+  {
+    "text": "How many new charging points were build in Hessen, Niedersachsen and Sachsen between march 2019 and november 2021?",
+    "intent": "agg_query",
+    "intent_prediction": {
+      "name": "continue",
+      "confidence": 0.2875383198261261
+    }
+  },
+  {
+    "text": "return number of Location in all states at the end of 2021.",
+    "intent": "group_sort_query",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.7684349417686462
+    }
+  },
+  {
+    "text": "what are the 5 states that have the most new Charging_stations from 2020 to 2022?",
+    "intent": "limit_query",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.4700675308704376
+    }
+  },
+  {
+    "text": "3 states with the highest Cars_per_chargingpoint by now?",
+    "intent": "limit_query",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.8417626023292542
+    }
+  },
+  {
+    "text": "Give me the company with largest number of charging stations in Berlin.",
+    "intent": "charger_operator",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.9988905787467957
+    }
+  },
+  {
+    "text": "what kind of suppliers are there in Sachsen?",
+    "intent": "charger_operator",
+    "intent_prediction": {
+      "name": "limit_query",
+      "confidence": 0.3839361071586609
+    }
+  },
+  {
+    "text": "how do the companys in Germany look like?",
+    "intent": "charger_operator",
+    "intent_prediction": {
+      "name": "charger_type",
+      "confidence": 0.38043519854545593
+    }
+  },
+  {
+    "text": "600",
+    "intent": "coreference_radius",
+    "intent_prediction": {
+      "name": "choose_service",
+      "confidence": 0.7391576170921326
+    }
+  },
+  {
+    "text": "yes",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.43032440543174744
+    }
+  },
+  {
+    "text": "Hört sich gut an",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "co_reference",
+      "confidence": 0.4145743250846863
+    }
+  },
+  {
+    "text": "don't like that",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "charger_operator",
+      "confidence": 0.21201971173286438
+    }
+  },
+  {
+    "text": "hi",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.21447473764419556
+    }
+  },
+  {
+    "text": "good afternoon",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.7521094083786011
+    }
+  },
+  {
+    "text": "Bis später",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "charger_operator",
+      "confidence": 0.27907028794288635
+    }
+  },
+  {
+    "text": "Bis dann",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.3060690462589264
+    }
+  },
+  {
+    "text": "September 2020",
+    "intent": "date",
+    "intent_prediction": {
+      "name": "group_sort_query",
+      "confidence": 0.8063075542449951
+    }
+  },
+  {
+    "text": "Tell me how many locations are there in July 2021?",
+    "intent": "agg_query",
+    "intent_prediction": {
+      "name": "group_sort_query",
+      "confidence": 0.5068809390068054
+    }
+  },
+  {
+    "text": "The avg number of chargingstatons of all federal states.",
+    "intent": "agg_query",
+    "intent_prediction": {
+      "name": "group_sort_query",
+      "confidence": 0.8496443033218384
+    }
+  },
+  {
+    "text": "please tell me the state that has the most Charging_points.",
     "intent": "agg_query",
     "intent_prediction": {
       "name": "limit_query",
-      "confidence": 0.8507301807403564
+      "confidence": 0.5159165263175964
+    }
+  },
+  {
+    "text": "Return cars per chargingpoints for Coburg last month.",
+    "intent": "agg_query",
+    "intent_prediction": {
+      "name": "group_sort_query",
+      "confidence": 0.634905993938446
+    }
+  },
+  {
+    "text": "Which county in Hessen have increased the number of charging points the most in 2021?",
+    "intent": "agg_query",
+    "intent_prediction": {
+      "name": "limit_query",
+      "confidence": 0.9669974446296692
+    }
+  },
+  {
+    "text": "states that have the most new Charging_stations in last two years?",
+    "intent": "agg_query",
+    "intent_prediction": {
+      "name": "limit_query",
+      "confidence": 0.9944366216659546
+    }
+  },
+  {
+    "text": "what is the increment of locations in each federal state from September 2022 to March 2022.",
+    "intent": "group_sort_query",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.977637529373169
+    }
+  },
+  {
+    "text": "The county in Niedersachsen that has the [largest] amount of normal charging stations.",
+    "intent": "charger_type",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.9786848425865173
+    }
+  },
+  {
+    "text": "What about bottom 3?",
+    "intent": "co_reference",
+    "intent_prediction": {
+      "name": "limit_query",
+      "confidence": 0.5669124722480774
+    }
+  },
+  {
+    "text": "and the lowest",
+    "intent": "co_reference",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.4909617602825165
+    }
+  },
+  {
+    "text": "Wie wars letzten Monat",
+    "intent": "co_reference",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.42157623171806335
+    }
+  },
+  {
+    "text": "700",
+    "intent": "coreference_radius",
+    "intent_prediction": {
+      "name": "choose_service",
+      "confidence": 0.4491368532180786
+    }
+  },
+  {
+    "text": "Natürlich",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.8509088754653931
+    }
+  },
+  {
+    "text": "Auf jeden fall",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "group_sort_query",
+      "confidence": 0.6760414242744446
+    }
+  },
+  {
+    "text": "Klar",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.2720434069633484
+    }
+  },
+  {
+    "text": "never",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "check_slot_input",
+      "confidence": 0.14659368991851807
+    }
+  },
+  {
+    "text": "/neustart",
+    "intent": "restart",
+    "intent_prediction": {
+      "name": "neustart",
+      "confidence": 1.0
+    }
+  },
+  {
+    "text": "let's go",
+    "intent": "greet",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.19404327869415283
+    }
+  },
+  {
+    "text": "have a nice day",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "limit_query",
+      "confidence": 0.565703272819519
     }
   },
   {
@@ -268,7 +484,31 @@
     "intent": "agg_query",
     "intent_prediction": {
       "name": "limit_query",
-      "confidence": 0.9898521304130554
+      "confidence": 0.9980286955833435
+    }
+  },
+  {
+    "text": "Was ist die Anzahl der [Ladestationen] {\"entity\": \"kpi\", \"value\": \"Charging_stations\"} in Berlin bis [ende 2019] in Berlin?",
+    "intent": "agg_query",
+    "intent_prediction": {
+      "name": "charger_type",
+      "confidence": 0.9242867827415466
+    }
+  },
+  {
+    "text": "Welche zielereichung hat Hamburg bis zum Juli 2019 erreicht?",
+    "intent": "agg_query",
+    "intent_prediction": {
+      "name": "limit_query",
+      "confidence": 0.6716872453689575
+    }
+  },
+  {
+    "text": "Which three county in Hessen have increased the number of charging points the most in August 2021?",
+    "intent": "limit_query",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.981819748878479
     }
   },
   {
@@ -276,79 +516,87 @@
     "intent": "limit_query",
     "intent_prediction": {
       "name": "agg_query",
-      "confidence": 0.9999847412109375
+      "confidence": 0.9997023940086365
+    }
+  },
+  {
+    "text": "Which provider is currently the strongest in hesse?",
+    "intent": "charger_operator",
+    "intent_prediction": {
+      "name": "agg_query",
+      "confidence": 0.8934581279754639
+    }
+  },
+  {
+    "text": "500",
+    "intent": "coreference_radius",
+    "intent_prediction": {
+      "name": "choose_service",
+      "confidence": 0.5055626630783081
+    }
+  },
+  {
+    "text": "indeed",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.20574332773685455
+    }
+  },
+  {
+    "text": "of course",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "reset",
+      "confidence": 0.22063103318214417
     }
   },
   {
     "text": "true",
     "intent": "affirm",
     "intent_prediction": {
-      "name": "deny",
-      "confidence": 0.2014881819486618
-    }
-  },
-  {
-    "text": "not really",
-    "intent": "deny",
-    "intent_prediction": {
-      "name": "affirm",
-      "confidence": 0.32069799304008484
+      "name": "greet",
+      "confidence": 0.20886558294296265
     }
   },
   {
     "text": "moin",
-    "intent": "chitchat",
+    "intent": "greet",
     "intent_prediction": {
       "name": "deny",
-      "confidence": 0.40453821420669556
+      "confidence": 0.24139967560768127
     }
   },
   {
-    "text": "what can you do?",
-    "intent": "faq",
+    "text": "cu",
+    "intent": "goodbye",
     "intent_prediction": {
-      "name": "chitchat",
-      "confidence": 0.8239150643348694
+      "name": "affirm",
+      "confidence": 0.17250734567642212
     }
   },
   {
-    "text": "February 2022",
+    "text": "good night",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "greet",
+      "confidence": 0.6267057657241821
+    }
+  },
+  {
+    "text": "how is the charging infrastructure in the US?",
+    "intent": "out_of_scope",
+    "intent_prediction": {
+      "name": "charger_operator",
+      "confidence": 0.5170537829399109
+    }
+  },
+  {
+    "text": "April 2022",
     "intent": "date",
     "intent_prediction": {
-      "name": "filter_query",
-      "confidence": 0.6529828310012817
-    }
-  },
-  {
-    "text": "the new charginstations in each county in Thüringer.",
-    "intent": "agg_query",
-    "intent_prediction": {
-      "name": "group_sort_query",
-      "confidence": 0.9991162419319153
-    }
-  },
-  {
-    "text": "What's the rising number of charging_point of each state between 09.2020 and 12.2020?",
-    "intent": "group_sort_query",
-    "intent_prediction": {
-      "name": "agg_query",
-      "confidence": 0.9130125045776367
-    }
-  },
-  {
-    "text": "and the lowest",
-    "intent": "co_reference",
-    "intent_prediction": {
-      "name": "chitchat",
-      "confidence": 0.3171756863594055
-    }
-  },
-  {
-    "text": "that sounds good",
-    "intent": "affirm",
-    "intent_prediction": {
-      "name": "chitchat",
-      "confidence": 0.9781598448753357
+      "name": "limit_query",
+      "confidence": 0.9613084197044373
     }
   }
 ]

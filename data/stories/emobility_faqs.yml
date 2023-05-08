@@ -4,9 +4,11 @@ stories:
 - story: give 1 faq + main_menu
   steps:
   - intent: choose_service
-  - action: action_service_mapping
+  # - action: action_service_mapping
   - slot_was_set:
     - service: 3
+  - action: utter_faqs
+  - intent: give_faqs
   - action: action_give_faqs_finished
   - action: action_continue_options
   - intent: main_menu
@@ -16,152 +18,156 @@ stories:
 - story: give 1 faq + continue have faqs + main_menu
   steps:
   - intent: choose_service
-  - action: action_service_mapping
+  # - action: action_service_mapping
   - slot_was_set:
     - service: 3
+  - action: utter_faqs
+  - intent: give_faqs
   - action: action_give_faqs_finished
   - action: action_continue_options
   - intent: continue
+  - action: utter_faqs
+  - intent: give_faqs
   - action: action_give_faqs_finished
   - action: action_continue_options
   - intent: main_menu
   - action: utter_main_menu
-  - action: action_restart
+  - action: action_restart 
 
-- story: give 1 faq + continue add faqs + main_menu
-  steps:
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 3
-  - action: action_give_faqs_finished
-  - action: action_continue_options
-  - intent: continue
-  - slot_was_set:
-    - identifier_faqs: true
-  - action: add_faqs_form
-  - active_loop: add_faqs_form
-  - slot_was_set:
-    - faqs_q: "Berlin"
-  - slot_was_set:
-    - faqs_a: "awesome"
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_add_faqs_finished
-  - action: action_continue_options
-  - intent: main_menu
-  - action: utter_main_menu
-  - action: action_restart
+# - story: give 1 faq + continue add faqs + main_menu
+#   steps:
+#   - intent: choose_service
+#   # - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 3
+#   - action: action_give_faqs_finished
+#   - action: action_continue_options
+#   - intent: continue
+#   - slot_was_set:
+#     - identifier_faqs: true
+#   - action: add_faqs_form
+#   - active_loop: add_faqs_form
+#   - slot_was_set:
+#     - faqs_q: "Berlin"
+#   - slot_was_set:
+#     - faqs_a: "awesome"
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_add_faqs_finished
+#   - action: action_continue_options
+#   - intent: main_menu
+#   - action: utter_main_menu
+#   - action: action_restart
 
-- story: give 1 faq + add + have + main_menu
-  steps:
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 3
-  - action: action_give_faqs_finished
-  - action: action_continue_options
-  - intent: continue
-  - slot_was_set:
-    - identifier_faqs: true
-  - action: add_faqs_form
-  - active_loop: add_faqs_form
-  - slot_was_set:
-    - faqs_q: "Berlin"
-  - slot_was_set:
-    - faqs_a: "awesome"
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_add_faqs_finished
-  - action: action_continue_options
-  - intent: continue
-  - slot_was_set:
-    - identifier_faqs: false
-  - action: action_give_faqs_finished
-  - action: action_continue_options
-  - intent: main_menu
-  - action: utter_main_menu
-  - action: action_restart
+# - story: give 1 faq + add + have + main_menu
+#   steps:
+#   - intent: choose_service
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 3
+#   - action: action_give_faqs_finished
+#   - action: action_continue_options
+#   - intent: continue
+#   - slot_was_set:
+#     - identifier_faqs: true
+#   - action: add_faqs_form
+#   - active_loop: add_faqs_form
+#   - slot_was_set:
+#     - faqs_q: "Berlin"
+#   - slot_was_set:
+#     - faqs_a: "awesome"
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_add_faqs_finished
+#   - action: action_continue_options
+#   - intent: continue
+#   - slot_was_set:
+#     - identifier_faqs: false
+#   - action: action_give_faqs_finished
+#   - action: action_continue_options
+#   - intent: main_menu
+#   - action: utter_main_menu
+#   - action: action_restart
 
-- story: give 1 faq + have + add + main_menu
-  steps:
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 3
-  - action: action_give_faqs_finished
-  - action: action_continue_options
-  - intent: continue
-  - slot_was_set:
-    - identifier_faqs: false
-  - action: action_give_faqs_finished
-  - action: action_continue_options
-  - intent: continue
-  - slot_was_set:
-    - identifier_faqs: true
-  - action: add_faqs_form
-  - active_loop: add_faqs_form
-  - slot_was_set:
-    - faqs_q: "Berlin"
-  - slot_was_set:
-    - faqs_a: "awesome"
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_add_faqs_finished
-  - action: action_continue_options
-  - intent: main_menu
-  - action: utter_main_menu
-  - action: action_restart
+# - story: give 1 faq + have + add + main_menu
+#   steps:
+#   - intent: choose_service
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 3
+#   - action: action_give_faqs_finished
+#   - action: action_continue_options
+#   - intent: continue
+#   - slot_was_set:
+#     - identifier_faqs: false
+#   - action: action_give_faqs_finished
+#   - action: action_continue_options
+#   - intent: continue
+#   - slot_was_set:
+#     - identifier_faqs: true
+#   - action: add_faqs_form
+#   - active_loop: add_faqs_form
+#   - slot_was_set:
+#     - faqs_q: "Berlin"
+#   - slot_was_set:
+#     - faqs_a: "awesome"
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_add_faqs_finished
+#   - action: action_continue_options
+#   - intent: main_menu
+#   - action: utter_main_menu
+#   - action: action_restart
 
-- story: give 1 faq + 2x have + 2x add + main_menu
-  steps:
-  - intent: choose_service
-  - action: action_service_mapping
-  - slot_was_set:
-    - service: 3
-  - action: action_give_faqs_finished
-  - action: action_continue_options
-  - intent: continue
-  - slot_was_set:
-    - identifier_faqs: false
-  - action: action_give_faqs_finished
-  - action: action_continue_options
-  - intent: continue
-  - slot_was_set:
-    - identifier_faqs: false
-  - action: action_give_faqs_finished
-  - action: action_continue_options
-  - intent: continue
-  - slot_was_set:
-    - identifier_faqs: true
-  - action: add_faqs_form
-  - active_loop: add_faqs_form
-  - slot_was_set:
-    - faqs_q: "Berlin"
-  - slot_was_set:
-    - faqs_a: "awesome"
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_add_faqs_finished
-  - action: action_continue_options
-  - intent: continue
-  - slot_was_set:
-    - identifier_faqs: true
-  - action: add_faqs_form
-  - active_loop: add_faqs_form
-  - slot_was_set:
-    - faqs_q: "Berlin"
-  - slot_was_set:
-    - faqs_a: "awesome"
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: action_add_faqs_finished
-  - action: action_continue_options
-  - intent: main_menu
-  - action: utter_main_menu
-  - action: action_restart
+# - story: give 1 faq + 2x have + 2x add + main_menu
+#   steps:
+#   - intent: choose_service
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 3
+#   - action: action_give_faqs_finished
+#   - action: action_continue_options
+#   - intent: continue
+#   - slot_was_set:
+#     - identifier_faqs: false
+#   - action: action_give_faqs_finished
+#   - action: action_continue_options
+#   - intent: continue
+#   - slot_was_set:
+#     - identifier_faqs: false
+#   - action: action_give_faqs_finished
+#   - action: action_continue_options
+#   - intent: continue
+#   - slot_was_set:
+#     - identifier_faqs: true
+#   - action: add_faqs_form
+#   - active_loop: add_faqs_form
+#   - slot_was_set:
+#     - faqs_q: "Berlin"
+#   - slot_was_set:
+#     - faqs_a: "awesome"
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_add_faqs_finished
+#   - action: action_continue_options
+#   - intent: continue
+#   - slot_was_set:
+#     - identifier_faqs: true
+#   - action: add_faqs_form
+#   - active_loop: add_faqs_form
+#   - slot_was_set:
+#     - faqs_q: "Berlin"
+#   - slot_was_set:
+#     - faqs_a: "awesome"
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_add_faqs_finished
+#   - action: action_continue_options
+#   - intent: main_menu
+#   - action: utter_main_menu
+#   - action: action_restart

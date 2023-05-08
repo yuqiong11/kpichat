@@ -1,0 +1,308 @@
+# version: "3.1"
+
+# stories:
+# - story: kpi_query + coref
+#   steps:
+#   - intent: KPI_query
+#     entities:
+#     - kpi: Locations
+#     - place: Berlin
+#     - time: last month
+#     - place: Berlin
+#   - slot_was_set:
+#     - place: Berlin
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - time: last month
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 1
+#   # - action: action_query_classification
+#   - action: kpi_form
+#   - active_loop: kpi_form
+#   - slot_was_set:
+#     - place: Berlin
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - time: last month
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: utter_query_received
+#   - action: action_query_confirm
+#   - intent: affirm
+#   - action: action_execute_kpi_query
+#   - action: action_continue_options
+#   - intent: continue
+#   - action: action_store_slots
+#   - action: action_reset_slots_except_stored
+#   - action: utter_kpi_query
+#   - intent: co_reference
+#     entities:
+#     - place: Hamburg
+#   - slot_was_set:
+#     - place: Hamburg
+#   - action: action_set_stored
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - time: last month
+#   - action: kpi_form
+#   - active_loop: kpi_form
+#   - slot_was_set:
+#     - place: Hamburg
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - time: last month
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: action_query_confirm
+#   - intent: affirm
+#   - action: action_execute_kpi_query
+#   - action: action_continue_options
+#   - intent: main_menu
+#   - action: utter_main_menu
+#   - action: action_restart
+
+# - story: agg_1xcoref3xquery
+#   steps:
+#   - intent: agg_query
+#     entities:
+#     - kpi: Locations
+#     - place: Berlin
+#     - time: last month
+#     - place: Berlin
+#   - slot_was_set:
+#     - place: Berlin
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - time: last month
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 1
+#   - action: action_query_classification
+#   - action: kpi_form
+#   - active_loop: kpi_form
+#   - slot_was_set:
+#     - place: Berlin
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - time: last month
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: utter_query_received
+#   - action: action_query_confirm
+#   - intent: affirm
+#   # - action: action_check_predefined_and_userdefined
+#   # - slot_was_set:
+#   #   - predefined: true
+#   # - slot_was_set:
+#   #   - userdefined: false
+#   - action: action_execute_agg_query
+#   - action: action_continue_options
+#   - intent: continue
+#   - action: action_store_slots
+#   - action: action_reset_slots_except_stored
+#   - action: utter_kpi_query
+#   - intent: agg_query
+#     entities:
+#     - place: states
+#     - kpi: Locations
+#     - time: now
+#   - slot_was_set:
+#     - place: states
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - time: now
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 1
+#   - action: kpi_form
+#   - active_loop: kpi_form
+#   - slot_was_set:
+#     - place: "Berlin"
+#   - slot_was_set:
+#     - time: "2021"
+#   - slot_was_set:
+#     - kpi: "locations"
+#   - slot_was_set:
+#     - requested_slot: null 
+#   - active_loop: null
+#   - action: utter_query_received
+#   - action: action_query_confirm
+#   - intent: affirm
+#   # - action: action_check_predefined_and_userdefined
+#   # - slot_was_set:
+#   #   - predefined: true
+#   # - slot_was_set:
+#   #   - userdefined: false
+#   - action: action_execute_agg_query
+#   - action: action_continue_options
+#   - intent: continue
+#   - action: action_store_slots
+#   - action: action_reset_slots_except_stored
+#   - action: utter_kpi_query
+#   - intent: agg_query
+#     entities:
+#     - place: states
+#     - kpi: Locations
+#     - time: now
+#   - slot_was_set:
+#     - place: states
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - time: now
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 1
+#   - action: action_query_classification 
+#   - action: kpi_form
+#   - active_loop: kpi_form
+#   - slot_was_set:
+#     - place: "Berlin"
+#   - slot_was_set:
+#     - time: "2021"
+#   - slot_was_set:
+#     - kpi: "locations"
+#   - slot_was_set:
+#     - requested_slot: null 
+#   - active_loop: null
+#   - action: utter_query_received
+#   - action: action_query_confirm
+#   - intent: affirm
+#   # - action: action_check_predefined_and_userdefined
+#   # - slot_was_set:
+#   #   - predefined: true
+#   # - slot_was_set:
+#   #   - userdefined: false
+#   - action: action_execute_agg_query
+#   - action: action_continue_options
+#   - intent: continue
+#   - action: action_store_slots
+#   - action: action_reset_slots_except_stored
+#   - action: utter_kpi_query
+#   - intent: agg_query
+#     entities:
+#     - place: states
+#     - kpi: Locations
+#     - time: now
+#   - slot_was_set:
+#     - place: states
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - time: now
+#   - action: action_query_classification
+#   - action: kpi_form
+#   - active_loop: kpi_form
+#   - slot_was_set:
+#     - place: "Berlin"
+#   - slot_was_set:
+#     - time: "2021"
+#   - slot_was_set:
+#     - kpi: "locations"
+#   - slot_was_set:
+#     - requested_slot: null 
+#   - active_loop: null
+#   - action: utter_query_received
+#   - action: action_query_confirm
+#   - intent: affirm
+#   # - action: action_check_predefined_and_userdefined
+#   # - slot_was_set:
+#   #   - predefined: true
+#   # - slot_was_set:
+#   #   - userdefined: false
+#   - action: action_execute_agg_query
+#   - action: action_continue_options
+#   - intent: continue
+#   - action: action_store_slots
+#   - action: action_reset_slots_except_stored
+#   - action: utter_kpi_query
+#   - intent: agg_query
+#     entities:
+#     - place: states
+#     - kpi: Locations
+#     - time: now
+#   - slot_was_set:
+#     - place: states
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - time: now
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 1
+#   - action: action_query_classification
+#   - action: kpi_form
+#   - active_loop: kpi_form
+#   - slot_was_set:
+#     - place: "Berlin"
+#   - slot_was_set:
+#     - time: "2021"
+#   - slot_was_set:
+#     - kpi: "locations"
+#   - slot_was_set:
+#     - requested_slot: null 
+#   - active_loop: null
+#   - action: utter_query_received
+#   - action: action_query_confirm
+#   - intent: affirm
+#   # - action: action_check_predefined_and_userdefined
+#   # - slot_was_set:
+#   #   - predefined: true
+#   # - slot_was_set:
+#   #   - userdefined: false
+#   - action: action_execute_agg_query
+#   - action: action_continue_options
+#   - intent: continue
+#   - action: action_store_slots
+#   - action: action_reset_slots_except_stored
+#   - action: utter_kpi_query
+#   - intent: agg_query
+#     entities:
+#     - place: states
+#     - kpi: Locations
+#     - time: now
+#   - slot_was_set:
+#     - place: states
+#   - slot_was_set:
+#     - kpi: Locations
+#   - slot_was_set:
+#     - time: now
+#   - action: action_service_mapping
+#   - slot_was_set:
+#     - service: 1
+#   - action: action_query_classification
+#   - action: kpi_form
+#   - active_loop: kpi_form
+#   - slot_was_set:
+#     - place: "Berlin"
+#   - slot_was_set:
+#     - time: "2021"
+#   - slot_was_set:
+#     - kpi: "locations"
+#   - slot_was_set:
+#     - requested_slot: null 
+#   - active_loop: null
+#   - action: utter_query_received
+#   - action: action_query_confirm
+#   - intent: affirm
+#   # - action: action_check_predefined_and_userdefined
+#   # - slot_was_set:
+#   #   - predefined: true
+#   # - slot_was_set:
+#   #   - userdefined: false
+#   - action: action_execute_agg_query
+#   - action: action_continue_options
+#   - intent: main_menu
+#   - action: utter_main_menu
+#   - action: action_restart

@@ -2,7 +2,12 @@ from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 import overpy
 import folium
-# import webbrowser
+import webbrowser
+from selenium import webdriver
+from selenium.webdriver.edge.options import Options as EdgeOptions
+from PIL import Image
+import uuid
+# from Screenshot import Screenshot_clipping
 
 class NearbySearch():
     # queries can be answered
@@ -17,6 +22,7 @@ class NearbySearch():
     
     def geocoding(self):
         start_point_geocode = self.geolocator.geocode(self.loc)
+        print("start point geocode: ", start_point_geocode)
         return start_point_geocode.latitude, start_point_geocode.longitude
         
 
@@ -27,6 +33,7 @@ class NearbySearch():
         # optional: also give some additional information, e.g. provider, type of chagring point, number of charging point
         found_nodes = []
         result = self.api.query(my_query)
+        print('result')
 
         for node in result.nodes:
             node_geocode = (node.lat, node.lon)
@@ -45,13 +52,31 @@ class NearbySearch():
         for single_node in nodes_list:
             folium.Marker(location=[single_node["geocode"][0], single_node["geocode"][1]], popup=f"{single_node['addr']}").add_to(m)
         m.save('my_map.html')
+
+        options = EdgeOptions()
+        options.add_argument("--headless=new")
+        driver = webdriver.Edge(options=options)
+        url = "http://127.0.0.1:5500/actions/my_map.html"
+        driver.get(url)
+        print('start saving...')
+        path = 'pics/'+str(uuid.uuid4())+'.png'
+        print('Pic saved')
+        driver.save_screenshot(path)
+        driver.close()
+        driver.quit()
+
+        return path
+        # print('start open...')
+        # screenshot = Image.open(path)
+
+        # screenshot.show()
         # webbrowser.open("my_map.html")
 
 
-# my_search = NearbySearch(6000, "Spenerstraße 28, 10557 Berlin")
+# my_search = NearbySearch(6000, "Spenerstraße 55, 10557 Berlin")
 # found_nodes, num_found_nodes = my_search.radius_search(800)
 # print(found_nodes)
-# my_search.display_map(found_nodes)
+# print(my_search.display_map(found_nodes))
 
 
 

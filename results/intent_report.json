@@ -1,5 +1,121 @@
 {
-  "choose_service": {
+  "charger_type": {
+    "precision": 0.9259259259259259,
+    "recall": 0.8620689655172413,
+    "f1-score": 0.8928571428571429,
+    "support": 29,
+    "confused_with": {
+      "agg_query": 3,
+      "co_reference": 1
+    }
+  },
+  "check_slot_input": {
+    "precision": 0.8888888888888888,
+    "recall": 1.0,
+    "f1-score": 0.9411764705882353,
+    "support": 8,
+    "confused_with": {}
+  },
+  "charger_operator": {
+    "precision": 0.9032258064516129,
+    "recall": 0.8484848484848485,
+    "f1-score": 0.875,
+    "support": 33,
+    "confused_with": {
+      "agg_query": 3,
+      "charger_type": 1
+    }
+  },
+  "continue": {
+    "precision": 0.875,
+    "recall": 0.875,
+    "f1-score": 0.875,
+    "support": 8,
+    "confused_with": {
+      "deny": 1
+    }
+  },
+  "change_slot": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 28,
+    "confused_with": {}
+  },
+  "main_menu": {
+    "precision": 0.8571428571428571,
+    "recall": 1.0,
+    "f1-score": 0.923076923076923,
+    "support": 6,
+    "confused_with": {}
+  },
+  "greet": {
+    "precision": 0.7,
+    "recall": 0.7777777777777778,
+    "f1-score": 0.7368421052631577,
+    "support": 18,
+    "confused_with": {
+      "goodbye": 2,
+      "deny": 2
+    }
+  },
+  "nearby_search": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 6,
+    "confused_with": {}
+  },
+  "out_of_scope": {
+    "precision": 1.0,
+    "recall": 0.42857142857142855,
+    "f1-score": 0.6,
+    "support": 7,
+    "confused_with": {
+      "reset": 1,
+      "charger_operator": 1
+    }
+  },
+  "coreference_radius": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 5,
+    "confused_with": {
+      "choose_service": 5
+    }
+  },
+  "affirm": {
+    "precision": 0.42857142857142855,
+    "recall": 0.23076923076923078,
+    "f1-score": 0.3,
+    "support": 13,
+    "confused_with": {
+      "greet": 3,
+      "deny": 2
+    }
+  },
+  "goodbye": {
+    "precision": 0.6363636363636364,
+    "recall": 0.4666666666666667,
+    "f1-score": 0.5384615384615385,
+    "support": 15,
+    "confused_with": {
+      "greet": 3,
+      "affirm": 2
+    }
+  },
+  "deny": {
+    "precision": 0.5833333333333334,
+    "recall": 0.5833333333333334,
+    "f1-score": 0.5833333333333334,
+    "support": 12,
+    "confused_with": {
+      "affirm": 2,
+      "charger_operator": 1
+    }
+  },
+  "start_define_kpi": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
@@ -7,165 +123,107 @@
     "confused_with": {}
   },
   "co_reference": {
-    "precision": 1.0,
-    "recall": 0.975609756097561,
-    "f1-score": 0.9876543209876543,
-    "support": 41,
-    "confused_with": {
-      "chitchat": 1
-    }
-  },
-  "chitchat": {
-    "precision": 0.7037037037037037,
-    "recall": 0.8260869565217391,
-    "f1-score": 0.76,
-    "support": 23,
-    "confused_with": {
-      "deny": 2,
-      "filter_query": 1
-    }
-  },
-  "limit_query": {
-    "precision": 0.86,
-    "recall": 0.9347826086956522,
-    "f1-score": 0.8958333333333334,
-    "support": 46,
+    "precision": 0.9473684210526315,
+    "recall": 0.9473684210526315,
+    "f1-score": 0.9473684210526315,
+    "support": 57,
     "confused_with": {
       "agg_query": 2,
-      "filter_query": 1
+      "limit_query": 1
     }
   },
-  "filter_query": {
-    "precision": 0.9076923076923077,
-    "recall": 0.9672131147540983,
-    "f1-score": 0.9365079365079365,
-    "support": 61,
+  "choose_service": {
+    "precision": 0.6666666666666666,
+    "recall": 1.0,
+    "f1-score": 0.8,
+    "support": 10,
+    "confused_with": {}
+  },
+  "skip": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 6,
+    "confused_with": {}
+  },
+  "agg_query": {
+    "precision": 0.8380952380952381,
+    "recall": 0.8543689320388349,
+    "f1-score": 0.8461538461538461,
+    "support": 103,
+    "confused_with": {
+      "limit_query": 8,
+      "group_sort_query": 5
+    }
+  },
+  "group_sort_query": {
+    "precision": 0.8947368421052632,
+    "recall": 0.9714285714285714,
+    "f1-score": 0.9315068493150684,
+    "support": 70,
     "confused_with": {
       "agg_query": 2
     }
   },
-  "deny": {
-    "precision": 0.5555555555555556,
-    "recall": 0.7142857142857143,
-    "f1-score": 0.6250000000000001,
-    "support": 7,
-    "confused_with": {
-      "affirm": 1,
-      "chitchat": 1
-    }
-  },
-  "affirm": {
-    "precision": 0.5,
-    "recall": 0.14285714285714285,
-    "f1-score": 0.22222222222222224,
-    "support": 7,
-    "confused_with": {
-      "chitchat": 4,
-      "deny": 2
-    }
-  },
-  "start_define_kpi": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 5,
-    "confused_with": {}
-  },
-  "charger_operator": {
-    "precision": 1.0,
-    "recall": 0.9,
-    "f1-score": 0.9473684210526316,
-    "support": 20,
-    "confused_with": {
-      "agg_query": 1,
-      "charger_type": 1
-    }
-  },
-  "coreference_radius": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 5,
-    "confused_with": {}
-  },
-  "change_slot": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 24,
-    "confused_with": {}
-  },
-  "faq": {
-    "precision": 0.9523809523809523,
-    "recall": 0.9090909090909091,
-    "f1-score": 0.9302325581395349,
-    "support": 22,
-    "confused_with": {
-      "chitchat": 2
-    }
-  },
-  "group_sort_query": {
-    "precision": 0.8837209302325582,
-    "recall": 0.9047619047619048,
-    "f1-score": 0.8941176470588236,
-    "support": 42,
-    "confused_with": {
-      "agg_query": 3,
-      "filter_query": 1
-    }
-  },
-  "agg_query": {
-    "precision": 0.8674698795180723,
-    "recall": 0.8372093023255814,
-    "f1-score": 0.8520710059171598,
-    "support": 86,
-    "confused_with": {
-      "limit_query": 7,
-      "group_sort_query": 5
-    }
-  },
-  "charger_type": {
-    "precision": 0.9444444444444444,
-    "recall": 0.85,
-    "f1-score": 0.8947368421052632,
-    "support": 20,
-    "confused_with": {
-      "agg_query": 3
-    }
-  },
-  "continue": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 5,
-    "confused_with": {}
-  },
   "date": {
     "precision": 1.0,
-    "recall": 0.9444444444444444,
-    "f1-score": 0.9714285714285714,
-    "support": 18,
+    "recall": 0.9375,
+    "f1-score": 0.967741935483871,
+    "support": 32,
     "confused_with": {
-      "filter_query": 1
+      "limit_query": 1,
+      "group_sort_query": 1
     }
   },
-  "accuracy": 0.9004524886877828,
-  "macro avg": {
-    "precision": 0.892645163148682,
-    "recall": 0.8768436384608675,
-    "f1-score": 0.877480756397243,
-    "support": 442
+  "limit_query": {
+    "precision": 0.8461538461538461,
+    "recall": 0.9166666666666666,
+    "f1-score": 0.8799999999999999,
+    "support": 72,
+    "confused_with": {
+      "agg_query": 6
+    }
   },
-  "weighted avg": {
-    "precision": 0.9005956185359646,
-    "recall": 0.9004524886877828,
-    "f1-score": 0.897881637306912,
-    "support": 442
+  "restart": {
+    "precision": 1.0,
+    "recall": 0.8,
+    "f1-score": 0.888888888888889,
+    "support": 5,
+    "confused_with": {
+      "neustart": 1
+    }
+  },
+  "reset": {
+    "precision": 0.75,
+    "recall": 1.0,
+    "f1-score": 0.8571428571428571,
+    "support": 6,
+    "confused_with": {}
+  },
+  "quiz": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 5,
+    "confused_with": {}
   },
   "micro avg": {
-    "precision": 0.9004524886877828,
-    "recall": 0.9004524886877828,
-    "f1-score": 0.9004524886877828,
-    "support": 442
-  }
+    "precision": 0.8685612788632326,
+    "recall": 0.8670212765957447,
+    "f1-score": 0.867790594498669,
+    "support": 564
+  },
+  "macro avg": {
+    "precision": 0.8225613704479721,
+    "recall": 0.8125002017628015,
+    "f1-score": 0.8076895963173957,
+    "support": 564
+  },
+  "weighted avg": {
+    "precision": 0.8593515725115746,
+    "recall": 0.8670212765957447,
+    "f1-score": 0.8591315257914377,
+    "support": 564
+  },
+  "accuracy": 0.8670212765957447
 }
